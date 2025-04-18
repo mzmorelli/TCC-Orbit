@@ -19,9 +19,10 @@ export default function NotificacaoDesaparecimento() {
   const [ultimoLocal, setUltimoLocal] = useState("");
   const [ultimaData, setUltimaData] = useState("");
   const [descricao, setDescricao] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
 
   const enviarDados = () => {
-    if (nomeCompleto=="" || idade=="" || ultimoLocal=="") {
+    if (nomeCompleto == "" || idade == "" || ultimoLocal == "") {
       alert("Por favor, preencha os campos obrigatórios!");
       return;
     }
@@ -31,96 +32,93 @@ export default function NotificacaoDesaparecimento() {
 
   return (
     <View style={styles.headerView}>
-        <Text style={styles.header}>NOTIFICAR DESAPARECIMENTO</Text>
-      
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.scrollContainer}
-    >
-      <Text style={styles.sectionTitle}>ADICIONAR FOTO:</Text>
-      <TouchableOpacity style={styles.addPhotoButton}>
-        <Text style={styles.addPhotoText}>+ Adicionar Foto</Text>
-      </TouchableOpacity>
+      <Text style={styles.header}>NOTIFICAR DESAPARECIMENTO</Text>
 
-      <Text style={styles.label}>NOME COMPLETO:</Text>
-      <TextInput
-        style={styles.input}
-        value={nomeCompleto}
-        onChangeText={setNomeCompleto}
-        placeholder="Digite o nome completo"
-      />
-
-      <Text style={styles.label}>IDADE:</Text>
-      <TextInput
-        style={styles.input}
-        value={idade}
-        onChangeText={setIdade}
-        keyboardType="numeric"
-        placeholder="Idade"
-      />
-
-      <Text style={styles.label}>ALTURA:</Text>
-      <TextInput
-        style={styles.input}
-        value={altura}
-        onChangeText={setAltura}
-        placeholder="Ex: 1.75"
-      />
-
-      <Text style={styles.label}>SEXO:</Text>
-      <View style={styles.sexoContainer}>
-        <TouchableOpacity
-          style={[styles.sexoButton, sexo === "M" && styles.sexoSelected]}
-          onPress={() => setSexo("M")}
-        >
-          <Text style={styles.sexoText}>M</Text>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.scrollContainer}
+      >
+        <TouchableOpacity style={styles.addPhotoButton}>
+          <Text style={styles.addPhotoText}>+ Adicionar Foto</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.sexoButton, sexo === "F" && styles.sexoSelected]}
-          onPress={() => setSexo("F")}
-        >
-          <Text style={styles.sexoText}>F</Text>
+
+        <TextInput
+          style={[styles.input, isFocused && styles.inputFocused]}
+          value={nomeCompleto}
+          onChangeText={setNomeCompleto}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          placeholder="Digite o nome completo"
+        />
+
+        <TextInput
+          style={styles.input}
+          value={idade}
+          onChangeText={setIdade}
+          keyboardType="numeric"
+          placeholder="Idade"
+        />
+
+        <TextInput
+          style={styles.input}
+          value={altura}
+          onChangeText={setAltura}
+          placeholder="Ex: 1.75"
+        />
+
+        <TextInput
+          style={styles.input}
+          value={ultimoLocal}
+          onChangeText={setUltimoLocal}
+          placeholder="Local onde foi visto pela última vez"
+        />
+
+        <Text style={styles.label}>SEXO:</Text>
+        <View style={styles.sexoContainer}>
+          <TouchableOpacity
+            style={[styles.sexoButton, sexo === "M" && styles.sexoSelected]}
+            onPress={() => setSexo("M")}
+          >
+            <Text style={styles.sexoText}>M</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.sexoButton, sexo === "F" && styles.sexoSelected]}
+            onPress={() => setSexo("F")}
+          >
+            <Text style={styles.sexoText}>F</Text>
+          </TouchableOpacity>
+        </View>
+
+        <Text style={styles.label}>TELEFONE PARA CONTATO:</Text>
+        <TextInput
+          style={styles.input}
+          value={telefone}
+          onChangeText={setTelefone}
+          placeholder="(00) 00000-0000"
+        />
+
+        <Text style={styles.label}>ÚLTIMA DATA VISTO:</Text>
+        <TextInput
+          style={styles.input}
+          value={ultimaData}
+          onChangeText={setUltimaData}
+          placeholder="DD/MM/AAAA"
+        />
+
+        <Text style={styles.label}>DESCRIÇÃO:</Text>
+        <TextInput
+          style={[styles.input, styles.descriptionInput]}
+          value={descricao}
+          onChangeText={setDescricao}
+          multiline
+          numberOfLines={4}
+          placeholder="Descreva as roupas, características físicas, etc."
+        />
+
+        <TouchableOpacity style={styles.submitButton} onPress={enviarDados}>
+          <Text style={styles.submitText}>POSTAR</Text>
         </TouchableOpacity>
-      </View>
-
-      <Text style={styles.label}>TELEFONE PARA CONTATO:</Text>
-      <TextInput
-        style={styles.input}
-        value={telefone}
-        onChangeText={setTelefone}
-        placeholder="(00) 00000-0000"
-      />
-
-      <Text style={styles.label}>ULTIMO LOCAL VISTO:</Text>
-      <TextInput
-        style={styles.input}
-        value={ultimoLocal}
-        onChangeText={setUltimoLocal}
-        placeholder="Local onde foi visto pela última vez"
-      />
-
-      <Text style={styles.label}>ULTIMA DATA VISTO:</Text>
-      <TextInput
-        style={styles.input}
-        value={ultimaData}
-        onChangeText={setUltimaData}
-        placeholder="DD/MM/AAAA"
-      />
-
-      <Text style={styles.label}>DESCRIÇÃO (ROUPAS, ETC):</Text>
-      <TextInput
-        style={[styles.input, styles.descriptionInput]}
-        value={descricao}
-        onChangeText={setDescricao}
-        multiline
-        numberOfLines={4}
-        placeholder="Descreva as roupas, características físicas, etc."
-      />
-
-      <TouchableOpacity style={styles.submitButton} onPress={enviarDados}>
-        <Text style={styles.submitText}>POSTAR</Text>
-      </TouchableOpacity>
-    </ScrollView>
+      </ScrollView>
     </View>
   );
 }
@@ -128,11 +126,11 @@ export default function NotificacaoDesaparecimento() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#8DEFEC",
+    backgroundColor: "#EAECEF",
   },
   headerView: {
     flex: 1,
-    backgroundColor: "#00bfb6"
+    backgroundColor: "#EAECEF",
   },
   scrollContainer: {
     padding: 20,
@@ -159,13 +157,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   input: {
-    borderWidth: 2,
-    borderColor: "#00BFB6",
     borderRadius: 8,
     padding: 12,
     marginBottom: 15,
     backgroundColor: "#fff",
     fontSize: 16,
+  },
+  inputFocused: {
+    borderColor: "#283BE3",
   },
   descriptionInput: {
     height: 100,
@@ -192,13 +191,12 @@ const styles = StyleSheet.create({
   sexoButton: {
     flex: 1,
     padding: 12,
-    borderWidth: 1,
-    borderColor: "#ccc",
     alignItems: "center",
     backgroundColor: "#f5f5f5",
+    borderRadius: 5,
   },
   sexoSelected: {
-    backgroundColor: "#00BFB6",
+    backgroundColor: "#283BE3",
     color: "#fff",
   },
   sexoText: {
@@ -209,7 +207,7 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   submitButton: {
-    backgroundColor: "#000",
+    backgroundColor: "#283BE3",
     padding: 15,
     borderRadius: 5,
     alignItems: "center",
