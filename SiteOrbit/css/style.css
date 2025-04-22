@@ -1,0 +1,39 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+  font-family: 'Inter', sans-serif;
+  background: #1B2CC1;
+  background: radial-gradient(circle, rgba(27, 44, 193, 1) 0%, rgba(13, 21, 91, 1) 100%);;
+  color: #fff;
+}
+a { text-decoration: none; color: inherit; }
+
+/* Navbar */
+.navbar { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: #142E9C; }
+.nav-links { display: flex; gap: 1.5rem; }
+.nav-item { position: relative; cursor: pointer; }
+.nav-item:hover .dropdown { display: block; }
+.dropdown { display: none; position: absolute; top: 2.5rem; left: 0; background: #1C3ACF; border-radius: 4px; overflow: hidden; }
+.dropdown a { display: block; padding: 0.75rem 1.25rem; white-space: nowrap; }
+.dropdown a:hover { background: #0D207A; }
+
+/*  principal */
+.banner { display: flex; align-items: center; justify-content: space-between; padding: 4rem 2rem; max-width: 1200px; margin: auto; }
+.banner-text { max-width: 50%; }
+.banner-text h1 { font-size: 3rem; font-weight: 700; margin-bottom: 1rem; }
+.banner-text p { font-size: 1rem; line-height: 1.6; margin-bottom: 1.75rem; }
+.search-bar { display: flex; }
+.search-bar input[type="text"] { flex: 1; padding: 0.75rem 1rem; border: none; border-radius: 4px 0 0 4px; }
+.search-bar button { padding: 0 1rem; border: none; background: #2552ff; border-radius: 0 4px 4px 0; cursor: pointer; }
+.search-bar button img { width: 20px; }
+.btn-download { display: inline-block; margin-top: 2rem; background: #2552ff; padding: 0.75rem 2rem; border: none; border-radius: 4px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+.app-badges { display: flex; gap: 1rem; margin-top: 1rem; }
+.app-badges img { height: 40px; }
+
+/* Imagem  */
+.banner-image img { width: 100%; max-width: 360px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+
+@media(max-width: 900px) {
+  .banner { flex-direction: column; text-align: center; }
+  .banner-text { max-width: 100%; }
+  .banner-image { margin-top: 2rem; }
+}
