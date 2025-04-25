@@ -6,8 +6,11 @@ export default function AdicionarFotoScreen() {
   return (
     <View style={styles.container}>
   
-      <View style={styles.backIcon}>
-        <Ionicons name="arrow-back" size={20} color="#000" />
+      <View style={styles.header}>
+        <TouchableOpacity style={styles.backIcon}>
+          <Ionicons name="arrow-back" size={24} color="#FFFFFF"
+          onPress={() => navigation.goBack()} />
+        </TouchableOpacity>
       </View>
 
       <Text style={styles.title}>Adicionar foto</Text>
@@ -20,11 +23,11 @@ export default function AdicionarFotoScreen() {
       </View>
 
   
-      <Image
+      {/* <Image
         source={require('./assets/mapa-com-pins.png')} 
         style={styles.image}
         resizeMode="contain"
-      />
+      /> */}
 
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Adicionar</Text>
@@ -49,6 +52,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 40,
     left: 20,
+  },
+  header: {
+    paddingTop: 60,
+    paddingBottom: 40,
   },
   title: {
     fontSize: 16,

@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'reac
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default function InfoPessoal() {
+export default function InfoPessoal({navigation}) {
   const [nome, setNome] = useState('');
   const [sobrenome, setSobrenome] = useState('');
   const [nascimento, setNascimento] = useState('');
@@ -18,7 +18,8 @@ export default function InfoPessoal() {
       end={{ x: 0, y: 1 }}
     >
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backIcon}>
+        <TouchableOpacity style={styles.backIcon}
+        onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
         </TouchableOpacity>
         
@@ -87,7 +88,8 @@ export default function InfoPessoal() {
           onChangeText={setSenha} 
         />
         
-        <TouchableOpacity style={styles.button} activeOpacity={0.8}>
+        <TouchableOpacity style={styles.button} activeOpacity={0.8}
+        onPress={() => navigation.navigate("Home")}>
           <Text style={styles.buttonText}>Salvar</Text>
         </TouchableOpacity>
       </View>

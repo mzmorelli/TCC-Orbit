@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'reac
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default function Login() {
+export default function Login({navigation}) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
@@ -15,18 +15,19 @@ export default function Login() {
       end={{ x: 0, y: 1 }}
     >
       <View style={styles.header}>
-        <View style={styles.backIcon}>
-          <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
-        </View>
+        <TouchableOpacity style={styles.backIcon}>
+          <Ionicons name="arrow-back" size={24} color="#FFFFFF"
+          onPress={() => navigation.goBack()} />
+        </TouchableOpacity>
         
-        {/*
+        
         <View style={styles.logoContainer}>
           <Image
-            source={require('./caminho/para/sua/logo.png')} // Substitua pelo caminho correto
+            source={require('../../../assets/logo.png')}
             style={styles.logo}
             resizeMode="contain"
           />
-        </View> */}
+        </View>
         
         <Text style={styles.title}>Orbit</Text>
         <View style={styles.dotsContainer}>
@@ -58,11 +59,13 @@ export default function Login() {
           onChangeText={setSenha}
         />
         
-        <TouchableOpacity>
+        <TouchableOpacity
+        onPress={() => navigation.navigate("Cadastro")}>
           <Text style={styles.link}>Cadastrar-se</Text>
         </TouchableOpacity>
         
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button}
+        onPress={() => navigation.navigate("Home")}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
       </View>

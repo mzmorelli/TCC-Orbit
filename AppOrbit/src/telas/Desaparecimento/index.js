@@ -1,7 +1,8 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { Ionicons } from "@expo/vector-icons";
 
-export default function DesaparecidosLista() {
+export default function Desaparecidos({navigation}) {
   // Dados dos desaparecidos (aleatórios, depois vai ter q fazer isso puxando do banco de dados)
   const desaparecidos = [
     {
@@ -34,13 +35,22 @@ export default function DesaparecidosLista() {
 
   return (
     <View style={styles.container}>
+
+    <View style={styles.header}>
+        <TouchableOpacity style={styles.addIcon}>
+          <Ionicons name="add" size={24} color="#1B2CC1"
+        onPress={() => navigation.navigate("CadDesaparecimento")} />
+      </TouchableOpacity>
+
       <Text style={styles.titulo}>DESAPARECIDOS</Text>
+    </View>
+
       <ScrollView style={styles.scrollview} contentContainerStyle={styles.scrollContent}>
         {desaparecidos.map((item, index) => (
           <TouchableOpacity 
             key={index} 
             style={styles.cardContainer}
-            onPress={() => console.log('Card pressionado:', item.nome)}
+            onPress={() => navigation.navigate("InfoDesaparecimento")}
           >
             <View style={styles.imageContainer}>
               <Image 
@@ -85,8 +95,18 @@ export default function DesaparecidosLista() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EAECEF',
+    backgroundColor: '#fff',
     paddingTop: 40,
+  },
+  header: {
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  addIcon: {
+    position: 'absolute',
+    top: 15,
+    right: 20,
+    zIndex: 1,
   },
   titulo: {
     fontSize: 24,

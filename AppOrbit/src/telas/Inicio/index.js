@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default function Inicio() {
+export default function Inicio({navigation}) {
   return (
     <LinearGradient
       colors={['#1B2CC1', '#0D155B']}
@@ -11,14 +11,11 @@ export default function Inicio() {
       start={{ x: 0, y: 0 }}
       end={{ x: 0, y: 1 }}
     >
-      <View style={styles.backIcon}>
-        <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
-      </View>
       
       {/*
       <View style={styles.logoContainer}>
         <Image
-          source={require('./caminho/para/sua/logo.png')} // Substitua pelo caminho correto
+          source={require('./assets/logo.png')}
           style={styles.logo}
           resizeMode="contain"
         />
@@ -33,7 +30,8 @@ export default function Inicio() {
       <Text style={styles.subtitle}>
         Bem-vindo!{'\n'}Sua órbita mais segura!
       </Text>
-      <TouchableOpacity style={styles.buttonWhite}>
+      <TouchableOpacity style={styles.buttonWhite}
+      onPress={() => navigation.navigate("Login")}>
         <Text style={styles.buttonTextBlue}>Continue</Text>
       </TouchableOpacity>
     </LinearGradient>

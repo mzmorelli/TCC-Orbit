@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'reac
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default function Cadastro() {
+export default function Cadastro({navigation}) {
   const [telefone, setTelefone] = useState('');
 
   return (
@@ -14,7 +14,8 @@ export default function Cadastro() {
       end={{ x: 0, y: 1 }}
     >
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backIcon}>
+        <TouchableOpacity style={styles.backIcon}
+        onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
         </TouchableOpacity>
         
@@ -53,7 +54,8 @@ export default function Cadastro() {
           />
         </View>
         
-        <TouchableOpacity style={styles.button} activeOpacity={0.8}>
+        <TouchableOpacity style={styles.button} activeOpacity={0.8}
+        onPress={() => navigation.navigate("InfoPessoal")}>
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
       </View>

@@ -8,8 +8,11 @@ export default function NomeCirculoScreen() {
   return (
     <View style={styles.container}>
       {}
-      <View style={styles.backIcon}>
-        <Ionicons name="arrow-back" size={20} color="#000" />
+      <View style={styles.header}>
+          <TouchableOpacity style={styles.backIcon}>
+          <Ionicons name="arrow-back" size={24} color="#FFFFFF"
+          onPress={() => navigation.goBack()} />
+        </TouchableOpacity>
       </View>
 
       {}
@@ -48,6 +51,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 40,
     left: 20,
+  },
+  header: {
+    paddingTop: 60,
+    paddingBottom: 40,
   },
   dotsContainer: {
     flexDirection: 'row',

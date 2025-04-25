@@ -15,6 +15,7 @@ import CadOrbitas from "./src/telas/CadOrbitas/index.js";
 import CriarOrbita from "./src/telas/CadOrbitas/criarOrbita.js";
 import addImg from "./src/telas/CadOrbitas/addImg.js";
 import Desaparecimento from "./src/telas/Desaparecimento/index.js";
+import InfoDesaparecimento from "./src/telas/Desaparecimento/infodesaparecimento.js";
 import CadDesaparecimento from "./src/telas/CadDesaparecimento/index.js";
 import Usuario from "./src/telas/Usuario/index.js";
 
@@ -28,37 +29,32 @@ function Tabs() {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-          color = "#00BFB6";
+          color = "#283BE3";
           size = 30;
           if (route.name === "Home") {
             iconName = focused ? "home" : "home";
           } else if (route.name === "Desaparecimento") {
             iconName = focused ? "newspaper" : "newspaper";
           } else if (route.name === "Orbitas") {
-            iconName = focused
-              ? "planet"
-              : "planet";
+            iconName = focused ? "planet" : "planet";
           } else if (route.name === "Usuario") {
-            iconName = focused
-              ? "person"
-              : "person";
+            iconName = focused ? "person" : "person";
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
+        tabBarShowLabel: false,
+        headerShown: false
       })}
       tabBarOptions={{
-        labelStyle: {
-          fontSize: 12,
-        },
-        activeTintColor: "#00BFB6",
+        activeTintColor: "#283BE3",
         inactiveTintColor: "gray",
       }}
     >
-      <Tab.Screen name="Home" component={Home}></Tab.Screen>
-      <Tab.Screen name="Usuario" component={Usuario}></Tab.Screen>
-      <Tab.Screen name="Desaparecimento" component={Desaparecimento}></Tab.Screen>
-      <Tab.Screen name="Orbitas" component={Orbitas}></Tab.Screen>
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Usuario" component={Usuario} />
+      <Tab.Screen name="Desaparecimento" component={Desaparecimento} />
+      <Tab.Screen name="Orbitas" component={Orbitas} />
     </Tab.Navigator>
   );
 }
@@ -68,46 +64,22 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Inicio">
-
-        <Stack.Screen 
-          name="Inicio" 
-          component={Inicio} 
-          options={{ headerShown: false }} 
-        />
-        <Stack.Screen 
-          name="Login" 
-          component={Login} 
-          options={{ headerShown: false }} 
-        />
-        <Stack.Screen 
-          name="Home" 
-          component={Home} 
-          options={{ headerShown: false }} 
-        />
-        <Stack.Screen 
-          name="Orbitas" 
-          component={Orbitas} 
-          options={{ headerShown: false }} 
-        />
-        <Stack.Screen 
-          name="Desaparecimento" 
-          component={Desaparecimento} 
-          options={{ headerShown: false }} 
-        />
-        <Stack.Screen 
-          name="Usuario" 
-          component={Usuario} 
-          options={{ headerShown: false }} 
-        />
-
-
+      <Stack.Navigator 
+        initialRouteName="Inicio"
+        screenOptions={{
+          headerShown: false
+        }}
+      >
+        <Stack.Screen name="Inicio" component={Inicio} />
+        <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Cadastro" component={Cadastro} />
         <Stack.Screen name="InfoPessoal" component={InfoPessoal} />
+        <Stack.Screen name="Home" component={Tabs} />
         <Stack.Screen name="CadOrbitas" component={CadOrbitas} />
         <Stack.Screen name="CriarOrbita" component={CriarOrbita} />
         <Stack.Screen name="addImg" component={addImg} />
         <Stack.Screen name="CadDesaparecimento" component={CadDesaparecimento} />
+        <Stack.Screen name="InfoDesaparecimento" component={InfoDesaparecimento} />
       </Stack.Navigator>
     </NavigationContainer>
   );

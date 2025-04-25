@@ -10,7 +10,9 @@ import {
   Button,
 } from "react-native";
 
-export default function NotificacaoDesaparecimento() {
+import { Ionicons } from '@expo/vector-icons';
+
+export default function CadDesaparecimento({navigation}) {
   const [nomeCompleto, setNomeCompleto] = useState("");
   const [idade, setIdade] = useState("");
   const [altura, setAltura] = useState("");
@@ -31,12 +33,18 @@ export default function NotificacaoDesaparecimento() {
   };
 
   return (
-    <View style={styles.headerView}>
-      <Text style={styles.header}>NOTIFICAR DESAPARECIMENTO</Text>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity style={styles.backIcon} onPress={() => navigation.goBack()}>
+          <Ionicons name="arrow-back" size={24} color="#1B2CC1" />
+        </TouchableOpacity>
+        <Text style={styles.titulo}>NOTIFICAR DESAPARECIMENTO</Text>
+      </View>
 
       <ScrollView
-        style={styles.container}
+        style={styles.scrollView}
         contentContainerStyle={styles.scrollContainer}
+        keyboardShouldPersistTaps="handled"
       >
         <TouchableOpacity style={styles.addPhotoButton}>
           <Text style={styles.addPhotoText}>+ Adicionar Foto</Text>
@@ -79,13 +87,13 @@ export default function NotificacaoDesaparecimento() {
             style={[styles.sexoButton, sexo === "M" && styles.sexoSelected]}
             onPress={() => setSexo("M")}
           >
-            <Text style={styles.sexoText}>M</Text>
+            <Text style={[styles.sexoText, sexo === "M" && styles.sexoSelectedText]}>M</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.sexoButton, sexo === "F" && styles.sexoSelected]}
             onPress={() => setSexo("F")}
           >
-            <Text style={styles.sexoText}>F</Text>
+            <Text style={[styles.sexoText, sexo === "F" && styles.sexoSelectedText]}>F</Text>
           </TouchableOpacity>
         </View>
 
@@ -126,29 +134,36 @@ export default function NotificacaoDesaparecimento() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#EAECEF",
+    backgroundColor: "#fff",
   },
-  headerView: {
+  header: {
+    paddingTop: 40,
+    paddingBottom: 10,
+    backgroundColor: '#fff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
+  },
+  backIcon: {
+    position: 'absolute',
+    top: 40,
+    left: 20,
+    zIndex: 1,
+  },
+  scrollView: {
     flex: 1,
-    backgroundColor: "#EAECEF",
   },
   scrollContainer: {
     padding: 20,
     paddingBottom: 40,
   },
-  header: {
+  titulo: {
     fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginVertical: 20,
-    color: "#000",
-    textTransform: "uppercase",
-  },
-  sectionTitle: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 10,
-    color: "#000",
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20,
+    color: '#000',
+    textTransform: 'uppercase',
+    paddingLeft: 15
   },
   label: {
     fontSize: 14,
@@ -157,11 +172,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   input: {
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 15,
-    backgroundColor: "#fff",
+    backgroundColor: '#F5F5F5',
+    borderRadius: 12,
+    paddingVertical: 16,
+    paddingHorizontal: 20,
     fontSize: 16,
+    color: '#1E2330',
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
   },
   inputFocused: {
     borderColor: "#283BE3",
@@ -194,10 +213,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#f5f5f5",
     borderRadius: 5,
+    marginHorizontal: 5,
   },
   sexoSelected: {
     backgroundColor: "#283BE3",
-    color: "#fff",
   },
   sexoText: {
     fontSize: 16,
