@@ -3,7 +3,7 @@ body {
   font-family: 'Arial', sans-serif;
   color: white;
   margin: 0;
-  padding: 40px 20px;
+  padding: 40px;
 }
 
 h1 {
@@ -11,64 +11,228 @@ h1 {
   font-weight: bold;
   margin-bottom: 20px;
   text-transform: uppercase;
-  text-align: center;
 }
 
-.cards {
+.container {
   display: flex;
-  justify-content: flex-start;
-  align-items: stretch;
-  gap: 20px;
-  overflow-x: auto;
-  padding: 20px 0;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-top: 1px solid white;
+  padding-top: 20px;
+  flex-wrap: wrap;
 }
 
-.cards::-webkit-scrollbar {
-  height: 8px;
+form {
+  width: 65%;
 }
 
-.cards::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.3);
+label {
+  display: block;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+input[type="text"],
+input[type="date"] {
+  width: 100%;
+  padding: 15px;
+  border: none;
   border-radius: 4px;
+  font-size: 14px;
 }
 
-.cards::-webkit-scrollbar-track {
-  background: transparent;
+.row {
+  display: flex;
+  gap: 50px;
 }
 
-.card {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  width: 300px;
-  min-width: 300px;
-  height: 600px;
+.row .column {
+  flex: 1;
+}
+
+.sexo-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.sexo-buttons button {
+  padding: 8px 15px;
+  background-color: #0055ff;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.descricao {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.descricao input {
+  flex: 1;
+}
+
+.postar {
+  margin-top: 30px;
+}
+
+.postar button {
+  background-color: #0033ff;
+  color: white;
+  border: none;
+  padding: 20px 100px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.foto-container {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  flex-shrink: 0;
+  align-items: center;
+  margin-left: 20px;
 }
 
-.img-placeholder {
-  background-color: rgba(255, 255, 255, 0.05);
-  height: 200px;
+.foto-container label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.foto-placeholder {
+  width: 250px;
+  height: 300px;
+  border: 1px solid white;
+  border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 90px;
+  margin-right: 50px;
 }
 
-.img-placeholder::before {
-  content: '🖼️';
-  font-size: 3rem;
-  color: rgba(255, 255, 255, 0.2);
+.foto-placeholder::before {
+  content: "🖼️";
+  font-size: 48px;
+  color: white;
 }
 
-.info {
-  padding: 1rem;
-  font-size: 0.9rem;
-  line-height: 1.6;
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+  }
+
+  form {
+    width: 90%;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .row .column {
+    flex: unset;
+    width: 100%;
+  }
+
+  .sexo-buttons {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .postar button {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .foto-placeholder {
+    margin: 20px auto;
+  }
 }
 
-.info b {
-  display: block;
-  margin-top: 10px;
+@media (max-width: 768px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  label {
+    font-size: 16px;
+  }
+
+  .row {
+    gap: 15px;
+  }
+
+  .foto-container {
+    padding: 15px;
+  }
+
+  .foto-placeholder {
+    width: 250px;
+    height: 300px;
+  }
+
+  .postar button {
+    padding: 15px;
+  }
+
+  .sexo-buttons {
+    gap: 8px;
+  }
+
+  .descricao input {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 20px;
+  }
+
+  .container {
+    padding-top: 5px;
+  }
+
+  h1 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  form {
+    width: 100%;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  .sexo-buttons button {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .foto-placeholder {
+    width: 220px;
+    height: 250px;
+  }
+
+  .postar button {
+    padding: 15px;
+    font-size: 14px;
+  }
 }
