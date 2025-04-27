@@ -1,74 +1,63 @@
-body {
-  background: radial-gradient(circle at center, #0033cc, #000066);
-  font-family: 'Arial', sans-serif;
-  color: white;
-  margin: 0;
-  padding: 40px 20px;
-}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Notificar Desaparecimento</title>
+  <link rel="stylesheet" href="css/registrar.css">
+</head>
+<body>
+  <h1>NOTIFICAR DESAPARECIMENTO</h1>
 
-h1 {
-  font-size: 30px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  text-align: center;
-}
+  <div class="container">
+    <form>
+      <label>Nome completo:</label>
+      <input type="text">
 
-.cards {
-  display: flex;
-  justify-content: flex-start;
-  align-items: stretch;
-  gap: 20px;
-  overflow-x: auto;
-  padding: 20px 0;
-}
+      <div class="row">
+        <div class="column">
+          <label>Idade:</label>
+          <input type="text">
+        </div>
+        <div class="column">
+          <label>Altura:</label>
+          <input type="text">
+        </div>
+      </div>
 
-.cards::-webkit-scrollbar {
-  height: 8px;
-}
+      <label>Telefone para contato:</label>
+      <input type="text">
 
-.cards::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.3);
-  border-radius: 4px;
-}
+      <label>Sexo:</label>
+      <div class="sexo-buttons">
+        <button type="button">M</button>
+        <button type="button">F</button>
+      </div>
 
-.cards::-webkit-scrollbar-track {
-  background: transparent;
-}
+      <div class="row">
+        <div class="column">
+          <label>Último local visto(a):</label>
+          <input type="text">
+        </div>
+        <div class="column">
+          <label>Última data visto(a):</label>
+          <input type="date">
+        </div>
+      </div>
 
-.card {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  width: 300px;
-  min-width: 300px;
-  height: 600px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  flex-shrink: 0;
-}
+      <label>Descrição (roupas, etc):</label>
+      <div class="descricao">
+        <input type="text">
+      </div>
 
-.img-placeholder {
-  background-color: rgba(255, 255, 255, 0.05);
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+      <div class="postar">
+        <button type="submit">POSTAR</button>
+      </div>
+    </form>
 
-.img-placeholder::before {
-  content: '🖼️';
-  font-size: 3rem;
-  color: rgba(255, 255, 255, 0.2);
-}
-
-.info {
-  padding: 1rem;
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
-
-.info b {
-  display: block;
-  margin-top: 10px;
-}
+    <div class="foto-container">
+      <label>Adicionar Foto:</label>
+      <div class="foto-placeholder"></div>
+    </div>
+  </div>
+</body>
+</html>
