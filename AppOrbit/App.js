@@ -11,7 +11,7 @@ import Cadastro from "./src/telas/Cadastro/index.js";
 import InfoPessoal from "./src/telas/Cadastro/infopessoal.js";
 import Home from "./src/telas/Home/index.js";
 import Orbitas from "./src/telas/Orbitas/index.js";
-import CompartilharOrbita from "./src/telas/CadOrbitas/index.js";
+import CompartilharOrbita from "./src/telas/CadOrbitas/compartilharOrbita.js";
 import CriarOrbita from "./src/telas/CadOrbitas/index.js";
 import AddImg from "./src/telas/CadOrbitas/addImg.js";
 import Desaparecimento from "./src/telas/Desaparecimento/index.js";
