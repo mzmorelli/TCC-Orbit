@@ -11,9 +11,9 @@ import Cadastro from "./src/telas/Cadastro/index.js";
 import InfoPessoal from "./src/telas/Cadastro/infopessoal.js";
 import Home from "./src/telas/Home/index.js";
 import Orbitas from "./src/telas/Orbitas/index.js";
-import CadOrbitas from "./src/telas/CadOrbitas/index.js";
-import CriarOrbita from "./src/telas/CadOrbitas/criarOrbita.js";
-import addImg from "./src/telas/CadOrbitas/addImg.js";
+import CompartilharOrbita from "./src/telas/CadOrbitas/index.js";
+import CriarOrbita from "./src/telas/CadOrbitas/index.js";
+import AddImg from "./src/telas/CadOrbitas/addImg.js";
 import Desaparecimento from "./src/telas/Desaparecimento/index.js";
 import InfoDesaparecimento from "./src/telas/Desaparecimento/infodesaparecimento.js";
 import CadDesaparecimento from "./src/telas/CadDesaparecimento/index.js";
@@ -29,7 +29,7 @@ function Tabs() {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-          color = "#283BE3";
+          color = "#fff";
           size = 30;
           if (route.name === "Home") {
             iconName = focused ? "home" : "home";
@@ -75,9 +75,9 @@ export default function App() {
         <Stack.Screen name="Cadastro" component={Cadastro} />
         <Stack.Screen name="InfoPessoal" component={InfoPessoal} />
         <Stack.Screen name="Home" component={Tabs} />
-        <Stack.Screen name="CadOrbitas" component={CadOrbitas} />
+        <Stack.Screen name="CompartilharOrbita" component={CompartilharOrbita} />
         <Stack.Screen name="CriarOrbita" component={CriarOrbita} />
-        <Stack.Screen name="addImg" component={addImg} />
+        <Stack.Screen name="AddImg" component={AddImg} />
         <Stack.Screen name="CadDesaparecimento" component={CadDesaparecimento} />
         <Stack.Screen name="InfoDesaparecimento" component={InfoDesaparecimento} />
       </Stack.Navigator>

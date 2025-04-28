@@ -1,40 +1,41 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons'; 
 
-export default function CodigoConviteScreen() {
-  const codigo = 'AWGFFF'; 
+export default function CriarOrbita(navigation) {
+  const [nome, setNome] = useState('');
 
   return (
     <View style={styles.container}>
-     
+      {}
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backIcon}>
+          <TouchableOpacity style={styles.backIcon}>
           <Ionicons name="arrow-back" size={24} color="#FFFFFF"
           onPress={() => navigation.goBack()} />
         </TouchableOpacity>
       </View>
 
-     
+      {}
       <View style={styles.dotsContainer}>
-        <View style={styles.dot} />
         <View style={[styles.dot, styles.activeDot]} />
         <View style={styles.dot} />
+        <View style={styles.dot} />
       </View>
 
-   
-      <Text style={styles.label}>
-        Compartilhe esse código para seus amigos se juntarem ao círculo!
-      </Text>
+      {}
+      <Text style={styles.label}>Dê um nome ao círculo:</Text>
 
-      
-      <View style={styles.codeBox}>
-        <Text style={styles.codeText}>{codigo}</Text>
-      </View>
+      {}
+      <TextInput
+        style={styles.input}
+        value={nome}
+        onChangeText={setNome}
+      />
 
-      
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Próxima etapa</Text>
+      {}
+      <TouchableOpacity style={styles.button}
+      onPress={() => navigation.navigate('AddImg')}>
+        <Text style={styles.buttonText}>Continuar</Text>
       </TouchableOpacity>
     </View>
   );
@@ -46,7 +47,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F5F5',
     paddingHorizontal: 30,
     paddingTop: 60,
-    alignItems: 'center',
   },
   backIcon: {
     position: 'absolute',
@@ -60,7 +60,8 @@ const styles = StyleSheet.create({
   dotsContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 30,
+    marginTop: 40,
+    marginBottom: 40,
   },
   dot: {
     width: 8,
@@ -70,32 +71,29 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
   },
   activeDot: {
-    backgroundColor: '#1F32F4',
+    backgroundColor: '#1F32F4', 
   },
   label: {
     textAlign: 'center',
-    color: '#1E2330',
+    color: '#C2C2C2',
     fontSize: 14,
-    fontWeight: 'bold',
-    marginBottom: 40,
+    marginBottom: 20,
   },
-  codeBox: {
-    backgroundColor: '#CFE2FF',
-    paddingVertical: 20,
-    paddingHorizontal: 40,
-    borderRadius: 12,
+  input: {
+    borderBottomWidth: 2,
+    borderBottomColor: '#1E2330', 
+    marginHorizontal: 30,
     marginBottom: 40,
-  },
-  codeText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#7A7A7A',
+    fontSize: 16,
+    color: '#1E2330',
+    textAlign: 'center',
   },
   button: {
-    backgroundColor: '#283BE3',
+    backgroundColor: '#283BE3', 
     paddingVertical: 12,
     paddingHorizontal: 40,
     borderRadius: 12,
+    alignSelf: 'center',
   },
   buttonText: {
     color: '#FFFFFF',

@@ -7,10 +7,9 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
-  Button,
 } from "react-native";
-
 import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function CadDesaparecimento({navigation}) {
   const [nomeCompleto, setNomeCompleto] = useState("");
@@ -28,214 +27,272 @@ export default function CadDesaparecimento({navigation}) {
       alert("Por favor, preencha os campos obrigatórios!");
       return;
     }
-
     alert("Notificação registrada com sucesso!");
+    navigation.goBack();
   };
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={['#1B2CC1', '#0D155B']}
+      style={styles.container}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+    >
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backIcon} onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={24} color="#1B2CC1" />
+        <TouchableOpacity 
+          style={styles.backIcon} 
+          onPress={() => navigation.goBack()}
+          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+        >
+          <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <Text style={styles.titulo}>NOTIFICAR DESAPARECIMENTO</Text>
+        <Text style={styles.titulo}>Notificar Desaparecimento</Text>
       </View>
 
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
       >
         <TouchableOpacity style={styles.addPhotoButton}>
-          <Text style={styles.addPhotoText}>+ Adicionar Foto</Text>
+          <View style={styles.photoPlaceholder}>
+            <Ionicons name="camera" size={32} color="rgba(255,255,255,0.7)" />
+            <Text style={styles.addPhotoText}>Adicionar Foto</Text>
+          </View>
         </TouchableOpacity>
 
-        <TextInput
-          style={[styles.input, isFocused && styles.inputFocused]}
-          value={nomeCompleto}
-          onChangeText={setNomeCompleto}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          placeholder="Digite o nome completo"
-        />
-
-        <TextInput
-          style={styles.input}
-          value={idade}
-          onChangeText={setIdade}
-          keyboardType="numeric"
-          placeholder="Idade"
-        />
-
-        <TextInput
-          style={styles.input}
-          value={altura}
-          onChangeText={setAltura}
-          placeholder="Ex: 1.75"
-        />
-
-        <TextInput
-          style={styles.input}
-          value={ultimoLocal}
-          onChangeText={setUltimoLocal}
-          placeholder="Local onde foi visto pela última vez"
-        />
-
-        <Text style={styles.label}>SEXO:</Text>
-        <View style={styles.sexoContainer}>
-          <TouchableOpacity
-            style={[styles.sexoButton, sexo === "M" && styles.sexoSelected]}
-            onPress={() => setSexo("M")}
-          >
-            <Text style={[styles.sexoText, sexo === "M" && styles.sexoSelectedText]}>M</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.sexoButton, sexo === "F" && styles.sexoSelected]}
-            onPress={() => setSexo("F")}
-          >
-            <Text style={[styles.sexoText, sexo === "F" && styles.sexoSelectedText]}>F</Text>
-          </TouchableOpacity>
+        <View style={styles.formGroup}>
+          <Text style={styles.label}>Nome Completo *</Text>
+          <TextInput
+            style={[styles.input, isFocused && styles.inputFocused]}
+            value={nomeCompleto}
+            onChangeText={setNomeCompleto}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            placeholder="Digite o nome completo"
+            placeholderTextColor="rgba(255,255,255,0.5)"
+          />
         </View>
 
-        <Text style={styles.label}>TELEFONE PARA CONTATO:</Text>
-        <TextInput
-          style={styles.input}
-          value={telefone}
-          onChangeText={setTelefone}
-          placeholder="(00) 00000-0000"
-        />
+        <View style={styles.row}>
+          <View style={[styles.formGroup, {flex: 1, marginRight: 10}]}>
+            <Text style={styles.label}>Idade *</Text>
+            <TextInput
+              style={styles.input}
+              value={idade}
+              onChangeText={setIdade}
+              keyboardType="numeric"
+              placeholder="Ex: 32"
+              placeholderTextColor="rgba(255,255,255,0.5)"
+            />
+          </View>
+          
+          <View style={[styles.formGroup, {flex: 1}]}>
+            <Text style={styles.label}>Altura</Text>
+            <TextInput
+              style={styles.input}
+              value={altura}
+              onChangeText={setAltura}
+              placeholder="Ex: 1.75"
+              placeholderTextColor="rgba(255,255,255,0.5)"
+            />
+          </View>
+        </View>
 
-        <Text style={styles.label}>ÚLTIMA DATA VISTO:</Text>
-        <TextInput
-          style={styles.input}
-          value={ultimaData}
-          onChangeText={setUltimaData}
-          placeholder="DD/MM/AAAA"
-        />
+        <View style={styles.formGroup}>
+          <Text style={styles.label}>Último local visto *</Text>
+          <TextInput
+            style={styles.input}
+            value={ultimoLocal}
+            onChangeText={setUltimoLocal}
+            placeholder="Onde foi visto pela última vez"
+            placeholderTextColor="rgba(255,255,255,0.5)"
+          />
+        </View>
 
-        <Text style={styles.label}>DESCRIÇÃO:</Text>
-        <TextInput
-          style={[styles.input, styles.descriptionInput]}
-          value={descricao}
-          onChangeText={setDescricao}
-          multiline
-          numberOfLines={4}
-          placeholder="Descreva as roupas, características físicas, etc."
-        />
+        <View style={styles.formGroup}>
+          <Text style={styles.label}>Sexo</Text>
+          <View style={styles.sexoContainer}>
+            <TouchableOpacity
+              style={[styles.sexoButton, sexo === "M" && styles.sexoSelected]}
+              onPress={() => setSexo("M")}
+            >
+              <Text style={[styles.sexoText, sexo === "M" && styles.sexoSelectedText]}>Masculino</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.sexoButton, sexo === "F" && styles.sexoSelected]}
+              onPress={() => setSexo("F")}
+            >
+              <Text style={[styles.sexoText, sexo === "F" && styles.sexoSelectedText]}>Feminino</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={[styles.formGroup, {flex: 1, marginRight: 10}]}>
+            <Text style={styles.label}>Telefone para contato</Text>
+            <TextInput
+              style={styles.input}
+              value={telefone}
+              onChangeText={setTelefone}
+              placeholder="(00) 00000-0000"
+              placeholderTextColor="rgba(255,255,255,0.5)"
+              keyboardType="phone-pad"
+            />
+          </View>
+          
+          <View style={[styles.formGroup, {flex: 1}]}>
+            <Text style={styles.label}>Última data visto</Text>
+            <TextInput
+              style={styles.input}
+              value={ultimaData}
+              onChangeText={setUltimaData}
+              placeholder="DD/MM/AAAA"
+              placeholderTextColor="rgba(255,255,255,0.5)"
+            />
+          </View>
+        </View>
+
+        <View style={styles.formGroup}>
+          <Text style={styles.label}>Descrição</Text>
+          <TextInput
+            style={[styles.input, styles.descriptionInput]}
+            value={descricao}
+            onChangeText={setDescricao}
+            multiline
+            numberOfLines={4}
+            placeholder="Descreva as roupas, características físicas, etc."
+            placeholderTextColor="rgba(255,255,255,0.5)"
+            textAlignVertical="top"
+          />
+        </View>
 
         <TouchableOpacity style={styles.submitButton} onPress={enviarDados}>
-          <Text style={styles.submitText}>POSTAR</Text>
+          <Text style={styles.submitText}>Cadastrar Desaparecimento</Text>
+          <Ionicons name="arrow-forward" size={20} color="#FFFFFF" />
         </TouchableOpacity>
       </ScrollView>
-    </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
   },
   header: {
-    paddingTop: 40,
-    paddingBottom: 10,
-    backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
+    paddingTop: 60,
+    paddingHorizontal: 25,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
   },
   backIcon: {
-    position: 'absolute',
-    top: 40,
-    left: 20,
-    zIndex: 1,
+    padding: 8,
+    borderRadius: 20,
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    marginRight: 15,
+  },
+  titulo: {
+    fontSize: 20,
+    color: '#FFFFFF',
+    fontWeight: '600',
+    flex: 1,
   },
   scrollView: {
     flex: 1,
   },
   scrollContainer: {
-    padding: 20,
+    paddingHorizontal: 25,
     paddingBottom: 40,
   },
-  titulo: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
+  addPhotoButton: {
+    marginBottom: 25,
+    alignItems: 'center',
+  },
+  photoPlaceholder: {
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    borderWidth: 2,
+    borderColor: 'rgba(255,255,255,0.3)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  addPhotoText: {
+    color: 'rgba(255,255,255,0.7)',
+    fontSize: 14,
+    marginTop: 10,
+  },
+  formGroup: {
     marginBottom: 20,
-    color: '#000',
-    textTransform: 'uppercase',
-    paddingLeft: 15
   },
   label: {
     fontSize: 14,
-    marginBottom: 5,
-    color: "#000",
-    fontWeight: "bold",
+    color: 'rgba(255,255,255,0.8)',
+    marginBottom: 8,
+    fontWeight: '500',
   },
   input: {
-    backgroundColor: '#F5F5F5',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
     borderRadius: 12,
-    paddingVertical: 16,
-    paddingHorizontal: 20,
+    padding: 16,
     fontSize: 16,
-    color: '#1E2330',
-    marginBottom: 20,
+    color: '#FFFFFF',
     borderWidth: 1,
-    borderColor: '#E0E0E0',
+    borderColor: 'rgba(255, 255, 255, 0.2)',
   },
   inputFocused: {
-    borderColor: "#283BE3",
+    borderColor: '#FFFFFF',
   },
   descriptionInput: {
-    height: 100,
-    textAlignVertical: "top",
+    height: 120,
   },
-  addPhotoButton: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 5,
-    padding: 15,
-    marginBottom: 20,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#f5f5f5",
-  },
-  addPhotoText: {
-    color: "#555",
-    fontSize: 16,
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   sexoContainer: {
     flexDirection: "row",
-    marginBottom: 15,
+    justifyContent: 'space-between',
   },
   sexoButton: {
     flex: 1,
-    padding: 12,
+    padding: 14,
     alignItems: "center",
-    backgroundColor: "#f5f5f5",
-    borderRadius: 5,
+    backgroundColor: "rgba(255,255,255,0.1)",
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.2)',
     marginHorizontal: 5,
   },
   sexoSelected: {
     backgroundColor: "#283BE3",
+    borderColor: '#283BE3',
   },
   sexoText: {
-    fontSize: 16,
-    color: "#000",
+    fontSize: 14,
+    color: "rgba(255,255,255,0.8)",
   },
   sexoSelectedText: {
     color: "#fff",
+    fontWeight: '500',
   },
   submitButton: {
-    backgroundColor: "#283BE3",
-    padding: 15,
-    borderRadius: 5,
-    alignItems: "center",
-    marginTop: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#283BE3',
+    padding: 16,
+    borderRadius: 12,
+    marginTop: 10,
   },
   submitText: {
     color: "#fff",
     fontSize: 16,
-    fontWeight: "bold",
-    textTransform: "uppercase",
+    fontWeight: "600",
+    marginRight: 8,
   },
 });

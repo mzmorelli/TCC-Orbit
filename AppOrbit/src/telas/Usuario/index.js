@@ -8,7 +8,7 @@ export default function PerfilUsuario({ navigation }) {
     nome: 'João Silva',
     email: 'joao@exemplo.com',
     telefone: '(11) 98765-4321',
-    foto: require('../../../assets/fotoUser.png')
+    foto: require('../../../assets/logo.png')
   };
 
   return (

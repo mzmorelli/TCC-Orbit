@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function addImg(navigation) {
+export default function CompartilharOrbita(navigation) {
+  const codigo = 'AWGFFF'; 
+
   return (
     <View style={styles.container}>
-  
+     
       <View style={styles.header}>
         <TouchableOpacity style={styles.backIcon}>
           <Ionicons name="arrow-back" size={24} color="#FFFFFF"
@@ -13,29 +15,27 @@ export default function addImg(navigation) {
         </TouchableOpacity>
       </View>
 
-      <Text style={styles.title}>Adicionar foto</Text>
-
-   
+     
       <View style={styles.dotsContainer}>
         <View style={styles.dot} />
-        <View style={[styles.dot, styles.activeDot]} />
         <View style={styles.dot} />
+        <View style={[styles.dot, styles.activeDot]} />
       </View>
 
-  
-      {/* <Image
-        source={require('./assets/mapa-com-pins.png')} 
-        style={styles.image}
-        resizeMode="contain"
-      /> */}
+   
+      <Text style={styles.label}>
+        Compartilhe esse código para seus amigos se juntarem ao círculo!
+      </Text>
 
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Adicionar</Text>
-      </TouchableOpacity>
+      
+      <View style={styles.codeBox}>
+        <Text style={styles.codeText}>{codigo}</Text>
+      </View>
 
-      <TouchableOpacity
-      onPress={() => navigation.navigate('Orbitas')}>
-        <Text style={styles.skipText}>Pular</Text>
+      
+      <TouchableOpacity style={styles.button}
+      onPress={() => navigation.navigate("Orbitas")}>
+        <Text style={styles.buttonText}>Continuar</Text>
       </TouchableOpacity>
     </View>
   );
@@ -44,10 +44,10 @@ export default function addImg(navigation) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ECEEF1',
-    alignItems: 'center',
-    paddingTop: 60,
+    backgroundColor: '#F5F5F5',
     paddingHorizontal: 30,
+    paddingTop: 60,
+    alignItems: 'center',
   },
   backIcon: {
     position: 'absolute',
@@ -57,12 +57,6 @@ const styles = StyleSheet.create({
   header: {
     paddingTop: 60,
     paddingBottom: 40,
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    color: '#1E2330',
   },
   dotsContainer: {
     flexDirection: 'row',
@@ -79,26 +73,34 @@ const styles = StyleSheet.create({
   activeDot: {
     backgroundColor: '#1F32F4',
   },
-  image: {
-    width: 220,
-    height: 180,
+  label: {
+    textAlign: 'center',
+    color: '#1E2330',
+    fontSize: 14,
+    fontWeight: 'bold',
     marginBottom: 40,
+  },
+  codeBox: {
+    backgroundColor: '#CFE2FF',
+    paddingVertical: 20,
+    paddingHorizontal: 40,
+    borderRadius: 12,
+    marginBottom: 40,
+  },
+  codeText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#7A7A7A',
   },
   button: {
     backgroundColor: '#283BE3',
     paddingVertical: 12,
     paddingHorizontal: 40,
     borderRadius: 12,
-    marginBottom: 10,
   },
   buttonText: {
     color: '#FFFFFF',
     fontWeight: 'bold',
     fontSize: 14,
-  },
-  skipText: {
-    color: '#1E2330',
-    textDecorationLine: 'underline',
-    fontWeight: 'bold',
   },
 });
