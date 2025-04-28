@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Desaparecidos({navigation}) {
   // Dados dos desaparecidos (aleatórios, depois vai ter q fazer isso puxando do banco de dados)
@@ -12,7 +13,7 @@ export default function Desaparecidos({navigation}) {
       ultimaVezVisto: '10/08/2023',
       ultimoLocal: 'Praça da Sé, São Paulo',
       telefone: '(11) 98765-4321',
-      imagem: ''  },
+      imagem: 'https://via.placeholder.com/100'  },
     {
       nome: 'Maria Oliveira',
       idade: '28 anos',
@@ -34,135 +35,214 @@ export default function Desaparecidos({navigation}) {
   ];
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={['#1B2CC1', '#0D155B']}
+      style={styles.container}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+    >
+      <View style={styles.header}>
+        <TouchableOpacity 
+          style={styles.backIcon} 
+          onPress={() => navigation.goBack()}
+          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+        >
+          <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
+        </TouchableOpacity>
+        
+        <Text style={styles.title}>Desaparecidos</Text>
+        
+        <TouchableOpacity 
+          style={styles.addIcon}
+          onPress={() => navigation.navigate("CadDesaparecimento")}
+          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+        >
+          <Ionicons name="add" size={24} color="#FFFFFF" />
+        </TouchableOpacity>
+      </View>
 
-    <View style={styles.header}>
-        <TouchableOpacity style={styles.addIcon}>
-          <Ionicons name="add" size={24} color="#1B2CC1"
-        onPress={() => navigation.navigate("CadDesaparecimento")} />
-      </TouchableOpacity>
-
-      <Text style={styles.titulo}>DESAPARECIDOS</Text>
-    </View>
-
-      <ScrollView style={styles.scrollview} contentContainerStyle={styles.scrollContent}>
+      <ScrollView 
+        style={styles.scrollView} 
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
         {desaparecidos.map((item, index) => (
           <TouchableOpacity 
             key={index} 
             style={styles.cardContainer}
-            onPress={() => navigation.navigate("InfoDesaparecimento")}
+            onPress={() => navigation.navigate("InfoDesaparecimento", { desaparecido: item })}
           >
-            <View style={styles.imageContainer}>
+            <View style={styles.imageShadow}>
               <Image 
-                source={{ uri: item.imagem }} 
-                style={styles.imagePlaceholder}
+                source={item.imagem} 
+                style={styles.profileImage}
               />
             </View>
             
             <View style={styles.card}>
-              <View style={styles.textRow}>
-                <Text style={styles.textInfo}>Nome: </Text>
-                <Text style={styles.textResposta}>{item.nome}</Text>
+              <Text style={styles.userName}>{item.nome}</Text>
+              
+              <View style={styles.infoSection}>
+                <View style={styles.infoItem}>
+                  <View style={styles.infoIcon}>
+                    <Ionicons name="time-outline" size={16} color="#FFFFFF" />
+                  </View>
+                  <Text style={styles.infoText}>Desaparecido desde: {item.ultimaVezVisto}</Text>
+                </View>
+                
+                <View style={styles.infoItem}>
+                  <View style={styles.infoIcon}>
+                    <Ionicons name="location-outline" size={16} color="#FFFFFF" />
+                  </View>
+                  <Text style={styles.infoText}>Último local: {item.ultimoLocal}</Text>
+                </View>
+                
+                <View style={styles.infoItem}>
+                  <View style={styles.infoIcon}>
+                    <Ionicons name="call-outline" size={16} color="#FFFFFF" />
+                  </View>
+                  <Text style={styles.infoText}>Contato: {item.telefone}</Text>
+                </View>
               </View>
-              <View style={styles.textRow}>
-                <Text style={styles.textInfo}>Idade: </Text>
-                <Text style={styles.textResposta}>{item.idade}</Text>
-              </View>
-              <View style={styles.textRow}>
-                <Text style={styles.textInfo}>Altura: </Text>
-                <Text style={styles.textResposta}>{item.altura}</Text>
-              </View>
-              <View style={styles.textRow}>
-                <Text style={styles.textInfo}>Última vez visto: </Text>
-                <Text style={styles.textResposta}>{item.ultimaVezVisto}</Text>
-              </View>
-              <View style={styles.textRow}>
-                <Text style={styles.textInfo}>Último local visto: </Text>
-                <Text style={styles.textResposta}>{item.ultimoLocal}</Text>
-              </View>
-              <View style={styles.textRow}>
-                <Text style={styles.textInfo}>Telefone de contato: </Text>
-                <Text style={styles.textResposta}>{item.telefone}</Text>
+              
+              <View style={styles.detailsRow}>
+                <View style={styles.detailItem}>
+                  <Text style={styles.detailLabel}>Idade</Text>
+                  <Text style={styles.detailValue}>{item.idade}</Text>
+                </View>
+                <View style={styles.detailItem}>
+                  <Text style={styles.detailLabel}>Altura</Text>
+                  <Text style={styles.detailValue}>{item.altura}</Text>
+                </View>
               </View>
             </View>
           </TouchableOpacity>
         ))}
       </ScrollView>
-    </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    paddingTop: 40,
   },
   header: {
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 60,
+    paddingHorizontal: 25,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    position: 'relative',
+    marginBottom: 20,
+  },
+  backIcon: {
+    padding: 8,
+    borderRadius: 20,
+    backgroundColor: 'rgba(255,255,255,0.1)',
   },
   addIcon: {
-    position: 'absolute',
-    top: 15,
-    right: 20,
-    zIndex: 1,
+    padding: 8,
+    borderRadius: 20,
+    backgroundColor: 'rgba(255,255,255,0.1)',
   },
-  titulo: {
+  title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 20,
-    color: '#000',
-    textTransform: 'uppercase',
+    color: '#FFFFFF',
+    fontWeight: '600',
+    letterSpacing: 0.5,
   },
-  scrollview: {
+  scrollView: {
+    flex: 1,
     width: '100%',
   },
   scrollContent: {
-    alignItems: 'center',
-    paddingBottom: 20,
+    paddingHorizontal: 20,
+    paddingBottom: 30,
   },
   cardContainer: {
-    width: '90%',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: 20,
+    padding: 15,
+    marginBottom: 20,
     flexDirection: 'row',
-    marginBottom: 15,
-    borderRadius: 8,
-    overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.2)',
   },
-  imageContainer: {
+  imageShadow: {
     width: 100,
-    backgroundColor: '#e0e0e0',
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: 'rgba(255,255,255,0.2)',
     justifyContent: 'center',
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    elevation: 5,
+    marginRight: 15,
   },
-  imagePlaceholder: {
-    width: 100,
-    height: 190,
-    borderRadius: 1,
+  profileImage: {
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    borderWidth: 2,
+    borderColor: 'rgba(255,255,255,0.3)',
   },
   card: {
     flex: 1,
-    backgroundColor: '#4CB4FF',
-    padding: 15,
   },
-  textRow: {
+  userName: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#FFFFFF',
+    marginBottom: 10,
+  },
+  infoSection: {
+    marginBottom: 10,
+  },
+  infoItem: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginBottom: 5,
+    alignItems: 'center',
+    marginBottom: 8,
   },
-  textInfo: {
-    fontSize: 12,
-    color: '#333',
-    fontWeight: 'bold',
+  infoIcon: {
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 10,
   },
-  textResposta: {
+  infoText: {
+    fontSize: 14,
+    color: '#FFFFFF',
+    flex: 1,
+    opacity: 0.9,
+  },
+  detailsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
+  detailItem: {
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    borderRadius: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    alignItems: 'center',
+    minWidth: '45%',
+  },
+  detailLabel: {
     fontSize: 12,
-    color: '#333',
+    color: 'rgba(255, 255, 255, 0.7)',
+    marginBottom: 2,
+  },
+  detailValue: {
+    fontSize: 14,
+    color: '#FFFFFF',
+    fontWeight: '500',
   },
 });

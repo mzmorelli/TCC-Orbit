@@ -1,251 +1,388 @@
-import React, { useState } from 'react';
-import { 
-  ScrollView, 
-  StyleSheet, 
-  Text, 
-  View, 
-  Image, 
-  TextInput, 
+import React, { useState } from "react";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TextInput,
   TouchableOpacity,
-  FlatList 
-} from 'react-native';
+  FlatList,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 
-import { Ionicons } from '@expo/vector-icons';
-
-export default function InfoDesaparecimento({navigation}) {
+export default function InfoDesaparecimento({ navigation }) {
   const desaparecido = {
-    nome: 'Carlos Alberto',
-    idade: '32 anos',
-    altura: '1,75m',
-    sexo: 'Masculino',
-    ultimaVezVisto: '15/05/2023',
-    ultimoLocal: 'Shopping Central',
-    telefone: '(11) 98765-4321',
-    descricao: 'Vestia camiseta azul e calça jeans. Possui tatuagem de dragão no braço direito.',
-    imagem: 'https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_1.5/c_scale,w_400/ncom/en_US/games/switch/s/spongebob-krusty-cook-off-switch/description-image'
+    nome: "Carlos Alberto",
+    idade: "32 anos",
+    altura: "1,75m",
+    sexo: "Masculino",
+    ultimaVezVisto: "15/05/2023",
+    ultimoLocal: "Shopping Central",
+    telefone: "(11) 98765-4321",
+    descricao:
+      "Vestia camiseta azul e calça jeans. Possui tatuagem de dragão no braço direito.",
+    imagem:
+      "https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_1.5/c_scale,w_400/ncom/en_US/games/switch/s/spongebob-krusty-cook-off-switch/description-image",
   };
 
   const [comentarios, setComentarios] = useState([
-    { id: '1', usuario: '@maria_silva', texto: 'mds q pena' },
-    { id: '2', usuario: '@joao_pereira', texto: 'Vou ficar de olho' }
+    { id: "1", usuario: "@maria_silva", texto: "mds q pena" },
+    { id: "2", usuario: "@joao_pereira", texto: "Vou ficar de olho" },
   ]);
-  const [novoComentario, setNovoComentario] = useState('');
+  const [novoComentario, setNovoComentario] = useState("");
 
   const adicionarComentario = () => {
-    if (novoComentario==''){
-      alert('Preencha todos os campos!');
-    }
-    else{
-        setComentarios([
-          ...comentarios,
-          //o id vai ser a data 
-          { id: Date.now().toString(), usuario: '@usuario', texto: novoComentario }
-        ]);
-        setNovoComentario('');
+    if (novoComentario == "") {
+      alert("Preencha todos os campos!");
+    } else {
+      setComentarios([
+        ...comentarios,
+        //o id vai ser a data
+        {
+          id: Date.now().toString(),
+          usuario: "@usuario",
+          texto: novoComentario,
+        },
+      ]);
+      setNovoComentario("");
     }
   };
 
   return (
-
-    <ScrollView style={styles.container}>
-
+    <LinearGradient
+      colors={["#1B2CC1", "#0D155B"]}
+      style={styles.container}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+    >
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backIcon}
-        onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={24} color="#1B2CC1" />
+        <TouchableOpacity
+          style={styles.backIcon}
+          onPress={() => navigation.goBack()}
+          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+        >
+          <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
+        </TouchableOpacity>
+
+        <Text style={styles.headerTitle}>Informações</Text>
+
+        <TouchableOpacity
+          style={styles.shareIcon}
+          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+        >
+          <Ionicons name="share-social-outline" size={22} color="#FFFFFF" />
         </TouchableOpacity>
       </View>
-      
-      <View style={styles.cabecalho}>
-        <Image 
-          source={{ uri: desaparecido.imagem }} 
-          style={styles.fotoDesaparecido}
-        />
-        
-        <View style={styles.infoContainer}>
-          <Text style={styles.titulo}>{desaparecido.nome}</Text>
-          
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Idade:</Text>
-            <Text style={styles.valor}>{desaparecido.idade}</Text>
-          </View>
-          
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Altura:</Text>
-            <Text style={styles.valor}>{desaparecido.altura}</Text>
+
+      <ScrollView
+        style={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.profileSection}>
+          <View style={styles.imageShadow}>
+            <Image source={desaparecido.imagem} style={styles.profileImage} />
           </View>
 
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Sexo:</Text>
-            <Text style={styles.valor}>{desaparecido.sexo}</Text>
+          <Text style={styles.userName}>{desaparecido.nome}</Text>
+
+          <View style={styles.detailsRow}>
+            <View style={styles.detailItem}>
+              <Text style={styles.detailLabel}>Idade</Text>
+              <Text style={styles.detailValue}>{desaparecido.idade}</Text>
+            </View>
+
+            <View style={styles.detailItem}>
+              <Text style={styles.detailLabel}>Altura</Text>
+              <Text style={styles.detailValue}>{desaparecido.altura}</Text>
+            </View>
+
+            <View style={styles.detailItem}>
+              <Text style={styles.detailLabel}>Sexo</Text>
+              <Text style={styles.detailValue}>{desaparecido.sexo}</Text>
+            </View>
           </View>
         </View>
-      </View>
 
-      <View style={styles.divisor} />
-
-      <View style={styles.secao}>
-        <Text style={styles.subtitulo}>Última vez visto:</Text>
-        <Text style={styles.texto}>{desaparecido.ultimaVezVisto}</Text>
-        
-        <Text style={styles.subtitulo}>Última local visto:</Text>
-        <Text style={styles.texto}>{desaparecido.ultimoLocal}</Text>
-      </View>
-
-      <View style={styles.secao}>
-        <Text style={styles.subtitulo}>Descrição:</Text>
-        <Text style={styles.texto}>{desaparecido.descricao}</Text>
-      </View>
-
-      <View style={styles.secao}>
-        <Text style={styles.subtitulo}>Telefone de contato:</Text>
-        <Text style={styles.texto}>{desaparecido.telefone}</Text>
-      </View>
-
-      <View style={styles.divisor} />
-
-      {/* seção comentarios */}
-      <Text style={styles.tituloSecao}>Comentários</Text>
-      
-      <View style={styles.comentarioInputContainer}>
-        <TextInput
-          style={styles.comentarioInput}
-          placeholder="Adicionar comentário"
-          value={novoComentario}
-          onChangeText={setNovoComentario}
-          multiline
-        />
-        <TouchableOpacity 
-          style={styles.botaoComentario} 
-          onPress={adicionarComentario}
-        >
-          <Text style={styles.botaoTexto}>Enviar</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* comentarios */}
-      <FlatList
-        data={comentarios}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={styles.comentarioContainer}>
-            <Text style={styles.usuarioComentario}>{item.usuario}</Text>
-            <Text style={styles.textoComentario}>{item.texto}</Text>
+        <View style={styles.glassCard}>
+          <View style={styles.infoItem}>
+            <View style={styles.infoIcon}>
+              <Ionicons name="time-outline" size={18} color="#FFFFFF" />
+            </View>
+            <View>
+              <Text style={styles.infoLabel}>Última vez visto</Text>
+              <Text style={styles.infoText}>{desaparecido.ultimaVezVisto}</Text>
+            </View>
           </View>
-        )}
-        scrollEnabled={false}
-      />
-    </ScrollView>
+
+          <View style={styles.infoItem}>
+            <View style={styles.infoIcon}>
+              <Ionicons name="location-outline" size={18} color="#FFFFFF" />
+            </View>
+            <View>
+              <Text style={styles.infoLabel}>Último local</Text>
+              <Text style={styles.infoText}>{desaparecido.ultimoLocal}</Text>
+            </View>
+          </View>
+
+          <View style={styles.infoItem}>
+            <View style={styles.infoIcon}>
+              <Ionicons name="call-outline" size={18} color="#FFFFFF" />
+            </View>
+            <View>
+              <Text style={styles.infoLabel}>Contato</Text>
+              <Text style={styles.infoText}>{desaparecido.telefone}</Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.glassCard}>
+          <View style={styles.infoItem}>
+            <View style={styles.infoIcon}>
+              <Ionicons
+                name="document-text-outline"
+                size={18}
+                color="#FFFFFF"
+              />
+            </View>
+            <View style={styles.descriptionContainer}>
+              <Text style={styles.infoLabel}>Descrição</Text>
+              <Text style={[styles.infoText, styles.descriptionText]}>
+                {desaparecido.descricao}
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.sectionTitleContainer}>
+          <Text style={styles.sectionTitle}>Comentários</Text>
+          <Text style={styles.commentCount}>
+            {comentarios.length} comentários
+          </Text>
+        </View>
+
+        <View style={styles.commentInputContainer}>
+          <TextInput
+            style={styles.commentInput}
+            placeholder="Adicione um comentário..."
+            placeholderTextColor="rgba(255,255,255,0.6)"
+            value={novoComentario}
+            onChangeText={setNovoComentario}
+            multiline
+          />
+          <TouchableOpacity
+            style={styles.commentButton}
+            onPress={adicionarComentario}
+          >
+            <Ionicons name="send" size={20} color="#FFFFFF" />
+          </TouchableOpacity>
+        </View>
+
+        <FlatList
+          data={comentarios}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <View style={styles.commentContainer}>
+              <Text style={styles.commentUser}>{item.usuario}</Text>
+              <Text style={styles.commentText}>{item.texto}</Text>
+            </View>
+          )}
+          scrollEnabled={false}
+          contentContainerStyle={styles.commentsList}
+        />
+      </ScrollView>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //ainda to em duvida se deixa o background nessa cor ou no cinza q ta no figma
-    backgroundColor: '#fff',
-    padding: 16,
   },
   header: {
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 60,
+    paddingHorizontal: 25,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 15,
   },
-  cabecalho: {
-    flexDirection: 'row',
-    marginBottom: 16,
+  backIcon: {
+    padding: 8,
+    borderRadius: 20,
+    backgroundColor: "rgba(255,255,255,0.1)",
   },
-  fotoDesaparecido: {
-    width: 120,
-    height: 120,
-    borderRadius: 8,
-    marginRight: 16,
+  shareIcon: {
+    padding: 8,
+    borderRadius: 20,
+    backgroundColor: "rgba(255,255,255,0.1)",
   },
-  infoContainer: {
+  headerTitle: {
+    fontSize: 20,
+    color: "#FFFFFF",
+    fontWeight: "600",
+  },
+  scrollContainer: {
     flex: 1,
-    justifyContent: 'center',
+    paddingHorizontal: 20,
+    paddingBottom: 30,
   },
-  titulo: {
+  profileSection: {
+    alignItems: "center",
+    marginBottom: 25,
+  },
+  imageShadow: {
+    width: 140,
+    height: 140,
+    borderRadius: 70,
+    backgroundColor: "rgba(255,255,255,0.2)",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.3,
+    shadowRadius: 20,
+    elevation: 10,
+    marginBottom: 15,
+  },
+  profileImage: {
+    width: 130,
+    height: 130,
+    borderRadius: 65,
+    borderWidth: 3,
+    borderColor: "rgba(255,255,255,0.3)",
+  },
+  userName: {
     fontSize: 22,
-    fontWeight: 'bold',
-    marginBottom: 8,
-    color: '#000',
+    fontWeight: "600",
+    color: "#FFFFFF",
+    marginBottom: 20,
+    textAlign: "center",
   },
-  infoRow: {
-    flexDirection: 'row',
-    marginBottom: 4,
+  detailsRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    marginBottom: 20,
   },
-  label: {
+  detailItem: {
+    backgroundColor: "rgba(255, 255, 255, 0.15)",
+    borderRadius: 12,
+    padding: 12,
+    alignItems: "center",
+    minWidth: "30%",
+  },
+  detailLabel: {
+    fontSize: 12,
+    color: "rgba(255, 255, 255, 0.7)",
+    marginBottom: 5,
+  },
+  detailValue: {
     fontSize: 16,
-    fontWeight: 'bold',
-    marginRight: 4,
-    color: '#1321A0',
+    color: "#FFFFFF",
+    fontWeight: "500",
   },
-  valor: {
+  glassCard: {
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    borderRadius: 20,
+    padding: 20,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.2)",
+  },
+  descriptionContainer: {
+    flex: 1,
+    flexShrink: 1,
+  },
+  descriptionText: {
+    flexWrap: "wrap",
+    flexShrink: 1,
+  },
+  infoItem: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    marginBottom: 15,
+  },
+  infoIcon: {
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 12,
+  },
+  infoLabel: {
+    fontSize: 14,
+    color: "rgba(255, 255, 255, 0.7)",
+    marginBottom: 3,
+  },
+  infoText: {
     fontSize: 16,
-    color: '#000',
-  },
-  divisor: {
-    height: 1,
-    backgroundColor: '#e0e0e0',
-    marginVertical: 16,
-  },
-  secao: {
-    marginBottom: 16,
-  },
-  subtitulo: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 4,
-    color: '#1321A0',
-  },
-  texto: {
-    fontSize: 16,
-    color: '#333',
-    marginBottom: 8,
+    color: "#FFFFFF",
+    opacity: 0.9,
     lineHeight: 22,
   },
-  tituloSecao: {
+  sectionTitleContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 15,
+    paddingHorizontal: 5,
+  },
+  sectionTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 12,
-    color: '#000',
+    color: "#FFFFFF",
+    fontWeight: "600",
   },
-  comentarioInputContainer: {
-    flexDirection: 'row',
-    marginBottom: 16,
+  commentCount: {
+    fontSize: 14,
+    color: "rgba(255, 255, 255, 0.7)",
   },
-  comentarioInput: {
-    flex: 1,
+  commentInputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(255, 255, 255, 0.15)",
+    borderRadius: 20,
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    marginBottom: 20,
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    padding: 12,
-    marginRight: 8,
-    minHeight: 50,
+    borderColor: "rgba(255, 255, 255, 0.2)",
   },
-  botaoComentario: {
-    backgroundColor: '#283BE3',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderRadius: 8,
-    justifyContent: 'center',
+  commentInput: {
+    flex: 1,
+    color: "#FFFFFF",
+    fontSize: 15,
+    paddingVertical: 10,
+    maxHeight: 100,
   },
-  botaoTexto: {
-    color: '#fff',
-    fontWeight: 'bold',
+  commentButton: {
+    padding: 8,
+    borderRadius: 20,
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
   },
-  comentarioContainer: {
-    backgroundColor: '#A9DBFF',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 8,
+  commentsList: {
+    paddingBottom: 30,
   },
-  usuarioComentario: {
-    fontWeight: 'bold',
-    marginBottom: 4,
-    color: '#000',
+  commentContainer: {
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    borderRadius: 15,
+    padding: 15,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.1)",
   },
-  textoComentario: {
-    color: '#333',
+  commentUser: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#FFFFFF",
+    marginBottom: 5,
+  },
+  commentText: {
+    fontSize: 14,
+    color: "rgba(255, 255, 255, 0.9)",
+    lineHeight: 20,
   },
 });
