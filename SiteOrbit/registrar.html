@@ -3,52 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <title>Notificar Desaparecimento</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/registrar.css">
 </head>
-
 <body>
-
   <h1>NOTIFICAR DESAPARECIMENTO</h1>
 
-  <div class="cards">
-   
-    <div class="card">
-      <div class="img-placeholder"></div>
-      <div class="info">
-        <b>Nome:</b> XXXXX<br>
-        <b>Idade:</b> XX<br>
-        <b>Último local visto (à):</b> XXXXXXXXXX<br>
-        <b>Última vez visto (à):</b> XXXXXXXXXX<br>
-        <b>Telefone para contato:</b> (XX) XXXX-XXXX<br>
-        <b>Descrição:</b> XXXXXXXXXX
-      </div>
-    </div>
+  <div class="container">
+    <form>
+      <label>Nome completo:</label>
+      <input type="text">
 
-    <div class="card">
-      <div class="img-placeholder"></div>
-      <div class="info">
-        <b>Nome:</b> XXXXX<br>
-        <b>Idade:</b> XX<br>
-        <b>Último local visto (à):</b> XXXXXXXXXX<br>
-        <b>Última vez visto (à):</b> XXXXXXXXXX<br>
-        <b>Telefone para contato:</b> (XX) XXXX-XXXX<br>
-        <b>Descrição:</b> XXXXXXXXXX
+      <div class="row">
+        <div class="column">
+          <label>Idade:</label>
+          <input type="text">
+        </div>
+        <div class="column">
+          <label>Altura:</label>
+          <input type="text">
+        </div>
       </div>
-    </div>
 
+      <label>Telefone para contato:</label>
+      <input type="text">
 
-    <div class="card">
-      <div class="img-placeholder"></div>
-      <div class="info">
-        <b>Nome:</b> XXXXX<br>
-        <b>Idade:</b> XX<br>
-        <b>Último local visto (à):</b> XXXXXXXXXX<br>
-        <b>Última vez visto (à):</b> XXXXXXXXXX<br>
-        <b>Telefone para contato:</b> (XX) XXXX-XXXX<br>
-        <b>Descrição:</b> XXXXXXXXXX
+      <label>Sexo:</label>
+      <div class="sexo-buttons">
+        <button type="button">M</button>
+        <button type="button">F</button>
       </div>
+
+      <div class="row">
+        <div class="column">
+          <label>Último local visto(a):</label>
+          <input type="text">
+        </div>
+        <div class="column">
+          <label>Última data visto(a):</label>
+          <input type="date">
+        </div>
+      </div>
+
+      <label>Descrição (roupas, etc):</label>
+      <div class="descricao">
+        <input type="text">
+      </div>
+
+      <div class="postar">
+        <button type="submit">POSTAR</button>
+      </div>
+    </form>
+
+    <div class="foto-container">
+      <label>Adicionar Foto:</label>
+      <div class="foto-placeholder"></div>
     </div>
   </div>
-
 </body>
 </html>
