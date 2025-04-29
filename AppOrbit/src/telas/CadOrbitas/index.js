@@ -1,103 +1,132 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 
-export default function CriarOrbita(navigation) {
+export default function CadOrbita({ navigation }) {
   const [nome, setNome] = useState('');
 
   return (
-    <View style={styles.container}>
-      {}
+    <LinearGradient
+      colors={['#1B2CC1', '#0D155B']}
+      style={styles.container}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+    >
+
       <View style={styles.header}>
-          <TouchableOpacity style={styles.backIcon}>
-          <Ionicons name="arrow-back" size={24} color="#FFFFFF"
-          onPress={() => navigation.goBack()} />
+        <TouchableOpacity 
+          style={styles.backIcon}
+          onPress={() => navigation.goBack()}
+          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+        >
+          <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
+        </TouchableOpacity>
+        <Text style={styles.title}>Criar Órbita</Text>
+        <View style={{ width: 24 }} />
+      </View>
+
+      <View style={styles.content}>
+        <View style={styles.dotsContainer}>
+          <View style={[styles.dot, styles.activeDot]} />
+          <View style={styles.dot} />
+          <View style={styles.dot} />
+        </View>
+
+        <Text style={styles.label}>Dê um nome ao círculo</Text>
+
+        <TextInput
+          style={styles.input}
+          value={nome}
+          onChangeText={setNome}
+          placeholder="Digite o nome"
+          placeholderTextColor="rgba(255,255,255,0.5)"
+          autoFocus
+        />
+
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => navigation.navigate("AddImg")}
+        >
+          <Text style={styles.buttonText}>Continuar</Text>
         </TouchableOpacity>
       </View>
-
-      {}
-      <View style={styles.dotsContainer}>
-        <View style={[styles.dot, styles.activeDot]} />
-        <View style={styles.dot} />
-        <View style={styles.dot} />
-      </View>
-
-      {}
-      <Text style={styles.label}>Dê um nome ao círculo:</Text>
-
-      {}
-      <TextInput
-        style={styles.input}
-        value={nome}
-        onChangeText={setNome}
-      />
-
-      {}
-      <TouchableOpacity style={styles.button}
-      onPress={() => navigation.navigate('AddImg')}>
-        <Text style={styles.buttonText}>Continuar</Text>
-      </TouchableOpacity>
-    </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
-    paddingHorizontal: 30,
-    paddingTop: 60,
-  },
-  backIcon: {
-    position: 'absolute',
-    top: 40,
-    left: 20,
   },
   header: {
     paddingTop: 60,
-    paddingBottom: 40,
+    paddingHorizontal: 25,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 40,
+  },
+  backIcon: {
+    padding: 8,
+    borderRadius: 20,
+    backgroundColor: 'rgba(255,255,255,0.1)',
+  },
+  title: {
+    fontSize: 20,
+    color: '#FFFFFF',
+    fontWeight: '600',
+  },
+  content: {
+    flex: 1,
+    alignItems: 'center',
+    paddingHorizontal: 30,
   },
   dotsContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 40,
     marginBottom: 40,
   },
   dot: {
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#AAB0B5',
-    marginHorizontal: 4,
+    backgroundColor: 'rgba(255,255,255,0.3)',
+    marginHorizontal: 6,
   },
   activeDot: {
-    backgroundColor: '#1F32F4', 
+    backgroundColor: '#FFFFFF',
   },
   label: {
     textAlign: 'center',
-    color: '#C2C2C2',
-    fontSize: 14,
-    marginBottom: 20,
+    color: 'rgba(255,255,255,0.8)',
+    fontSize: 16,
+    marginBottom: 30,
+    fontWeight: '500',
   },
   input: {
-    borderBottomWidth: 2,
-    borderBottomColor: '#1E2330', 
-    marginHorizontal: 30,
-    marginBottom: 40,
-    fontSize: 16,
-    color: '#1E2330',
+    width: '100%',
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255,255,255,0.5)',
+    paddingVertical: 12,
+    fontSize: 18,
+    color: '#FFFFFF',
     textAlign: 'center',
+    marginBottom: 40,
   },
   button: {
-    backgroundColor: '#283BE3', 
-    paddingVertical: 12,
+    backgroundColor: '#283BE3',
+    paddingVertical: 16,
     paddingHorizontal: 40,
     borderRadius: 12,
-    alignSelf: 'center',
+    opacity: 1,
+  },
+  buttonDisabled: {
+    opacity: 0.5,
   },
   buttonText: {
     color: '#FFFFFF',
-    fontWeight: 'bold',
-    fontSize: 14,
+    fontWeight: '600',
+    fontSize: 16,
   },
 });

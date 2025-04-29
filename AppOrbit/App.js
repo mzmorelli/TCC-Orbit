@@ -75,6 +75,7 @@ export default function App() {
         <Stack.Screen name="Cadastro" component={Cadastro} />
         <Stack.Screen name="InfoPessoal" component={InfoPessoal} />
         <Stack.Screen name="Home" component={Tabs} />
+        <Stack.Screen name="Orbitas" component={Orbitas} />
         <Stack.Screen name="CompartilharOrbita" component={CompartilharOrbita} />
         <Stack.Screen name="CriarOrbita" component={CriarOrbita} />
         <Stack.Screen name="AddImg" component={AddImg} />

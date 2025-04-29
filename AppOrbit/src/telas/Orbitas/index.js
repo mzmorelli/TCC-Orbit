@@ -5,11 +5,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Orbitas({ navigation }) {
   const grupos = [
-    { id: '1', nome: 'Família', icone: 'people' },
-    { id: '2', nome: 'Trabalho', icone: 'briefcase' },
-    { id: '3', nome: 'Amigos Próximos', icone: 'heart' },
-    { id: '4', nome: 'Academia', icone: 'barbell' },
-    { id: '5', nome: 'Faculdade', icone: 'school' },
+    { id: '1', nome: 'Família', icone: 'home' },
+    { id: '2', nome: 'Amigos', icone: 'beer' },
+    { id: '3', nome: 'Amor', icone: 'heart-circle' },
+    { id: '4', nome: 'Amante', icone: 'heart-dislike-circle' },
   ];
 
   return (
