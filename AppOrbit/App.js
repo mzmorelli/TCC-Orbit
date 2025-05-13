@@ -29,7 +29,7 @@ function Tabs() {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-          color = "#fff";
+          color = "#283BE3";
           size = 30;
           if (route.name === "Home") {
             iconName = focused ? "home" : "home";
@@ -52,9 +52,9 @@ function Tabs() {
       }}
     >
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Usuario" component={Usuario} />
-      <Tab.Screen name="Desaparecimento" component={Desaparecimento} />
       <Tab.Screen name="Orbitas" component={Orbitas} />
+      <Tab.Screen name="Desaparecimento" component={Desaparecimento} />
+      <Tab.Screen name="Usuario" component={Usuario} />
     </Tab.Navigator>
   );
 }

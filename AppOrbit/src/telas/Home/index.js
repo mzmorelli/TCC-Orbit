@@ -11,26 +11,10 @@ export default function Inicio({navigation}) {
       start={{ x: 0, y: 0 }}
       end={{ x: 0, y: 1 }}
     >
-      <View style={styles.backIcon}>
-        <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
-      </View>
       
-      {/*
-      <View style={styles.logoContainer}>
-        <Image
-          source={require('./assets/logo.png')}
-          style={styles.logo}
-          resizeMode="contain"
-        />
-      </View> */}
-      
-      <Text style={styles.subtitle}>
-        Bem-vindo!{'\n'}oiiiiiiiiiii / home
+      <Text>
+        tela home
       </Text>
-      <TouchableOpacity style={styles.buttonWhite}
-      onPress={() => navigation.goBack()}>
-        <Text style={styles.buttonTextBlue}>Continue</Text>
-      </TouchableOpacity>
     </LinearGradient>
   );
 }
@@ -42,67 +26,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 30,
     paddingTop: 60,
-  },
-  backIcon: { 
-    position: 'absolute', 
-    top: 40, 
-    left: 20,
-    zIndex: 1,
-  },
-  logoContainer: {
-    marginBottom: 20,
-  },
-  logo: {
-    width: 100,
-    height: 100,
-  },
-  title: { 
-    fontSize: 32, 
-    color: '#FFFFFF', 
-    fontWeight: 'bold', 
-    marginBottom: 24,
-  },
-  dotsContainer: { 
-    flexDirection: 'row', 
-    justifyContent: 'center', 
-    marginBottom: 24,
-  },
-  dot: { 
-    width: 8, 
-    height: 8, 
-    borderRadius: 4, 
-    backgroundColor: 'rgba(255, 255, 255, 0.4)', 
-    marginHorizontal: 4,
-  },
-  activeDot: { 
-    backgroundColor: '#FFFFFF',
-    width: 16,
-    opacity: 1,
-  },
-  subtitle: { 
-    color: '#FFFFFF', 
-    fontSize: 16, 
-    textAlign: 'center', 
-    marginBottom: 40,
-    lineHeight: 24,
-    opacity: 0.8,
-  },
-  buttonWhite: { 
-    backgroundColor: '#FFFFFF', 
-    paddingVertical: 16, 
-    paddingHorizontal: 40, 
-    borderRadius: 12,
-    width: '100%',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  buttonTextBlue: { 
-    color: '#283BE3', 
-    fontSize: 16, 
-    fontWeight: 'bold',
   },
 });

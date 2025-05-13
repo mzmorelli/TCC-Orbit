@@ -19,14 +19,6 @@ export default function PerfilUsuario({ navigation }) {
       end={{ x: 1, y: 1 }}
     >
       <View style={styles.header}>
-        <TouchableOpacity 
-          style={styles.backIcon} 
-          onPress={() => navigation.goBack()}
-          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-        >
-          <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
-        </TouchableOpacity>
-        
         <Text style={styles.title}>Meu Perfil</Text>
       </View>
 
@@ -102,13 +94,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
-  },
-  backIcon: {
-    position: 'absolute',
-    left: 25,
-    padding: 8,
-    borderRadius: 20,
-    backgroundColor: 'rgba(255,255,255,0.1)',
   },
   title: {
     fontSize: 24,

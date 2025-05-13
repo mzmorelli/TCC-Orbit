@@ -42,7 +42,7 @@ export default function CompartilharOrbita({ navigation }) {
 
         <TouchableOpacity 
           style={styles.button}
-          onPress={() => navigation.navigate("Orbitas")}
+          onPress={() => navigation.navigate("Home", { screen: "Orbitas" })}
         >
           <Ionicons name="checkmark" size={20} color="#FFFFFF" style={styles.buttonIcon} />
         </TouchableOpacity>
