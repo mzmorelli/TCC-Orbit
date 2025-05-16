@@ -21,6 +21,10 @@ import Usuario from "./src/telas/Usuario/index.js";
 
 import { Ionicons } from "@expo/vector-icons";
 
+import axios from "axios";
+
+const api ='http://10.68.36.140/3mtec/apireact';
+
 const Tab = createBottomTabNavigator();
 
 function Tabs() {
@@ -29,7 +33,7 @@ function Tabs() {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-          color = "#283BE3";
+          color = "#fff";
           size = 30;
           if (route.name === "Home") {
             iconName = focused ? "home" : "home";
@@ -52,9 +56,9 @@ function Tabs() {
       }}
     >
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Orbitas" component={Orbitas} />
-      <Tab.Screen name="Desaparecimento" component={Desaparecimento} />
       <Tab.Screen name="Usuario" component={Usuario} />
+      <Tab.Screen name="Desaparecimento" component={Desaparecimento} />
+      <Tab.Screen name="Orbitas" component={Orbitas} />
     </Tab.Navigator>
   );
 }
@@ -75,7 +79,6 @@ export default function App() {
         <Stack.Screen name="Cadastro" component={Cadastro} />
         <Stack.Screen name="InfoPessoal" component={InfoPessoal} />
         <Stack.Screen name="Home" component={Tabs} />
-        <Stack.Screen name="Orbitas" component={Orbitas} />
         <Stack.Screen name="CompartilharOrbita" component={CompartilharOrbita} />
         <Stack.Screen name="CriarOrbita" component={CriarOrbita} />
         <Stack.Screen name="AddImg" component={AddImg} />
