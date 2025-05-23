@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <head>
+    <link rel="stylesheet" href="static/css/desaparecidos.css" />
+  </head>
+
+    <section class="desaparecidos-custom py-5">
+      <div class="container">
+        <div
+          class="d-flex justify-content-between align-items-center mb-4 header"
+        >
+          <h2 class="section-title">DESAPARECIDOS</h2>
+          <div class="ordenar">
+            <span>ORDENAR POR:</span>
+            <strong>MAIS RECENTES</strong>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          {% for desaparecido in desaparecidosDados %}
+          <div class="col-md-6 col-lg-4">
+            <a
+              href="{{ url_for('detalhe', id=desaparecido.id) }}"
+              class="text-decoration-none"
+            >
+              <div class="card desaparecido-card h-100">
+                <div class="img-placeholder"></div>
+                <div class="card-body info">
+                  <p><strong>Nome:</strong> {{ desaparecido.nome }}</p>
+                  <p><strong>Idade:</strong> {{ desaparecido.idade }} anos</p>
+                  <p>
+                    <strong>Último local visto:</strong> {{ desaparecido.localVisto }}
+                  </p>
+                  <p>
+                    <strong>Quando visto:</strong> {{
+                    desaparecido.vezVisto.strftime('%d/%m/%Y às %H:%M') }}
+                  </p>
+                  <p><strong>Contato:</strong> {{ desaparecido.telefoneContato }}</p>
+                  <p><strong>Descrição:</strong> {{ desaparecido.descricao }}</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+{% endblock content %}

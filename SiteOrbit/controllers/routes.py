@@ -5,7 +5,7 @@ from models.database import Desaparecidos, db
 def init_app(app):
     @app.route('/')
     def home():
-        return render_template('registrar.html')
+        return render_template('index.html')
 
     @app.route('/desaparecidos', methods=['GET','POST'])
     def desaparecidos(id=None):
@@ -34,3 +34,7 @@ def init_app(app):
     @app.route('/registrar')
     def registrar():
         return render_template('registrar.html')
+    
+    @app.route('/detalhe')
+    def detalhe():
+        return render_template('detalhe.html')
