@@ -1,4 +1,4 @@
-* { 
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -36,7 +36,7 @@ body {
   color: rgba(27, 44, 193, 1);
 }
 
-.nav-item-custom > a {
+.nav-item-custom>a {
   font-weight: 500;
   color: #333;
   text-decoration: none;
@@ -45,7 +45,7 @@ body {
   border-radius: 4px;
 }
 
-.nav-item-custom > a:hover {
+.nav-item-custom>a:hover {
   color: rgba(27, 44, 193, 1);
   background-color: rgba(27, 44, 193, 0.1);
 }
@@ -57,12 +57,12 @@ body {
   min-width: 160px;
   border: 1px solid #eee;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
-  transition: 
+  transition:
     opacity 0.3s ease,
     transform 0.3s ease,
     visibility 0.3s;
@@ -250,4 +250,18 @@ body {
     margin: 10px;
     padding: 2rem 1rem;
   }
+}
+
+.about-project-button {
+  background: radial-gradient(circle, rgba(27, 44, 193, 1) 0%, rgba(13, 21, 91, 1) 100%);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(13, 21, 91, 0.4);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }

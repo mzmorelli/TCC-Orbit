@@ -4,6 +4,7 @@
 
   <head>
     <link rel="stylesheet" href="static/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   </head>
 
   <section class="hero-custom">
@@ -20,7 +21,7 @@
         <div class="col-md-4">
           <div class="feature-card">
             <div class="feature-icon">
-              <div class="image-placeholder"></div>
+              <i class="fas fa-users fa-3x"></i>
             </div>
             <h3>Acompanhe seus familiares</h3>
             <p>Localização em tempo real e histórico de rotas com atualizações instantâneas</p>
@@ -30,20 +31,96 @@
         <div class="col-md-4">
           <div class="feature-card">
             <div class="feature-icon">
-              <div class="image-placeholder"></div>
+              <i class="fas fa-address-book fa-3x"></i>
             </div>
-            <h3>Encontre objetos perdidos</h3>
-            <p>Localizador inteligente para chaves, mochilas e itens importantes</p>
+            <h3>Denúncias de pessoas desaparecidas</h3>
+            <p>Informações detalhadas sobre as vítimas perto de você</p>
           </div>
         </div>
         
         <div class="col-md-4">
           <div class="feature-card">
             <div class="feature-icon">
-              <div class="image-placeholder"></div>
+              <i class="fas fa-shield-alt fa-3x"></i>
             </div>
             <h3>Segurança em tempo real</h3>
             <p>Alertas automáticos e monitoramento de deslocamentos seguros</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="about-project py-5" style="background: radial-gradient(circle, rgba(0, 0, 102, 0.05) 0%, rgba(13, 21, 91, 0.1) 100%);">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <h2 class="mb-4" style="color: #000066;">Sobre o Projeto ORBIT</h2>
+          <p class="lead" style="color: #000066; font-weight: 500;">Mais do que um aplicativo, uma rede de segurança</p>
+          <p style="color: #333;">O ORBIT foi desenvolvido com a missão de proporcionar tranquilidade às famílias e ajudar na localização de pessoas desaparecidas.</p>
+          <p style="color: #333;"><strong>Nosso aplicativo oferece:</strong></p>
+          <ul class="fa-ul" style="color: #333;">
+            <li class="mb-2"><span class="fa-li"><i class="fas fa-check-circle" style="color: #000066;"></i></span>Área dedicada a vítimas de desaparecimento</li>
+            <li class="mb-2"><span class="fa-li"><i class="fas fa-check-circle" style="color: #000066;"></i></span>Localização em tempo real de familiares</li>
+            <li class="mb-2"><span class="fa-li"><i class="fas fa-check-circle" style="color: #000066;"></i></span>Design intuitivo e fácil de usar</li>
+            <li class="mb-2"><span class="fa-li"><i class="fas fa-check-circle" style="color: #000066;"></i></span>Alertas inteligentes de segurança</li>
+            <li class="mb-2"><span class="fa-li"><i class="fas fa-check-circle" style="color: #000066;"></i></span>Rastreamento de objetos pessoais</li>
+          </ul>
+          <p style="color: #333;">Além disso, nosso site mantém um banco de dados atualizado com informações sobre pessoas desaparecidas, ajudando famílias a se reunirem.</p>
+          <a href="#" class="btn mt-3 d-inline-flex align-items-center about-project-button">
+            <span style="position: relative; z-index: 2;">Saiba mais sobre o projeto</span>
+            <i class="fas fa-arrow-right ms-2" style="position: relative; z-index: 2;"></i>
+            <span style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%); z-index: 1; transition: all 0.3s ease;"></span>
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <div class="p-4 position-relative">
+            <img src="https://via.placeholder.com/600x400" alt="Aplicativo ORBIT em uso" class="img-fluid rounded" style="border: 3px solid #000066; box-shadow: 0 8px 25px rgba(0, 0, 102, 0.2);">
+            <div style="position: absolute; width: 100px; height: 100px; background: radial-gradient(circle, rgba(27, 44, 193, 0.1) 0%, rgba(13, 21, 91, 0.1) 100%); border-radius: 50%; top: -20px; left: -20px; z-index: -1;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+  <section class="testimonials py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">O que nossos usuários dizem</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="testimonial-card p-4 rounded shadow">
+            <div class="d-flex align-items-center mb-3">
+              <i class="fas fa-user-circle fa-3x me-3" style="color: #000066;"></i>
+              <div>
+                <h5 class="mb-0">Carlos Silva</h5>
+                <p class="text-muted mb-0">Pai de dois adolescentes</p>
+              </div>
+            </div>
+            <p>"O Orbit me dá paz sabendo que posso localizar meus filhos rapidamente!"</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="testimonial-card p-4 rounded shadow">
+            <div class="d-flex align-items-center mb-3">
+              <i class="fas fa-user-circle fa-3x me-3" style="color: #000066;"></i>
+              <div>
+                <h5 class="mb-0">Ana Oliveira</h5>
+                <p class="text-muted mb-0">Mãe e professora</p>
+              </div>
+            </div>
+            <p>"Junto com o Orbit, eu consegui localizar a minha mãe que havia desaparecido!"</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="testimonial-card p-4 rounded shadow">
+            <div class="d-flex align-items-center mb-3">
+              <i class="fas fa-user-circle fa-3x me-3" style="color: #000066;"></i>
+              <div>
+                <h5 class="mb-0">Roberto Santos</h5>
+                <p class="text-muted mb-0">Avô</p>
+              </div>
+            </div>
+            <p>"Meus netos me ensinaram a usar e agora me sinto muito mais seguro quando saio sozinho."</p>
           </div>
         </div>
       </div>
