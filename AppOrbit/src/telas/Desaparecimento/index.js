@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Desaparecidos({navigation}) {
-  // Dados dos desaparecidos (aleatórios, depois vai ter q fazer isso puxando do banco de dados)
+
   const desaparecidos = [
     {
       nome: 'João da Silva',
@@ -13,7 +13,7 @@ export default function Desaparecidos({navigation}) {
       ultimaVezVisto: '10/08/2023',
       ultimoLocal: 'Praça da Sé, São Paulo',
       telefone: '(11) 98765-4321',
-      imagem: 'https://via.placeholder.com/100'  },
+      imagem: require('../../../assets/sem-foto.png')  },
     {
       nome: 'Maria Oliveira',
       idade: '28 anos',
@@ -21,7 +21,7 @@ export default function Desaparecidos({navigation}) {
       ultimaVezVisto: '15/08/2023',
       ultimoLocal: 'Shopping Center Norte',
       telefone: '(11) 91234-5678',
-      imagem: 'https://via.placeholder.com/100'
+      imagem: require('../../../assets/sem-foto.png')
     },
     {
       nome: 'Carlos Pereira',
@@ -30,7 +30,7 @@ export default function Desaparecidos({navigation}) {
       ultimaVezVisto: '05/08/2023',
       ultimoLocal: 'Av. Paulista, 1000',
       telefone: '(11) 99876-5432',
-      imagem: 'https://via.placeholder.com/100'
+      imagem: require('../../../assets/sem-foto.png')
     }
   ];
 

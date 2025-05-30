@@ -23,13 +23,12 @@ export default function Login({navigation}) {
         
         <View style={styles.logoContainer}>
           <Image
-            source={require('../../../assets/logo.png')}
+            source={require('../../../assets/logoOrbitOfc.png')}
             style={styles.logo}
             resizeMode="contain"
           />
         </View>
         
-        <Text style={styles.title}>Orbit</Text>
         <View style={styles.dotsContainer}>
           <View style={[styles.dot, styles.activeDot]} />
           <View style={styles.dot} />
@@ -92,8 +91,8 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   logo: {
-    width: 80,
-    height: 80,
+    width: 200,
+    height: 200,
   },
   title: {
     fontSize: 32,

@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import * as Animatable from 'react-native-animatable';
 
 export default function Orbitas({ navigation }) {
   const grupos = [
     { id: '1', nome: 'Família', icone: 'home' },
     { id: '2', nome: 'Amigos', icone: 'beer' },
     { id: '3', nome: 'Amor', icone: 'heart-circle' },
-    { id: '4', nome: 'Amante', icone: 'heart-dislike-circle' },
   ];
+
+  const [grupoSelecionado, setGrupoSelecionado] = useState(null);
+
+  const toggleGrupo = (id) => {
+    setGrupoSelecionado(grupoSelecionado === id ? null : id);
+  };
 
   return (
     <LinearGradient
@@ -20,28 +26,42 @@ export default function Orbitas({ navigation }) {
     >
       <View style={styles.header}>
         <Text style={styles.title}>Minhas Órbitas</Text>
-        <View style={{ width: 24 }} />
       </View>
 
-      <View style={styles.listContainer}>
-        <FlatList
-          data={grupos}
-          keyExtractor={(item) => item.id}
-          contentContainerStyle={styles.listContent}
-          renderItem={({ item }) => (
-            <View style={styles.groupItem}>
+      <FlatList
+        data={grupos}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.listContainer}
+        renderItem={({ item }) => (
+          <View>
+            <TouchableOpacity onPress={() => toggleGrupo(item.id)} style={styles.groupItem}>
               <View style={styles.iconContainer}>
                 <Ionicons name={item.icone} size={22} color="#FFFFFF" />
               </View>
               <Text style={styles.groupName}>{item.nome}</Text>
-              <Ionicons name="chevron-forward" size={18} color="rgba(255,255,255,0.6)" />
-            </View>
-          )}
-          ItemSeparatorComponent={() => <View style={styles.separator} />}
-        />
-      </View>
+              <Ionicons name="chevron-down" size={18} color="rgba(255,255,255,0.6)" />
+            </TouchableOpacity>
 
-      <TouchableOpacity 
+            {grupoSelecionado === item.id && (
+              <Animatable.View
+                animation="fadeInDown"
+                duration={400}
+                style={styles.optionsContainer}
+              >
+                <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                  <Text style={styles.optionText}>Ver no Mapa</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('ListaChat')}>
+                  <Text style={styles.optionText}>Ir para o Chat</Text>
+                </TouchableOpacity>
+              </Animatable.View>
+            )}
+          </View>
+        )}
+        ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+      />
+
+      <TouchableOpacity
         style={styles.addButton}
         onPress={() => navigation.navigate('CriarOrbita')}
       >
@@ -52,20 +72,10 @@ export default function Orbitas({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+  container: { flex: 1 },
   header: {
     paddingTop: 60,
-    paddingHorizontal: 25,
     alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 0,
-  },
-  backIcon: {
-    padding: 8,
-    borderRadius: 20,
-    backgroundColor: 'rgba(255,255,255,0.1)',
   },
   title: {
     fontSize: 20,
@@ -73,22 +83,14 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   listContainer: {
-    flex: 1,
-    paddingHorizontal: 30,
-    marginTop: 20,
-  },
-  listContent: {
-    paddingTop: 30,
+    padding: 30,
   },
   groupItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 16,
-    paddingHorizontal: 20,
+    padding: 16,
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     borderRadius: 12,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.2)',
   },
   iconContainer: {
     width: 36,
@@ -103,10 +105,18 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     color: '#FFFFFF',
-    fontWeight: '500',
   },
-  separator: {
-    height: 12,
+  optionsContainer: {
+    backgroundColor: 'rgba(255,255,255,0.05)',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginHorizontal: 10,
+    borderBottomLeftRadius: 12,
+    borderBottomRightRadius: 12,
+  },
+  optionText: {
+    color: '#fff',
+    paddingVertical: 8,
   },
   addButton: {
     position: 'absolute',
@@ -118,12 +128,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#283BE3',
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
-    elevation: 5,
-    borderWidth: 2,
-    borderColor: 'rgba(255,255,255,0.3)',
   },
 });

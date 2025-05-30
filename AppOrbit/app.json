@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "AppOrbit",
-    "slug": "AppOrbit",
+    "name": "appTccPrimeiro",
+    "slug": "appTccPrimeiro",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

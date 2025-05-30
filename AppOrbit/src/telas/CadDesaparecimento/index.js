@@ -6,10 +6,11 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
-  Image,
+  Alert,
 } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import axios from 'axios';
 
 export default function CadDesaparecimento({navigation}) {
   const [nomeCompleto, setNomeCompleto] = useState("");
@@ -21,14 +22,50 @@ export default function CadDesaparecimento({navigation}) {
   const [ultimaData, setUltimaData] = useState("");
   const [descricao, setDescricao] = useState("");
   const [isFocused, setIsFocused] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const enviarDados = () => {
-    if (nomeCompleto == "" || idade == "" || ultimoLocal == "") {
-      alert("Por favor, preencha os campos obrigatórios!");
+  const api = "http://10.68.36.140/3mtec/apireact/"; // Altere para sua URL
+
+  const enviarDados = async () => {
+    if (!nomeCompleto || !idade || !ultimoLocal) {
+      Alert.alert("Atenção", "Por favor, preencha os campos obrigatórios!");
       return;
     }
-    alert("Notificação registrada com sucesso!");
-    navigation.goBack();
+
+    setIsLoading(true);
+
+    try {
+      const dados = {
+        nomeCompleto,
+        idade,
+        altura,
+        sexo,
+        telefone,
+        ultimoLocal,
+        ultimaData,
+        descricao
+      };
+
+      const response = await axios.post(`${api}cadastrar.php`, dados);
+
+      if (response.data.success) {
+        Alert.alert(
+          "Sucesso", 
+          "Desaparecimento cadastrado com sucesso!",
+          [{ text: "OK", onPress: () => navigation.goBack() }]
+        );
+      } else {
+        Alert.alert("Erro", response.data.message || "Ocorreu um erro ao cadastrar");
+      }
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+      Alert.alert(
+        "Erro", 
+        "Não foi possível conectar ao servidor. Verifique sua conexão."
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -89,13 +126,14 @@ export default function CadDesaparecimento({navigation}) {
           </View>
           
           <View style={[styles.formGroup, {flex: 1}]}>
-            <Text style={styles.label}>Altura</Text>
+            <Text style={styles.label}>Altura (cm)</Text>
             <TextInput
               style={styles.input}
               value={altura}
               onChangeText={setAltura}
-              placeholder="Ex: 1.75"
+              placeholder="Ex: 175"
               placeholderTextColor="rgba(255,255,255,0.5)"
+              keyboardType="numeric"
             />
           </View>
         </View>
@@ -168,9 +206,15 @@ export default function CadDesaparecimento({navigation}) {
           />
         </View>
 
-        <TouchableOpacity style={styles.submitButton} onPress={enviarDados}>
-          <Text style={styles.submitText}>Cadastrar Desaparecimento</Text>
-          <Ionicons name="arrow-forward" size={20} color="#FFFFFF" />
+        <TouchableOpacity 
+          style={[styles.submitButton, isLoading && styles.submitButtonDisabled]}
+          onPress={enviarDados}
+          disabled={isLoading}
+        >
+          <Text style={styles.submitText}>
+            {isLoading ? "Enviando..." : "Cadastrar Desaparecimento"}
+          </Text>
+          {!isLoading && <Ionicons name="arrow-forward" size={20} color="#FFFFFF" />}
         </TouchableOpacity>
       </ScrollView>
     </LinearGradient>
@@ -288,6 +332,9 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 12,
     marginTop: 10,
+  },
+  submitButtonDisabled: {
+    backgroundColor: '#6c757d',
   },
   submitText: {
     color: "#fff",

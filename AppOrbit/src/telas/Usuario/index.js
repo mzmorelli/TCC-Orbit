@@ -5,10 +5,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 export default function PerfilUsuario({ navigation }) {
   const userData = {
-    nome: 'João Silva',
-    email: 'joao@exemplo.com',
+    nome: 'Usuário',
+    email: 'email@exemplo.com',
     telefone: '(11) 98765-4321',
-    foto: require('../../../assets/logo.png')
+    foto: require('../../../assets/sem-foto.png')
   };
 
   return (
@@ -73,7 +73,7 @@ export default function PerfilUsuario({ navigation }) {
 
         <TouchableOpacity 
           style={styles.logoutButton}
-          onPress={() => navigation.navigate('Login')}
+          onPress={() => navigation.navigate('EditarPerfil')}
         >
           <Text style={styles.logoutButtonText}>Sair</Text>
           <Ionicons name="log-out-outline" size={20} color="#FF3B30" />
@@ -94,6 +94,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
+  },
+  backIcon: {
+    position: 'absolute',
+    left: 25,
+    padding: 8,
+    borderRadius: 20,
+    backgroundColor: 'rgba(255,255,255,0.1)',
   },
   title: {
     fontSize: 24,

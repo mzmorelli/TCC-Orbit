@@ -11,7 +11,14 @@ export default function Inicio({navigation}) {
       start={{ x: 0, y: 0 }}
       end={{ x: 0, y: 1 }}
     >
-      <Text style={styles.title}>Orbit</Text>
+      <View style={styles.logoContainer}>
+                <Image
+                  source={require('../../../assets/logoOrbitOfc.png')}
+                  style={styles.logo}
+                  resizeMode="contain"
+                />
+              </View>
+              
       <View style={styles.dotsContainer}>
         <View style={[styles.dot, styles.activeDot]} />
         <View style={styles.dot} />
@@ -95,5 +102,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+  },
+   logoContainer: {
+    marginBottom: 16,
+  },
+  logo: {
+    width: 200,
+    height: 200,
   },
 });

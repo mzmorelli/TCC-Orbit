@@ -18,6 +18,9 @@ import Desaparecimento from "./src/telas/Desaparecimento/index.js";
 import InfoDesaparecimento from "./src/telas/Desaparecimento/infodesaparecimento.js";
 import CadDesaparecimento from "./src/telas/CadDesaparecimento/index.js";
 import Usuario from "./src/telas/Usuario/index.js";
+import EditarPerfil from "././src/telas/Usuario/editarPerfil.js";
+import ChatOrbitas from "./src/telas/ChatOrbitas/chat.js";
+import ListaChat from "./src/telas/ChatOrbitas/lista.js";
 
 import { Ionicons } from "@expo/vector-icons";
 
@@ -30,10 +33,11 @@ const Tab = createBottomTabNavigator();
 function Tabs() {
   return (
     <Tab.Navigator
+      initialRouteName="Home"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-          color = "#fff";
+          color = "#283BE3";
           size = 30;
           if (route.name === "Home") {
             iconName = focused ? "home" : "home";
@@ -43,6 +47,9 @@ function Tabs() {
             iconName = focused ? "planet" : "planet";
           } else if (route.name === "Usuario") {
             iconName = focused ? "person" : "person";
+          }
+            else if (route.name=="ListaChat"){
+              iconName = focused ? "logo-wechat" : "logo-wechat"; 
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;
@@ -55,10 +62,13 @@ function Tabs() {
         inactiveTintColor: "gray",
       }}
     >
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Usuario" component={Usuario} />
+
+
+      <Tab.Screen name="ListaChat" component={ListaChat}/>
       <Tab.Screen name="Desaparecimento" component={Desaparecimento} />
+      <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Orbitas" component={Orbitas} />
+      <Tab.Screen name="Usuario" component={Usuario} />
     </Tab.Navigator>
   );
 }
@@ -77,13 +87,15 @@ export default function App() {
         <Stack.Screen name="Inicio" component={Inicio} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Cadastro" component={Cadastro} />
-        <Stack.Screen name="InfoPessoal" component={InfoPessoal} />
         <Stack.Screen name="Home" component={Tabs} />
+        <Stack.Screen name="InfoPessoal" component={InfoPessoal} />
         <Stack.Screen name="CompartilharOrbita" component={CompartilharOrbita} />
         <Stack.Screen name="CriarOrbita" component={CriarOrbita} />
         <Stack.Screen name="AddImg" component={AddImg} />
         <Stack.Screen name="CadDesaparecimento" component={CadDesaparecimento} />
         <Stack.Screen name="InfoDesaparecimento" component={InfoDesaparecimento} />
+        <Stack.Screen name="EditarPerfil" component={EditarPerfil} />
+        <Stack.Screen name="ChatOrbitas" component={ChatOrbitas} />
       </Stack.Navigator>
     </NavigationContainer>
   );
