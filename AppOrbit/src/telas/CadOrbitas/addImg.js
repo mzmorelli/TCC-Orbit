@@ -8,12 +8,10 @@ export default function addImg({navigation}) {
   
       <View style={styles.header}>
         <TouchableOpacity style={styles.backIcon}>
-          <Ionicons name="arrow-back" size={24} color="#FFFFFF"
+          <Ionicons name="arrow-back" size={24} color="#1F32F4"
           onPress={() => navigation.goBack()} />
         </TouchableOpacity>
       </View>
-
-      <Text style={styles.title}>Adicionar foto</Text>
 
    
       <View style={styles.dotsContainer}>
@@ -22,12 +20,7 @@ export default function addImg({navigation}) {
         <View style={styles.dot} />
       </View>
 
-  
-      {/* <Image
-        source={require('./assets/mapa-com-pins.png')} 
-        style={styles.image}
-        resizeMode="contain"
-      /> */}
+       <Text style={styles.title}>Adicionar foto</Text>
 
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Adicionar</Text>
@@ -45,7 +38,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ECEEF1',
-    alignItems: 'center',
+
     paddingTop: 60,
     paddingHorizontal: 30,
   },
@@ -63,6 +56,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
     color: '#1E2330',
+    alignSelf: 'center'
   },
   dotsContainer: {
     flexDirection: 'row',
@@ -90,6 +84,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     borderRadius: 12,
     marginBottom: 10,
+    alignItems: 'center',
+    alignSelf: 'center',
   },
   buttonText: {
     color: '#FFFFFF',
@@ -100,5 +96,6 @@ const styles = StyleSheet.create({
     color: '#1E2330',
     textDecorationLine: 'underline',
     fontWeight: 'bold',
+    alignSelf: 'center'
   },
 });

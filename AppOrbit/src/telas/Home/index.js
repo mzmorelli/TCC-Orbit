@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
   },
   locationIcon: {
     padding: 8,
-    borderRadius: 20,
+    borderRadius: 10,
     backgroundColor: 'rgba(255,255,255,0.1)',
   },
   searchContainer: {
@@ -201,8 +201,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   markerBubble: {
-    width: 38,
-    height: 38,
+    width: 33,
+    height: 33,
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',

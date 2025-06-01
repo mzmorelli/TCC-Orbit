@@ -10,7 +10,7 @@ export default function CompartilharOrbita({navigation}) {
      
       <View style={styles.header}>
         <TouchableOpacity style={styles.backIcon}>
-          <Ionicons name="arrow-back" size={24} color="#FFFFFF"
+          <Ionicons name="arrow-back" size={24} color="#1F32F4"
           onPress={() => navigation.goBack()} />
         </TouchableOpacity>
       </View>
@@ -34,8 +34,8 @@ export default function CompartilharOrbita({navigation}) {
 
       
       <TouchableOpacity style={styles.button}
-      onPress={() => navigation.navigate("Orbitas")}>
-        <Text style={styles.buttonText}>Continuar</Text>
+      onPress={() => navigation.navigate("Home")}>
+        <Text style={styles.buttonText}>Finalizar </Text>
       </TouchableOpacity>
     </View>
   );
@@ -47,12 +47,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F5F5',
     paddingHorizontal: 30,
     paddingTop: 60,
-    alignItems: 'center',
   },
   backIcon: {
     position: 'absolute',
     top: 40,
-    left: 20,
+    left: 10,
   },
   header: {
     paddingTop: 60,
@@ -79,6 +78,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     marginBottom: 40,
+    alignItems: 'center'
   },
   codeBox: {
     backgroundColor: '#CFE2FF',
@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     borderRadius: 12,
     marginBottom: 40,
+    alignItems: 'center'
   },
   codeText: {
     fontSize: 24,
@@ -97,6 +98,8 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 40,
     borderRadius: 12,
+    alignItems: 'center',
+    alignSelf: 'center'
   },
   buttonText: {
     color: '#FFFFFF',

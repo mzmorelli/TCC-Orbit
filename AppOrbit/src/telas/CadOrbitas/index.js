@@ -10,7 +10,7 @@ export default function CriarOrbita({navigation}) {
       {}
       <View style={styles.header}>
           <TouchableOpacity style={styles.backIcon}>
-          <Ionicons name="arrow-back" size={24} color="#FFFFFF"
+          <Ionicons name="arrow-back" size={24} color="#1F32F4"
           onPress={() => navigation.goBack()} />
         </TouchableOpacity>
       </View>
