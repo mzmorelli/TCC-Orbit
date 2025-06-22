@@ -26,7 +26,6 @@ import { Ionicons } from "@expo/vector-icons";
 
 import axios from "axios";
 
-const api ='http://10.68.36.140/3mtec/apireact';
 
 const Tab = createBottomTabNavigator();
 

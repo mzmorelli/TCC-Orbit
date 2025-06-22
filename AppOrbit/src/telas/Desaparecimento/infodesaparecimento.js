@@ -12,19 +12,16 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 
-export default function InfoDesaparecimento({ navigation }) {
-  const desaparecido = {
-    nome: "Carlos Alberto",
-    idade: "32 anos",
-    altura: "1,75m",
-    sexo: "Masculino",
-    ultimaVezVisto: "15/05/2023",
-    ultimoLocal: "Shopping Central",
-    telefone: "(11) 98765-4321",
-    descricao:
-      "Vestia camiseta azul e calça jeans. Possui tatuagem de dragão no braço direito.",
-    imagem:
-      "https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_1.5/c_scale,w_400/ncom/en_US/games/switch/s/spongebob-krusty-cook-off-switch/description-image",
+export default function InfoDesaparecimento({ route, navigation }) {
+  const { desaparecido } = route.params;
+  const formatarTelefone = (numero) => {
+    if (!numero || typeof numero !== "string") return "";
+
+    return numero
+      .replace(/\D/g, "") // remove tudo que não for número
+      .replace(/(\d{2})(\d)/, "($1) $2") // coloca parênteses no DDD
+      .replace(/(\d{5})(\d)/, "$1-$2") // coloca o hífen
+      .replace(/(-\d{4})\d+?$/, "$1"); // limita a 4 dígitos no final
   };
 
   const [comentarios, setComentarios] = useState([
@@ -81,26 +78,39 @@ export default function InfoDesaparecimento({ navigation }) {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.profileSection}>
-          <View style={styles.imageShadow}>
-            <Image source={desaparecido.imagem} style={styles.profileImage} />
-          </View>
+          <Image
+            source={
+              desaparecido.imagem
+                ? {
+                    uri: `http://ip/appTcc/uploads/${desaparecido.imagem}`,
+                  }
+                : require("../../../assets/sem-foto.png")
+            }
+            style={styles.profileImage}
+          />
 
           <Text style={styles.userName}>{desaparecido.nome}</Text>
 
           <View style={styles.detailsRow}>
             <View style={styles.detailItem}>
               <Text style={styles.detailLabel}>Idade</Text>
-              <Text style={styles.detailValue}>{desaparecido.idade}</Text>
+              <Text style={styles.detailValue}>{desaparecido.idade} anos</Text>
             </View>
 
             <View style={styles.detailItem}>
               <Text style={styles.detailLabel}>Altura</Text>
-              <Text style={styles.detailValue}>{desaparecido.altura}</Text>
+              <Text style={styles.detailValue}>{desaparecido.altura} cm</Text>
             </View>
 
             <View style={styles.detailItem}>
               <Text style={styles.detailLabel}>Sexo</Text>
-              <Text style={styles.detailValue}>{desaparecido.sexo}</Text>
+              <Text style={styles.detailValue}>
+                {desaparecido.sexo === "M"
+                  ? "Masculino"
+                  : desaparecido.sexo === "F"
+                  ? "Feminino"
+                  : desaparecido.sexo}
+              </Text>
             </View>
           </View>
         </View>
@@ -112,7 +122,7 @@ export default function InfoDesaparecimento({ navigation }) {
             </View>
             <View>
               <Text style={styles.infoLabel}>Última vez visto</Text>
-              <Text style={styles.infoText}>{desaparecido.ultimaVezVisto}</Text>
+              <Text style={styles.infoText}>{desaparecido.vezVisto}</Text>
             </View>
           </View>
 
@@ -122,7 +132,7 @@ export default function InfoDesaparecimento({ navigation }) {
             </View>
             <View>
               <Text style={styles.infoLabel}>Último local</Text>
-              <Text style={styles.infoText}>{desaparecido.ultimoLocal}</Text>
+              <Text style={styles.infoText}>{desaparecido.localVisto}</Text>
             </View>
           </View>
 
@@ -132,7 +142,9 @@ export default function InfoDesaparecimento({ navigation }) {
             </View>
             <View>
               <Text style={styles.infoLabel}>Contato</Text>
-              <Text style={styles.infoText}>{desaparecido.telefone}</Text>
+              <Text style={styles.infoText}>
+                Contato: {formatarTelefone(String(desaparecido.telefoneContato))}
+              </Text>
             </View>
           </View>
         </View>
