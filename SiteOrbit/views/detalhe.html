@@ -2,56 +2,73 @@
 
 {% block content %}
 
-  <head>
-    <link rel="stylesheet" href="static/css/desaparecidos.css" />
-  </head>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/desaparecidos.css') }}">
+</head>
 
-  <section class="py-5">
-    <div class="container">
-      <button onclick="history.back()" class="btn btn-sm btn-outline-secondary mb-4">← Voltar</button>
-      <div class="row">
-        <div class="col-md-5">
-          <div class="img-placeholder mb-3" style="height:300px;"></div>
-        </div>
-        <div class="col-md-7">
-          <h3 class="mb-3 text-primary">João Silva, 12 anos</h3>
-          <ul class="list-unstyled mb-4">
-            <li><strong>Último local visto:</strong> Praça Central</li>
-            <li><strong>Data e hora:</strong> 12/05/2025 às 17:30</li>
-            <li><strong>Contato:</strong> (11) 91234‑5678</li>
-          </ul>
-          <p><strong>Descrição detalhada:</strong> João saiu de casa vestindo uma camiseta vermelha, calça jeans e mochila azul. Ele tem olhos castanhos e 1,50m de altura.</p>
-        </div>
+<section class="py-5">
+  <div class="container">
+    <button onclick="history.back()" class="btn btn-sm btn-outline-secondary mb-4">← Voltar</button>
+    <div class="row">
+      <div class="col-md-5">
+        {% if pessoa.imagem %}
+          <img src="{{ url_for('static', filename='uploads/' + pessoa.imagem) }}" alt="Imagem" class="img-fluid rounded mb-3" style="height: 300px; object-fit: cover;">
+        {% else %}
+          <div class="img-placeholder mb-3" style="height: 300px;"></div>
+        {% endif %}
       </div>
-
-      <div class="mt-5">
-        <h4>Comentários</h4>
-        <form id="comment-form" class="mb-4">
-          <div class="mb-3">
-            <label for="comment" class="form-label">Deixe seu comentário</label>
-            <textarea id="comment" class="form-control" rows="4" placeholder="Compartilhe informações que possam ajudar..."></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
-        <div id="comments-list">
-        </div>
+      <div class="col-md-7">
+        <h3 class="mb-3 text-primary">{{ pessoa.nome }}, {{ pessoa.idade }} anos</h3>
+        <ul class="list-unstyled mb-4">
+          <li><strong>Sexo:</strong> {{ pessoa.sexo }}</li>
+          <li><strong>Altura:</strong> {{ pessoa.altura }}cm</li>
+          <li><strong>Último local visto:</strong> {{ pessoa.localVisto }}</li>
+          <li><strong>Data e hora:</strong>
+            {% if pessoa.vezVisto %}
+              {% if pessoa.vezVisto is string %}
+                {{ pessoa.vezVisto }}
+              {% else %}
+                {{ pessoa.vezVisto.strftime('%d/%m/%Y às %H:%M') }}
+              {% endif %}
+            {% else %}
+              Data não informada
+            {% endif %}
+          </li>
+          <li><strong>Contato:</strong> {{ pessoa.telefoneContato }}</li>
+        </ul>
+        <p><strong>Descrição detalhada:</strong> {{ pessoa.descricao }}</p>
       </div>
     </div>
-  </section>
 
-  <script>
-    const form = document.getElementById('comment-form');
-    const list = document.getElementById('comments-list');
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const txt = document.getElementById('comment').value.trim();
-      if (!txt) return;
-      const div = document.createElement('div');
-      div.className = 'border rounded p-3 mb-2 bg-light';
-      div.textContent = "@usuario: "+txt;
-      list.prepend(div);
-      form.reset();
-    });
-  </script>
+    <div class="mt-5">
+      <h4>Comentários</h4>
+      <form id="comment-form" class="mb-4">
+        <div class="mb-3">
+          <label for="comment" class="form-label">Deixe seu comentário</label>
+          <textarea id="comment" class="form-control" rows="4" placeholder="Compartilhe informações que possam ajudar..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </form>
+      <div id="comments-list">
+        <!-- Comentários inseridos via JavaScript -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('comment-form');
+  const list = document.getElementById('comments-list');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const txt = document.getElementById('comment').value.trim();
+    if (!txt) return;
+    const div = document.createElement('div');
+    div.className = 'border rounded p-3 mb-2 bg-light';
+    div.textContent = "@usuario: " + txt;
+    list.prepend(div);
+    form.reset();
+  });
+</script>
 
 {% endblock content %}

@@ -1,193 +1,272 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <head>
-    <link rel="stylesheet" href="static/css/registrar.css" />
-  </head>
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/registrar.css') }}"
+  />
+</head>
 
-    <div class="missing-person-container container-lg">
-      <h1 class="missing-person-title text-center">
-        Notificar Desaparecimento
-      </h1>
-      <div class="missing-person-form-container mt-4 p-5 shadow-sm rounded">
-        <div class="row g-4">
-          <div class="col-lg-7">
-            <form
-              class="missing-person-form"
-              action="{{ url_for('desaparecidos') }}"
-              method="POST"
-            >
-              <div class="mb-4">
-                <label class="form-label">Nome completo</label>
-                <input
-                  type="text"
-                  class="form-control form-input"
-                  name="nome"
-                  placeholder="Ex: Maria Oliveira"
-                  required
-                />
-              </div>
+<div class="missing-person-container container-lg">
+  <h1 class="missing-person-title text-center">Notificar Desaparecimento</h1>
+  <div class="missing-person-form-container mt-4 p-5 shadow-sm rounded">
+    <!-- Mensagens de flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible fade show">
+      {{ message }}
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+    {% endfor %} {% endif %} {% endwith %}
 
-              <div class="row mb-4 g-3">
-                <div class="col-md-6">
-                  <label class="form-label">Idade</label>
-                  <input
-                    type="number"
-                    class="form-control form-input"
-                    name="idade"
-                    placeholder="Anos"
-                    required
-                  />
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Altura (cm)</label>
-                  <input
-                    type="number"
-                    class="form-control form-input"
-                    name="altura"
-                    placeholder="Ex: 165"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div class="mb-4">
-                <label class="form-label">Telefone para contato</label>
-                <input
-                  type="tel"
-                  class="form-control form-input"
-                  name="telefoneContato"
-                  placeholder="(XX) XXXXX-XXXX"
-                  required
-                />
-              </div>
-
-              <div class="mb-4">
-                <label class="form-label">Sexo</label>
-                <div class="d-flex gap-3">
-                  <div>
-                    <input
-                      type="radio"
-                      id="masculino"
-                      name="sexo"
-                      value="Masculino"
-                      required
-                    />
-                    <label for="masculino">Masculino</label>
-                  </div>
-                  <div>
-                    <input
-                      type="radio"
-                      id="feminino"
-                      name="sexo"
-                      value="Feminino"
-                    />
-                    <label for="feminino">Feminino</label>
-                  </div>
-                  <div>
-                    <input type="radio" id="outro" name="sexo" value="Outro" />
-                    <label for="outro">Outro</label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row mb-4 g-3">
-                <div class="col-md-6">
-                  <label class="form-label">Último local visto</label>
-                  <input
-                    type="text"
-                    class="form-control form-input"
-                    name="localVisto"
-                    placeholder="Ex: Avenida Paulista"
-                    required
-                  />
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Data e hora</label>
-                  <input
-                    type="datetime-local"
-                    class="form-control form-input"
-                    name="vezVisto"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div class="mb-4">
-                <label class="form-label"
-                  >Descrição (roupas, características)</label
-                >
-                <textarea
-                  class="form-control form-input"
-                  name="descricao"
-                  rows="4"
-                  placeholder="Detalhe aqui..."
-                  required
-                ></textarea>
-              </div>
-
-              <div class="text-center mt-5">
-                <button type="submit" class="btn submit-btn px-5">
-                  Postar Notificação
-                </button>
-              </div>
-            </form>
+    <div class="row g-4">
+      <div class="col-lg-7">
+        <form
+          class="missing-person-form"
+          action="{{ url_for('registrar') }}"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <div class="mb-4">
+            <label class="form-label">Nome completo</label>
+            <input
+              type="text"
+              class="form-control form-input"
+              name="nome"
+              placeholder="Ex: Maria Oliveira"
+              required
+            />
           </div>
-          <div class="col-lg-5">
-            <div
-              class="photo-upload-container h-100 d-flex flex-column justify-content-center align-items-center p-4 bg-light rounded"
-            >
-              <label class="form-label w-100">Adicionar Foto</label>
-              <div
-                class="photo-placeholder flex-fill w-100 d-flex flex-column align-items-center justify-content-center rounded border-dashed"
-                tabindex="0"
-              >
-                <div class="photo-icon mb-3">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="48"
-                    height="48"
-                    fill="#6c757d"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                    <path
-                      d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"
-                    />
-                  </svg>
-                </div>
-                <p class="photo-text text-center mb-0">
-                  Arraste e solte ou clique para selecionar
-                </p>
-                <input type="file" class="photo-input" accept="image/*" />
+
+          <div class="row mb-4 g-3">
+            <div class="col-md-6">
+              <label class="form-label">Idade</label>
+              <input
+                type="number"
+                class="form-control form-input"
+                name="idade"
+                placeholder="Anos"
+                required
+                min="1"
+              />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Altura (cm)</label>
+              <input
+                type="number"
+                class="form-control form-input"
+                name="altura"
+                placeholder="Ex: 165"
+                required
+                min="50"
+                max="250"
+              />
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label">Telefone para contato</label>
+            <input
+              type="tel"
+              class="form-control form-input"
+              name="telefoneContato"
+              placeholder="(XX) XXXXX-XXXX"
+            />
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label">Sexo</label>
+            <div class="d-flex gap-3">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  id="masculino"
+                  name="sexo"
+                  value="Masculino"
+                  required
+                />
+                <label class="form-check-label" for="masculino"
+                  >Masculino</label
+                >
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  id="feminino"
+                  name="sexo"
+                  value="Feminino"
+                />
+                <label class="form-check-label" for="feminino">Feminino</label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  id="outro"
+                  name="sexo"
+                  value="Outro"
+                />
+                <label class="form-check-label" for="outro">Outro</label>
               </div>
             </div>
           </div>
-        </div>
+
+          <div class="row mb-4 g-3">
+            <div class="col-md-6">
+              <label class="form-label">Último local visto</label>
+              <input
+                type="text"
+                class="form-control form-input"
+                name="localVisto"
+                placeholder="Ex: Avenida Paulista"
+                required
+              />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Data e hora</label>
+              <input
+                type="datetime-local"
+                class="form-control form-input"
+                name="vezVisto"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label"
+              >Descrição (roupas, características)</label
+            >
+            <textarea
+              class="form-control form-input"
+              name="descricao"
+              rows="4"
+              placeholder="Detalhe aqui..."
+              required
+            ></textarea>
+          </div>
+
+          <input type="hidden" name="imagem" id="imagem-hidden-input" />
+
+          <div class="text-center mt-5">
+            <button type="submit" class="btn submit-btn px-5">
+              Postar Notificação
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-5">
+        <div class="photo-upload-container h-100 d-flex flex-column justify-content-center align-items-center p-4 bg-light rounded">
+                    <label class="form-label w-100">Adicionar Foto</label>
+                    <div class="photo-placeholder flex-fill w-100 d-flex flex-column align-items-center justify-content-center rounded border-dashed" tabindex="0">
+                        <div class="photo-icon mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#6c757d" viewBox="0 0 16 16">
+                                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                            </svg>
+                        </div>
+                        <p class="photo-text text-center mb-0">
+                            Arraste e solte ou clique para selecionar
+                        </p>
+                        <p class="text-muted small mt-2">Formatos: JPG, PNG (Máx. 16MB)</p>
+                       <input type="file" class="photo-input d-none" name="imagem" id="imagem" accept="image/*" />
+
+                    </div>
+                </div>
+
       </div>
     </div>
+  </div>
+</div>
 
-    <script>
-      // Toggle gênero
-      document.querySelectorAll(".gender-btn").forEach((btn) =>
-        btn.addEventListener("click", () => {
-          document
-            .querySelectorAll(".gender-btn")
-            .forEach((b) => b.classList.remove("active"));
-          event.currentTarget.classList.add("active");
-        })
-      );
+<script>
+    const photoInput = document.getElementById('imagem');
+    const photoPlaceholder = document.querySelector('.photo-placeholder');
 
-      // Preview foto
-      const inp = document.querySelector(".photo-input");
-      const ph = document.querySelector(".photo-placeholder");
-      inp.addEventListener("change", (e) => {
+    // Preview da imagem selecionada
+    photoInput.addEventListener('change', (e) => {
         if (e.target.files[0]) {
-          const url = URL.createObjectURL(e.target.files[0]);
-          ph.innerHTML = `<img src="${url}" class="uploaded-photo rounded" alt="Foto">`;
+            const file = e.target.files[0];
+
+            // Verifica o tamanho máximo (16MB)
+            if (file.size > 16 * 1024 * 1024) {
+                alert('O arquivo é muito grande. Tamanho máximo permitido: 16MB');
+                photoInput.value = '';
+                return;
+            }
+
+            // Verifica a extensão permitida
+            const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+            const fileExt = file.name.toLowerCase().split('.').pop();
+
+            if (!allowedExtensions.includes(fileExt)) {
+                alert('Tipo de arquivo não permitido. Use apenas: ' + allowedExtensions.join(', '));
+                photoInput.value = '';
+                return;
+            }
+
+            // Mostra o preview da imagem
+            const url = URL.createObjectURL(file);
+            photoPlaceholder.innerHTML = `
+                <img src="${url}" class="uploaded-photo rounded" alt="Preview da foto" style="max-width: 100%; height: auto;">
+                <button type="button" class="btn btn-sm btn-danger mt-2 remove-photo">Remover</button>
+            `;
+
+            // Botão para remover a foto
+            document.querySelector('.remove-photo')?.addEventListener('click', () => {
+                photoInput.value = '';
+                photoPlaceholder.innerHTML = getPlaceholderHTML();
+            });
         }
-      });
-    </script>
+    });
+
+    // Clicar na área da imagem ativa o input
+    photoPlaceholder.addEventListener('click', () => photoInput.click());
+
+    // Drag and drop
+    photoPlaceholder.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        photoPlaceholder.classList.add('border-primary');
+    });
+
+    photoPlaceholder.addEventListener('dragleave', () => {
+        photoPlaceholder.classList.remove('border-primary');
+    });
+
+    photoPlaceholder.addEventListener('drop', (e) => {
+        e.preventDefault();
+        photoPlaceholder.classList.remove('border-primary');
+
+        if (e.dataTransfer.files.length) {
+            photoInput.files = e.dataTransfer.files;
+            const event = new Event('change');
+            photoInput.dispatchEvent(event);
+        }
+    });
+
+    // Função para gerar HTML padrão do placeholder
+    function getPlaceholderHTML() {
+        return `
+            <div class="photo-icon mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#6c757d" viewBox="0 0 16 16">
+                    <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                    <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                </svg>
+            </div>
+            <p class="photo-text text-center mb-0">
+                Arraste e solte ou clique para selecionar
+            </p>
+            <p class="text-muted small mt-2">Formatos: JPG, PNG (Máx. 16MB)</p>
+        `;
+    }
+</script>
+
 
 {% endblock content %}
