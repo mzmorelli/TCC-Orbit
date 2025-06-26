@@ -7,6 +7,7 @@ import {
   ScrollView,
   Alert,
   Image,
+  StyleSheet
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
@@ -46,6 +47,14 @@ export default function CadDesaparecimento({ navigation }) {
 
   const handleChange = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFocus = (fieldName) => {
+    setInputFocused(fieldName);
+  };
+
+  const handleBlur = () => {
+    setInputFocused(null);
   };
 
   const selecionarImagem = async () => {
@@ -117,11 +126,12 @@ export default function CadDesaparecimento({ navigation }) {
           ultimoLocal: formData.ultimoLocal.trim(),
           ultimaData: formData.ultimaData || null,
           descricao: formData.descricao.trim() || null,
+          origem: "app"
         })
       );
 
       const response = await axios.post(
-        `http://ip/appTcc/salvar.php`,
+        `http://192.168.1.69/appTcc/salvar.php`,
         formDataToSend,
         {
           headers: {

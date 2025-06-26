@@ -41,7 +41,8 @@ try {
                 localVisto = :localVisto, 
                 telefoneContato = :telefoneContato,
                 descricao = :descricao,
-                imagem = :imagem
+                imagem = :imagem,
+                origem =  :origem
             ");
 
             $query->bindValue(":nome", $postData['nomeCompleto'] ?? '');
@@ -53,6 +54,8 @@ try {
             $query->bindValue(":telefoneContato", $postData['telefone'] ?? NULL);
             $query->bindValue(":descricao", $postData['descricao'] ?? NULL);
             $query->bindValue(":imagem", $fileName);
+            $query->bindValue(":origem", 'app');
+
 
             if ($query->execute()) {
                 $response['success'] = true;

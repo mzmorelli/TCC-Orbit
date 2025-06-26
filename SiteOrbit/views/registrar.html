@@ -10,7 +10,7 @@
 <div class="missing-person-container container-lg">
   <h1 class="missing-person-title text-center">Notificar Desaparecimento</h1>
   <div class="missing-person-form-container mt-4 p-5 shadow-sm rounded">
-    <!-- Mensagens de flash -->
+
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
     messages %} {% for category, message in messages %}
     <div class="alert alert-{{ category }} alert-dismissible fade show">
@@ -153,44 +153,32 @@
             ></textarea>
           </div>
 
-          <input type="hidden" name="imagem" id="imagem-hidden-input" />
 
-          <div class="text-center mt-5">
-            <button type="submit" class="btn submit-btn px-5">
-              Postar Notificação
-            </button>
-          </div>
-        </form>
-      </div>
-      <div class="col-lg-5">
-        <div class="photo-upload-container h-100 d-flex flex-column justify-content-center align-items-center p-4 bg-light rounded">
-                    <label class="form-label w-100">Adicionar Foto</label>
-                    <div class="photo-placeholder flex-fill w-100 d-flex flex-column align-items-center justify-content-center rounded border-dashed" tabindex="0">
-                        <div class="photo-icon mb-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#6c757d" viewBox="0 0 16 16">
-                                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                                <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
-                            </svg>
-                        </div>
-                        <p class="photo-text text-center mb-0">
-                            Arraste e solte ou clique para selecionar
-                        </p>
-                        <p class="text-muted small mt-2">Formatos: JPG, PNG (Máx. 16MB)</p>
-                       <input type="file" class="photo-input d-none" name="imagem" id="imagem" accept="image/*" />
-
-                    </div>
-                </div>
-
-      </div>
+      <div class="image-upload-container">
+  <label class="image-upload-label">Adicionar Foto:</label>
+  <div class="image-upload-wrapper" onclick="document.getElementById('imagem').click()">
+    <div class="upload-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+        <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+      </svg>
+    </div>
+    <p class="upload-text">Clique para selecionar ou arraste uma imagem</p>
+    <p class="upload-hint">Formatos: JPG, PNG (Máx. 16MB)</p>
+    <img id="image-preview" class="image-preview" alt="Pré-visualização da imagem">
+  </div>
+  <input type="file" name="imagem" id="imagem" accept="image/*" required>
+  <button type="submit" class="upload-button">Postar Notificação</button>
+</div>
     </div>
   </div>
 </div>
 
 <script>
     const photoInput = document.getElementById('imagem');
-    const photoPlaceholder = document.querySelector('.photo-placeholder');
+    const imagePreview = document.getElementById('image-preview');
+    const uploadWrapper = document.querySelector('.image-upload-wrapper');
 
-    // Preview da imagem selecionada
     photoInput.addEventListener('change', (e) => {
         if (e.target.files[0]) {
             const file = e.target.files[0];
@@ -213,36 +201,36 @@
             }
 
             // Mostra o preview da imagem
-            const url = URL.createObjectURL(file);
-            photoPlaceholder.innerHTML = `
-                <img src="${url}" class="uploaded-photo rounded" alt="Preview da foto" style="max-width: 100%; height: auto;">
-                <button type="button" class="btn btn-sm btn-danger mt-2 remove-photo">Remover</button>
-            `;
-
-            // Botão para remover a foto
-            document.querySelector('.remove-photo')?.addEventListener('click', () => {
-                photoInput.value = '';
-                photoPlaceholder.innerHTML = getPlaceholderHTML();
-            });
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                imagePreview.src = event.target.result;
+                imagePreview.style.display = 'block';
+                
+                // Esconde o conteúdo padrão quando uma imagem é selecionada
+                uploadWrapper.querySelector('.upload-icon').style.display = 'none';
+                uploadWrapper.querySelector('.upload-text').style.display = 'none';
+                uploadWrapper.querySelector('.upload-hint').style.display = 'none';
+            };
+            reader.readAsDataURL(file);
         }
     });
 
-    // Clicar na área da imagem ativa o input
-    photoPlaceholder.addEventListener('click', () => photoInput.click());
-
     // Drag and drop
-    photoPlaceholder.addEventListener('dragover', (e) => {
+    uploadWrapper.addEventListener('dragover', (e) => {
         e.preventDefault();
-        photoPlaceholder.classList.add('border-primary');
+        uploadWrapper.style.borderColor = 'rgba(27, 44, 193, 0.8)';
+        uploadWrapper.style.backgroundColor = 'rgba(27, 44, 193, 0.05)';
     });
 
-    photoPlaceholder.addEventListener('dragleave', () => {
-        photoPlaceholder.classList.remove('border-primary');
+    uploadWrapper.addEventListener('dragleave', () => {
+        uploadWrapper.style.borderColor = '#ccc';
+        uploadWrapper.style.backgroundColor = '#fafafa';
     });
 
-    photoPlaceholder.addEventListener('drop', (e) => {
+    uploadWrapper.addEventListener('drop', (e) => {
         e.preventDefault();
-        photoPlaceholder.classList.remove('border-primary');
+        uploadWrapper.style.borderColor = '#ccc';
+        uploadWrapper.style.backgroundColor = '#fafafa';
 
         if (e.dataTransfer.files.length) {
             photoInput.files = e.dataTransfer.files;
@@ -250,22 +238,6 @@
             photoInput.dispatchEvent(event);
         }
     });
-
-    // Função para gerar HTML padrão do placeholder
-    function getPlaceholderHTML() {
-        return `
-            <div class="photo-icon mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#6c757d" viewBox="0 0 16 16">
-                    <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                    <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
-                </svg>
-            </div>
-            <p class="photo-text text-center mb-0">
-                Arraste e solte ou clique para selecionar
-            </p>
-            <p class="text-muted small mt-2">Formatos: JPG, PNG (Máx. 16MB)</p>
-        `;
-    }
 </script>
 
 

@@ -21,6 +21,8 @@ import Usuario from "./src/telas/Usuario/index.js";
 import EditarPerfil from "././src/telas/Usuario/editarPerfil.js";
 import ChatOrbitas from "./src/telas/ChatOrbitas/chat.js";
 import ListaChat from "./src/telas/ChatOrbitas/lista.js";
+import anuncios from "./src/telas/Desaparecimento/anuncios.js";
+import anunciosUsuario from "./src/telas/Desaparecimento/anunciosUsuario.js";
 
 import { Ionicons } from "@expo/vector-icons";
 
@@ -95,6 +97,8 @@ export default function App() {
         <Stack.Screen name="InfoDesaparecimento" component={InfoDesaparecimento} />
         <Stack.Screen name="EditarPerfil" component={EditarPerfil} />
         <Stack.Screen name="ChatOrbitas" component={ChatOrbitas} />
+        <Stack.Screen name="Anuncios" component={anuncios} />
+        <Stack.Screen name="AnunciosUsuario" component={anunciosUsuario} />
       </Stack.Navigator>
     </NavigationContainer>
   );

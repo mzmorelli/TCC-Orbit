@@ -1,7 +1,9 @@
-{% extends 'base.html' %} 
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <head>
-  <link rel="stylesheet" href="static/css/desaparecidos.css" />
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/desaparecidos.css') }}"
+  />
 </head>
 
 <section class="desaparecidos-custom py-5">
@@ -23,29 +25,37 @@
         >
           <div class="card desaparecido-card h-100">
             <div class="img-placeholder">
+              {% if desaparecido.imagem %} {% if desaparecido.origem == 'site'
+              %}
               <img
-                src="http://localhost/appTcc/uploads/{{ desaparecido.imagem }}"
-                alt="{{ desaparecido.nome }}"
-                class="img-fluid"
+                src="{{ url_for('static', filename='uploads/' + desaparecido.imagem) }}"
+                alt="Foto de {{ desaparecido.nome }}"
               />
+              {% else %}
+              <img
+                src="http://localhost/apptcc/uploads/{{ desaparecido.imagem }}"
+                alt="Foto de {{ desaparecido.nome }}"
+              />
+              {% endif %} {% else %}
+              <img
+                src="{{ url_for('static', filename='img/imagem-nao-disponivel.png') }}"
+                alt="Imagem não disponível"
+              />
+              {% endif %}
             </div>
             <div class="card-body info">
               <p><strong>Nome:</strong> {{ desaparecido.nome }}</p>
               <p><strong>Idade:</strong> {{ desaparecido.idade }} anos</p>
               <p>
-                <strong>Último local visto:</strong> {{ desaparecido.localVisto }}
+                <strong>Último local visto:</strong> {{ desaparecido.localVisto
+                }}
               </p>
               <p>
-                <strong>Última vez visto: </strong>
-                {% if desaparecido.vezVisto %}
-                  {% if desaparecido.vezVisto is string %}
-                    {{ desaparecido.vezVisto }}
-                  {% else %}
-                    {{ desaparecido.vezVisto.strftime('%d/%m/%Y às %H:%M') }}
-                  {% endif %}
-                {% else %}
-                  Data não informada
-                {% endif %}
+                <strong>Última vez visto:</strong>
+                {% if desaparecido.vezVisto %} {% if desaparecido.vezVisto is
+                string %} {{ desaparecido.vezVisto }} {% else %} {{
+                desaparecido.vezVisto.strftime('%d/%m/%Y às %H:%M') }} {% endif
+                %} {% else %} Data não informada {% endif %}
               </p>
             </div>
           </div>
@@ -55,5 +65,4 @@
     </div>
   </div>
 </section>
-
 {% endblock content %}
