@@ -9,6 +9,10 @@ def init_app(app):
     @app.route('/')
     def home():
         return render_template('index.html')
+    
+    @app.route('/sobre')
+    def sobre():
+        return render_template('sobre.html')
 
     @app.route('/desaparecidos')
     def desaparecidos():
@@ -37,7 +41,6 @@ def init_app(app):
                     localVisto=request.form.get('localVisto', '').strip(),
                     descricao=request.form.get('descricao', '').strip(),
                     imagem=None,
-                    origem='site'
                 )
 
                 if 'imagem' in request.files:
@@ -50,6 +53,12 @@ def init_app(app):
                         file_path = os.path.join(upload_path, filename)
                         file.save(file_path)
                         novo.imagem = filename
+                        app_php_path = os.path.join('C:/xampp/htdocs/appTcc/uploads', filename)
+                        try:
+                                import shutil
+                                shutil.copy2(file_path, app_php_path)
+                        except Exception as copy_error:
+                                 current_app.logger.warning(f"Erro ao copiar imagem para o app: {copy_error}")
 
                 db.session.add(novo)
                 db.session.commit()

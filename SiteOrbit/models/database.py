@@ -14,7 +14,7 @@ class Desaparecido(db.Model):
     localVisto = db.Column(db.String(500), nullable=False)
     descricao = db.Column(db.Text)
     imagem = db.Column(db.String(255))
-    origem = db.Column(db.String(10), default='site')  
+    origem = db.Column(db.String(10), nullable=True)  
 
     def __init__(self, nome, idade, sexo, telefoneContato, vezVisto, localVisto, 
                  descricao=None, altura=None, imagem=None):
