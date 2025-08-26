@@ -1,9 +1,7 @@
 {% extends 'base.html' %} {% block content %}
+
 <head>
-  <link
-    rel="stylesheet"
-    href="{{ url_for('static', filename='css/desaparecidos.css') }}"
-  />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/desaparecidos.css') }}" />
 </head>
 
 <section class="desaparecidos-custom py-5">
@@ -18,51 +16,71 @@
 
     <div class="row g-4">
       {% for desaparecido in desaparecidosDados %}
-      <div class="col-md-6 col-lg-4">
-        <a
-          href="{{ url_for('detalhe', id=desaparecido.id) }}"
-          class="text-decoration-none"
-        >
-          <div class="card desaparecido-card h-100">
-            <div class="img-placeholder">
-              {% if desaparecido.imagem %} {% if desaparecido.origem == 'site'
-              %}
-              <img
-                src="{{ url_for('static', filename='uploads/' + desaparecido.imagem) }}"
-                alt="Foto de {{ desaparecido.nome }}"
-              />
+      <div class="col-md-6 col-lg-3">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+
+
+            <div class="flip-card-front">
+              {% if desaparecido.imagem %}
+              {% if desaparecido.origem == 'site' %}
+              <img src="{{ url_for('static', filename='uploads/' + desaparecido.imagem) }}"
+                alt="Foto de {{ desaparecido.nome }}">
               {% else %}
-              <img
-                src="http://localhost/apptcc/uploads/{{ desaparecido.imagem }}"
-                alt="Foto de {{ desaparecido.nome }}"
-              />
-              {% endif %} {% else %}
-              <img
-                src="{{ url_for('static', filename='img/imagem-nao-disponivel.png') }}"
-                alt="Imagem não disponível"
-              />
+              <img src="http://localhost/apptcc/uploads/{{ desaparecido.imagem }}"
+                alt="Foto de {{ desaparecido.nome }}">
               {% endif %}
+              {% else %}
+              <img src="{{ url_for('static', filename='img/imagem-nao-disponivel.png') }}" alt="Imagem não disponível">
+              {% endif %}
+
+              <div class="overlay-info">
+                <h5 style="font-size: 20px;">{{ desaparecido.nome }}</h5>
+                <p><strong>Último local:</strong> {{ desaparecido.localVisto }}</p>
+                <p>
+                  <strong>Última vez visto:</strong>
+                  {% if desaparecido.vezVisto %}
+                  {% if desaparecido.vezVisto is string %}
+                  {{ desaparecido.vezVisto }}
+                  {% else %}
+                  {{ desaparecido.vezVisto.strftime('%d/%m/%Y às %H:%M') }}
+                  {% endif %}
+                  {% else %}
+                  Não informado
+                  {% endif %}
+                </p>
+              </div>
             </div>
-            <div class="card-body info">
-              <p><strong>Nome:</strong> {{ desaparecido.nome }}</p>
-              <p><strong>Idade:</strong> {{ desaparecido.idade }} anos</p>
-              <p>
-                <strong>Último local visto:</strong> {{ desaparecido.localVisto
-                }}
-              </p>
+
+            <div class="flip-card-back">
+              <p><strong>Telefone para contato:</strong> {{ desaparecido.telefoneContato }}</p>
+              <p><strong>Descrição:</strong> {{ desaparecido.descricao }}</p>
               <p>
                 <strong>Última vez visto:</strong>
-                {% if desaparecido.vezVisto %} {% if desaparecido.vezVisto is
-                string %} {{ desaparecido.vezVisto }} {% else %} {{
-                desaparecido.vezVisto.strftime('%d/%m/%Y às %H:%M') }} {% endif
-                %} {% else %} Data não informada {% endif %}
+                {% if desaparecido.vezVisto %}
+                {% if desaparecido.vezVisto is string %}
+                {{ desaparecido.vezVisto }}
+                {% else %}
+                {{ desaparecido.vezVisto.strftime('%d/%m/%Y às %H:%M') }}
+                {% endif %}
+                {% else %}
+                Não informado
+                {% endif %}
               </p>
+
+              <a href="{{ url_for('detalhe', id=desaparecido.id) }}" class="btn-detalhes">
+                Ver mais detalhes
+              </a>
             </div>
+
           </div>
-        </a>
+        </div>
       </div>
+
+
       {% endfor %}
     </div>
+
   </div>
 </section>
 {% endblock content %}
