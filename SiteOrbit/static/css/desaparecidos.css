@@ -176,7 +176,7 @@ ul.list-unstyled li {
   }
 }
 
-/* Card retangular */
+
 .flip-card {
   background: transparent;
   width: 100%;
@@ -237,16 +237,21 @@ ul.list-unstyled li {
 }
 
 .flip-card-back {
-  background: linear-gradient(135deg, #1b2cc1, #000066);
-  color: #fff;
+  background: #fff;
+  color: #000;
   transform: rotateY(180deg);
-  padding: 1rem;
-  font-size: 0.85rem;
+  padding: 1.5rem;
+  font-size: 0.9rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   text-align: left;
+  border: 3px solid #1b2cc1;
+  border-radius: 12px;
+  line-height: 1.6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 
 .flip-card-back p {
   margin: 0.3rem 0;
@@ -254,18 +259,23 @@ ul.list-unstyled li {
 }
 
 .btn-detalhes {
-  align-self: flex-start;
-  background: #fff;
-  color: #000066;
+  background: radial-gradient(circle, rgba(27, 44, 193, 1) 0%, rgba(13, 21, 91, 1) 100%);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
   font-weight: 600;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
   text-decoration: none;
-  transition: all 0.3s;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(13, 21, 91, 0.4);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
   margin-top: 0.8rem;
 }
 
 .btn-detalhes:hover {
   background: #f0f0f0;
+  color: #000066;
   transform: translateY(-2px);
 }

@@ -17,7 +17,6 @@ app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'static', 
 
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-# Cria a pasta de uploads se não existir
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 routes.init_app(app)

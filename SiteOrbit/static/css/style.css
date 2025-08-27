@@ -115,7 +115,6 @@ body {
   opacity: 0.8;
 }
 
-/* Hero */
 .hero-custom {
   background: radial-gradient(circle, rgba(27, 44, 193, 1) 0%, rgba(13, 21, 91, 1) 100%);
   padding: 7rem 2rem;
