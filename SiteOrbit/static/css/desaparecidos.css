@@ -326,4 +326,12 @@ ul.list-unstyled li {
   margin-bottom: 0.8rem;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
+.relacionados-section .card {
+  border-radius: 12px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.relacionados-section .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
 

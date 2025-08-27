@@ -75,4 +75,9 @@ def init_app(app):
     @app.route('/detalhe/<int:id>')
     def detalhe(id):
         pessoa = Desaparecido.query.get_or_404(id)
+        relacionados = (Desaparecido.query
+                    .filter(Desaparecido.id != id)
+                    .order_by(Desaparecido.id.desc())
+                    .limit(4)
+                    .all())
         return render_template('detalhe.html', pessoa=pessoa)
