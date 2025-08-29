@@ -3,170 +3,15 @@
 {% block content %}
 
 <head>
-  <link rel="stylesheet" href="static/css/style.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sobre.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    /* Estilos específicos para a página sobre */
-    .about-hero {
-      background: radial-gradient(circle, rgba(27, 44, 193, 0.8) 0%, rgba(13, 21, 91, 0.9) 100%);
-      padding: 6rem 0;
-      color: white;
-      text-align: center;
-      margin: 18px;
-      border-radius: 16px;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .about-hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('https://via.placeholder.com/1920x1080') center/cover no-repeat;
-      opacity: 0.15;
-      z-index: 0;
-    }
-    
-    .about-hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    
-    .mission-section {
-      background-color: white;
-      padding: 5rem 0;
-      margin: 18px;
-      border-radius: 16px;
-    }
-    
-    .mission-card {
-      background: linear-gradient(135deg, rgba(27, 44, 193, 0.05) 0%, rgba(13, 21, 91, 0.05) 100%);
-      border-radius: 16px;
-      padding: 3rem;
-      height: 100%;
-      transition: transform 0.3s ease;
-    }
-    
-    .mission-card:hover {
-      transform: translateY(-5px);
-    }
-    
-    .feature-highlight {
-      background: radial-gradient(circle, rgba(0, 0, 102, 0.05) 0%, rgba(13, 21, 91, 0.1) 100%);
-      padding: 5rem 0;
-      margin: 18px;
-      border-radius: 16px;
-    }
-    
-    .feature-img-container {
-      position: relative;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 15px 30px rgba(0, 0, 102, 0.1);
-    }
-    
-    .feature-img-container img {
-      width: 100%;
-      height: auto;
-      transition: transform 0.5s ease;
-    }
-    
-    .feature-img-container:hover img {
-      transform: scale(1.05);
-    }
-    
-    .team-section {
-      padding: 5rem 0;
-      background-color: white;
-      margin: 18px;
-      border-radius: 16px;
-    }
-    
-    .team-card {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    
-    .team-img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 5px solid rgba(27, 44, 193, 0.1);
-      margin: 0 auto 1.5rem;
-      transition: all 0.3s ease;
-    }
-    
-    .team-card:hover .team-img {
-      border-color: rgba(27, 44, 193, 0.3);
-      transform: scale(1.05);
-    }
-    
-    .stats-section {
-      background: radial-gradient(circle, rgba(27, 44, 193, 0.8) 0%, rgba(13, 21, 91, 0.9) 100%);
-      padding: 4rem 0;
-      color: white;
-      margin: 18px;
-      border-radius: 16px;
-    }
-    
-    .stat-item {
-      text-align: center;
-      padding: 1.5rem;
-    }
-    
-    .stat-number {
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    
-    .stat-label {
-      font-size: 1.1rem;
-      opacity: 0.9;
-    }
-    
-    .cta-section {
-      padding: 5rem 0;
-      text-align: center;
-    }
-    
-    .cta-card {
-      background: white;
-      padding: 3rem;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 102, 0.1);
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    
-    @media (max-width: 768px) {
-      .about-hero,
-      .mission-section,
-      .feature-highlight,
-      .team-section,
-      .stats-section {
-        margin: 10px;
-        border-radius: 12px;
-      }
-      
-      .about-hero {
-        padding: 4rem 1rem;
-      }
-    }
-  </style>
 </head>
 
 <section class="about-hero">
   <div class="about-hero-content">
     <h1 class="mb-4"><strong>Sobre o ORBIT</strong></h1>
     <p class="lead mb-4" style="font-size: 1.5rem;">Revolucionando a segurança familiar e o combate a desaparecimentos</p>
-    <a href="#" class="btn btn-join">BAIXAR O APP</a>
+    <a href="#" class="btn btn-started">BAIXAR O APP</a>
   </div>
 </section>
 
@@ -175,10 +20,12 @@
     <div class="row mb-5">
       <div class="col-12 text-center">
         <h2 class="mb-3" style="color: #000066;">Nossa Missão</h2>
-        <p class="lead" style="max-width: 700px; margin: 0 auto; color: #333;">Conectar famílias e comunidades para criar um ambiente mais seguro para todos</p>
+        <p class="lead" style="max-width: 700px; margin: 0 auto; color: #333;">
+          Desenvolver soluções tecnológicas que fortaleçam a rede de proteção social, promovendo segurança, rastreamento em tempo real e engajamento comunitário na busca por pessoas desaparecidas.
+        </p>
       </div>
     </div>
-    
+
     <div class="row g-4">
       <div class="col-md-4">
         <div class="mission-card">
@@ -186,27 +33,33 @@
             <i class="fas fa-heart fa-2x" style="color: #000066;"></i>
           </div>
           <h3 style="color: #000066;">Proteção Familiar</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula.</p>
+          <p>
+            O desaparecimento de entes queridos afeta profundamente famílias e comunidades. O ORBIT oferece uma rede de proteção que permite o monitoramento em tempo real de pessoas próximas, promovendo mais segurança e tranquilidade.
+          </p>
         </div>
       </div>
-      
+
       <div class="col-md-4">
         <div class="mission-card">
           <div class="feature-icon mb-4">
             <i class="fas fa-search-location fa-2x" style="color: #000066;"></i>
           </div>
           <h3 style="color: #000066;">Localização em Tempo Real</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula.</p>
+          <p>
+            Utilizando tecnologia de geolocalização, o aplicativo garante o rastreio preciso e instantâneo de familiares e amigos, permitindo respostas rápidas em situações críticas.
+          </p>
         </div>
       </div>
-      
+
       <div class="col-md-4">
         <div class="mission-card">
           <div class="feature-icon mb-4">
             <i class="fas fa-hands-helping fa-2x" style="color: #000066;"></i>
           </div>
           <h3 style="color: #000066;">Comunidade Ativa</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula.</p>
+          <p>
+            A participação da comunidade é essencial. O ORBIT facilita o compartilhamento de alertas e informações, ampliando a rede de apoio e tornando a busca por desaparecidos mais eficaz.
+          </p>
         </div>
       </div>
     </div>
@@ -219,28 +72,34 @@
       <div class="col-lg-6 mb-4 mb-lg-0">
         <h2 class="mb-4" style="color: #000066;">Tecnologia que Conecta</h2>
         <p class="lead mb-4" style="color: #000066; font-weight: 500;">Inovação a serviço da segurança familiar</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.</p>
-        
+        <p>
+          Em resposta ao ODS 16 da ONU, o ORBIT propõe uma solução integrada para reduzir o tempo de resposta em casos de desaparecimento. Com localização em tempo real, alertas emergenciais e comunicação direta, conectamos famílias, amigos e a comunidade para garantir ações coordenadas e eficientes.
+        </p>
+
         <div class="d-flex align-items-start my-4">
           <i class="fas fa-check-circle mt-1 me-3" style="color: #000066; font-size: 1.2rem;"></i>
           <div>
             <h5 style="color: #000066;">Localização precisa</h5>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>
+              Acompanhamento contínuo de usuários conectados, com atualização automática de localização, garantindo precisão e agilidade nas respostas.
+            </p>
           </div>
         </div>
-        
+
         <div class="d-flex align-items-start my-4">
           <i class="fas fa-check-circle mt-1 me-3" style="color: #000066; font-size: 1.2rem;"></i>
           <div>
             <h5 style="color: #000066;">Alertas inteligentes</h5>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>
+              Envio de notificações imediatas em casos de emergência, desaparecimento ou perda de sinal, permitindo que familiares ajam rapidamente.
+            </p>
           </div>
         </div>
       </div>
-      
+
       <div class="col-lg-6">
         <div class="feature-img-container">
-          <img src="https://via.placeholder.com/600x400" alt="Tecnologia ORBIT" class="img-fluid">
+          <img src="../static/imgs/laptop.png" alt="Tecnologia ORBIT" class="img-fluid">
         </div>
       </div>
     </div>
@@ -252,40 +111,43 @@
     <div class="row mb-5">
       <div class="col-12 text-center">
         <h2 class="mb-3" style="color: #000066;">Conheça o Time</h2>
-        <p class="lead" style="max-width: 700px; margin: 0 auto; color: #333;">Profissionais dedicados a tornar o mundo um lugar mais seguro</p>
       </div>
     </div>
-    
+
     <div class="row">
       <div class="col-md-3 col-sm-6">
         <div class="team-card">
-          <img src="https://via.placeholder.com/300x300" alt="Membro do time" class="team-img">
-          <h4 style="color: #000066;">João Silva</h4>
-          <p class="text-muted">CEO & Fundador</p>
+          <a href="https://github.com/JuliaAlabi">
+          <img src="../static/imgs/julia.jpg" alt="Membro do time" class="team-img"></a>
+          <h4 style="color: #000066;">Julia Alabi</h4>
+          <p class="text-muted">Desenvolvedora</p>
         </div>
       </div>
-      
+
       <div class="col-md-3 col-sm-6">
         <div class="team-card">
-          <img src="https://via.placeholder.com/300x300" alt="Membro do time" class="team-img">
-          <h4 style="color: #000066;">Maria Souza</h4>
-          <p class="text-muted">CTO</p>
+          <a href="https://github.com/mzmorelli">
+          <img src="../static/imgs/equipe.jpg" alt="Membro do time" class="team-img"></a>
+          <h4 style="color: #000066;">Millie Zanon</h4>
+          <p class="text-muted">Desenvolvedor</p>
         </div>
       </div>
-      
+
       <div class="col-md-3 col-sm-6">
         <div class="team-card">
-          <img src="https://via.placeholder.com/300x300" alt="Membro do time" class="team-img">
-          <h4 style="color: #000066;">Carlos Oliveira</h4>
-          <p class="text-muted">Desenvolvedor Sênior</p>
+          <a href="https://github.com/BZYasmin">
+          <img src="../static/imgs/yasmin.jpg" alt="Membro do time" class="team-img"></a>
+          <h4 style="color: #000066;">Yasmin de Oliveira</h4>
+          <p class="text-muted">Desenvolvedora</p>
         </div>
       </div>
-      
+
       <div class="col-md-3 col-sm-6">
         <div class="team-card">
-          <img src="https://via.placeholder.com/300x300" alt="Membro do time" class="team-img">
-          <h4 style="color: #000066;">Ana Santos</h4>
-          <p class="text-muted">Designer UX/UI</p>
+          <a href="https://github.com/ramtrigodev">
+          <img src="../static/imgs/ramon.png" alt="Membro do time" class="team-img"></a>
+          <h4 style="color: #000066;">Ramon Trigo</h4>
+          <p class="text-muted">Orientador</p>
         </div>
       </div>
     </div>
@@ -301,21 +163,21 @@
           <div class="stat-label">Famílias Protegidas</div>
         </div>
       </div>
-      
+
       <div class="col-md-3 col-6">
         <div class="stat-item">
           <div class="stat-number">500+</div>
           <div class="stat-label">Pessoas Encontradas</div>
         </div>
       </div>
-      
+
       <div class="col-md-3 col-6">
         <div class="stat-item">
           <div class="stat-number">20+</div>
           <div class="stat-label">Cidades Atendidas</div>
         </div>
       </div>
-      
+
       <div class="col-md-3 col-6">
         <div class="stat-item">
           <div class="stat-number">24/7</div>
