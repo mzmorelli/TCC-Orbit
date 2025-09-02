@@ -8,7 +8,27 @@ def init_app(app):
 
     @app.route('/')
     def home():
-        return render_template('index.html')
+        desaparecidos = Desaparecido.query.order_by(Desaparecido.id.desc()).all()
+        desaparecidos_json = [
+            {
+                "id": d.id,
+                "nome": d.nome,
+                "idade": d.idade,
+                "localVisto": d.localVisto,
+                "vezVisto": str(d.vezVisto) if d.vezVisto else None,  
+                "imagem": d.imagem,
+                "telefoneContato": d.telefoneContato,
+                "descricao": d.descricao,
+                "origem": getattr(d, "origem", "site")  
+            } for d in desaparecidos
+        ]
+
+        return render_template(
+            "index.html",
+            desaparecidos=desaparecidos,
+            desaparecidos_json=desaparecidos_json
+        )
+
     
     @app.route('/sobre')
     def sobre():

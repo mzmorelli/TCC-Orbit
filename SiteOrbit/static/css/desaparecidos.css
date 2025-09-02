@@ -335,3 +335,19 @@ ul.list-unstyled li {
   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
 
+
+.desaparecidos-carousel-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.desaparecidos-carousel {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+  flex: 0 0 25%; /* 4 cards visíveis (100 / 4 = 25%) */
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+}
