@@ -118,6 +118,17 @@ export default function InfoDesaparecimento({ route, navigation }) {
         <View style={styles.glassCard}>
           <View style={styles.infoItem}>
             <View style={styles.infoIcon}>
+              <Ionicons name="call-outline" size={18} color="#FFFFFF" />
+            </View>
+            <View>
+              <Text style={styles.infoLabel}>Contato</Text>
+              <Text style={styles.infoText}>
+              {formatarTelefone(String(desaparecido.telefoneContato))}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.infoItem}>
+            <View style={styles.infoIcon}>
               <Ionicons name="time-outline" size={18} color="#FFFFFF" />
             </View>
             <View>
@@ -126,12 +137,14 @@ export default function InfoDesaparecimento({ route, navigation }) {
             </View>
           </View>
 
+          
+          
           <View style={styles.infoItem}>
             <View style={styles.infoIcon}>
               <Ionicons name="location-outline" size={18} color="#FFFFFF" />
             </View>
             <View>
-              <Text style={styles.infoLabel}>Último local</Text>
+              <Text style={styles.infoLabel}>Último local visto </Text>
               <Text style={styles.infoText}>{desaparecido.localVisto}</Text>
             </View>
           </View>
@@ -144,21 +157,9 @@ export default function InfoDesaparecimento({ route, navigation }) {
             <Ionicons name="location-outline" size={18} color="#fff" style={{ marginRight: 8 }} />
             <Text style={styles.mapButtonText}>Ver no mapa</Text>
           </TouchableOpacity>
-
-
-
-          <View style={styles.infoItem}>
-            <View style={styles.infoIcon}>
-              <Ionicons name="call-outline" size={18} color="#FFFFFF" />
-            </View>
-            <View>
-              <Text style={styles.infoLabel}>Contato</Text>
-              <Text style={styles.infoText}>
-                Contato: {formatarTelefone(String(desaparecido.telefoneContato))}
-              </Text>
-            </View>
-          </View>
         </View>
+
+        
 
         <View style={styles.glassCard}>
           <View style={styles.infoItem}>
@@ -416,7 +417,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 15,
-    marginTop: 15,
+    marginTop: 8,
+    marginBottom: 15,
     borderWidth: 1,
     borderColor: "rgba(255,255,255,0.3)",
   },
