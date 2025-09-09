@@ -43,7 +43,6 @@ export default function Anuncios({ navigation }) {
         <TouchableOpacity
           style={styles.cardContainer}
           onPress={() => {
-            // no futuro: navigation.navigate("EditarDesaparecimento", { desaparecido: placeholder })
           }}
         >
           <View style={styles.imageShadow}>

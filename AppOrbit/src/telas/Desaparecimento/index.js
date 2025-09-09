@@ -1,8 +1,8 @@
 import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-import TodosDesaparecidos from "./anuncios"; // lista geral
-import AnunciosUsuario from "./anunciosUsuario"; // anúncios do usuário
+import TodosDesaparecidos from "./anuncios";
+import AnunciosUsuario from "./anunciosUsuario"; 
 
 const Tab = createMaterialTopTabNavigator();
 

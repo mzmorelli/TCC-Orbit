@@ -29,7 +29,7 @@ export default function anuncios({ navigation }) {
     const buscarDesaparecidos = async () => {
       try {
         const response = await axios.get(
-          "http://192.168.1.69/appTcc/listar-cards.php"
+          "http://10.239.0.239/appTcc/listar-cards.php"
         );
         if (response.data.success) {
           setDesaparecidos(response.data.dados);
@@ -84,8 +84,8 @@ export default function anuncios({ navigation }) {
                   source={{
                     uri:
                       item.origem === "site"
-                        ? `http://192.168.1.69/static/uploads/${item.imagem}`
-                        : `http://192.168.1.69/appTcc/uploads/${item.imagem}`,
+                        ? `http://10.239.0.239/SiteOrbit/static/uploads/${item.imagem}`
+                        : `http://10.239.0.239/appTcc/uploads/${item.imagem}`,
                   }}
                   style={styles.profileImage}
                 />
@@ -116,7 +116,6 @@ export default function anuncios({ navigation }) {
                       Último local: {item.localVisto}
                     </Text>
                   </View>
-
                   <View style={styles.infoItem}>
                     <View style={styles.infoIcon}>
                       <Ionicons name="call-outline" size={16} color="#FFFFFF" />

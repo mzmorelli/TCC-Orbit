@@ -82,8 +82,8 @@ export default function InfoDesaparecimento({ route, navigation }) {
             source={
               desaparecido.imagem
                 ? {
-                    uri: `http://192.168.1.69/appTcc/uploads/${desaparecido.imagem}`,
-                  }
+                  uri: `http://10.239.0.239/appTcc/uploads/${desaparecido.imagem}`,
+                }
                 : require("../../../assets/sem-foto.png")
             }
             style={styles.profileImage}
@@ -108,8 +108,8 @@ export default function InfoDesaparecimento({ route, navigation }) {
                 {desaparecido.sexo === "M"
                   ? "Masculino"
                   : desaparecido.sexo === "F"
-                  ? "Feminino"
-                  : desaparecido.sexo}
+                    ? "Feminino"
+                    : desaparecido.sexo}
               </Text>
             </View>
           </View>
@@ -135,6 +135,17 @@ export default function InfoDesaparecimento({ route, navigation }) {
               <Text style={styles.infoText}>{desaparecido.localVisto}</Text>
             </View>
           </View>
+          <TouchableOpacity
+            style={styles.mapButton}
+            onPress={() =>
+              navigation.navigate("MapaDesaparecido", { endereco: desaparecido.localVisto })
+            }
+          >
+            <Ionicons name="location-outline" size={18} color="#fff" style={{ marginRight: 8 }} />
+            <Text style={styles.mapButtonText}>Ver no mapa</Text>
+          </TouchableOpacity>
+
+
 
           <View style={styles.infoItem}>
             <View style={styles.infoIcon}>
@@ -397,4 +408,22 @@ const styles = StyleSheet.create({
     color: "rgba(255, 255, 255, 0.9)",
     lineHeight: 20,
   },
+  mapButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 15,
+    marginTop: 15,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.3)",
+  },
+  mapButtonText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "600",
+  }
+
 });
