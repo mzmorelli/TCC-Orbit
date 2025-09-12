@@ -5,7 +5,13 @@ header('Content-Type: application/json');
 include_once('conexao.php');
 
 try {
-    $query = $pdo->query("SELECT * FROM desaparecido ORDER BY id DESC");
+    // Faz o JOIN com a tabela usuario usando usuario_id
+    $query = $pdo->query("
+        SELECT d.*, u.nome AS usuario_nome
+        FROM desaparecido d
+        LEFT JOIN usuario u ON d.usuario_id = u.id
+        ORDER BY d.id DESC
+    ");
     $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
     echo json_encode([
@@ -18,3 +24,4 @@ try {
         'message' => 'Erro: ' . $e->getMessage()
     ]);
 }
+?>

@@ -11,7 +11,7 @@ export default function Desaparecimento() {
      <Tab.Navigator
       screenOptions={{
         tabBarStyle: { 
-          backgroundColor: "#0D155B",
+          backgroundColor: "#135991",
           height: 50, 
         },
         tabBarLabelStyle: {

@@ -50,12 +50,7 @@ export default function ChatScreen({ route, navigation }) {
   };
 
   return (
-    <LinearGradient
-      colors={['#1B2CC1', '#0D155B']}
-      style={styles.container}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-    >
+    <View style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         {/* Header Personalizado */}
         <View style={styles.header}>
@@ -107,13 +102,14 @@ export default function ChatScreen({ route, navigation }) {
           </TouchableOpacity>
         </KeyboardAvoidingView>
       </SafeAreaView>
-    </LinearGradient>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#d1e5f4', // fundo leve
   },
   safeArea: {
     flex: 1,
@@ -126,7 +122,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255,255,255,0.1)',
+    borderBottomColor: 'rgba(0,0,0,0.1)',
   },
   backButton: {
     padding: 5,
@@ -134,43 +130,45 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#FFFFFF',
+    color: '#2c3e50',
     flex: 1,
     textAlign: 'center',
     marginHorizontal: 10,
   },
   headerRight: {
-    width: 24, // Mesma largura do botão de voltar para manter o balanceamento
+    width: 24,
   },
   messagesContainer: {
-    padding: 20,
+    paddingHorizontal: 15,
     paddingTop: 10,
-    paddingBottom: 70, // Espaço para o input
+    paddingBottom: 70, // espaço para o input
   },
   messageBubble: {
     maxWidth: '80%',
-    padding: 12,
-    borderRadius: 12,
-    marginBottom: 10,
+    padding: 10,
+    borderRadius: 8,
+    marginBottom: 8,
   },
   sentBubble: {
     alignSelf: 'flex-end',
-    backgroundColor: '#283BE3',
+    backgroundColor: '#135991', // tom azul mais leve
     borderBottomRightRadius: 2,
   },
   receivedBubble: {
     alignSelf: 'flex-start',
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#FFFFFF',
+    opacity: 0.9,
     borderBottomLeftRadius: 2,
   },
   messageText: {
-    fontSize: 16,
+    fontSize: 15,
+    lineHeight: 20,
   },
   sentText: {
     color: '#FFFFFF',
   },
   receivedText: {
-    color: '#FFFFFF',
+    color: '#2c3e50',
   },
   timeText: {
     fontSize: 10,
@@ -181,7 +179,7 @@ const styles = StyleSheet.create({
     color: 'rgba(255,255,255,0.6)',
   },
   receivedTime: {
-    color: 'rgba(255,255,255,0.6)',
+    color: 'rgba(44,62,80,0.5)',
   },
   inputContainer: {
     flexDirection: 'row',
@@ -189,17 +187,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderTopWidth: 1,
-    borderTopColor: 'rgba(255,255,255,0.1)',
+    borderTopColor: 'rgba(0,0,0,0.1)',
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: '#1B2CC1',
+    backgroundColor: '#d1e5f4', // fundo leve igual à tela
   },
   input: {
     flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    color: '#FFFFFF',
+    backgroundColor: '#FFFFFF',
+    color: '#2c3e50',
     borderRadius: 20,
     paddingHorizontal: 15,
     paddingVertical: 10,
@@ -210,7 +208,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#283BE3',
+    backgroundColor: '#135991',
     justifyContent: 'center',
     alignItems: 'center',
   },

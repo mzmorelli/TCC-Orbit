@@ -15,10 +15,10 @@ export default function Cadastro({ navigation }) {
 
   return (
     <LinearGradient
-      colors={["#1B2CC1", "#0D155B"]}
+      colors={["#83bde3", "#3f92cb", "#135991"]}
       style={styles.container}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 0, y: 1 }}
+      start={{ x: 0, y: 0, w: 0 }}
+      end={{ x: 0, y: 0.9, w: 1 }}
     >
       <View style={styles.header}>
         <TouchableOpacity
@@ -65,10 +65,11 @@ export default function Cadastro({ navigation }) {
         <TouchableOpacity
           style={styles.button}
           activeOpacity={0.8}
-          onPress={() => navigation.navigate("InfoPessoal")}
+          onPress={() => navigation.navigate("InfoPessoal", { telefone })}
         >
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
+
       </View>
     </LinearGradient>
   );
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
     padding: 8,
   },
-    logoContainer: {
+  logoContainer: {
     marginBottom: 16,
   },
   logo: {
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
   },
   button: {
-    backgroundColor: "#283BE3",
+    backgroundColor: "#3f92cb",
     paddingVertical: 16,
     borderRadius: 12,
     alignItems: "center",

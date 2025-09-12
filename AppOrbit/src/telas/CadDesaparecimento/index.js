@@ -157,12 +157,7 @@ export default function CadDesaparecimento({ navigation }) {
   };
 
   return (
-    <LinearGradient
-      colors={["#1B2CC1", "#0D155B"]}
-      style={styles.container}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-    >
+    <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backIcon}
@@ -405,13 +400,14 @@ export default function CadDesaparecimento({ navigation }) {
           )}
         </TouchableOpacity>
       </ScrollView>
-    </LinearGradient>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#d1e5f4", // fundo leve
   },
   header: {
     paddingTop: 60,
@@ -423,12 +419,12 @@ const styles = StyleSheet.create({
   backIcon: {
     padding: 8,
     borderRadius: 20,
-    backgroundColor: "rgba(255,255,255,0.1)",
+    backgroundColor: "rgba(19,89,145,0.2)", // destaque suave
     marginRight: 15,
   },
   titulo: {
     fontSize: 20,
-    color: "#FFFFFF",
+    color: "#2c3e50",
     fontWeight: "600",
     flex: 1,
   },
@@ -447,9 +443,10 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 75,
-    backgroundColor: "rgba(255,255,255,0.1)",
+    backgroundColor: "#FFFFFF",
+    opacity: 0.2,
     borderWidth: 2,
-    borderColor: "rgba(255,255,255,0.3)",
+    borderColor: "#135991", // destaque azul
     justifyContent: "center",
     alignItems: "center",
   },
@@ -458,10 +455,10 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 75,
     borderWidth: 2,
-    borderColor: "rgba(255,255,255,0.3)",
+    borderColor: "#135991", // destaque azul
   },
   addPhotoText: {
-    color: "rgba(255,255,255,0.7)",
+    color: "#135991", // destaque azul
     fontSize: 14,
     marginTop: 10,
   },
@@ -470,21 +467,22 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    color: "rgba(255,255,255,0.8)",
+    color: "#2c3e50",
     marginBottom: 8,
     fontWeight: "500",
   },
   input: {
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor: "#FFFFFF",
+    opacity: 0.9,
     borderRadius: 12,
-    padding: 16,
+    padding: 14,
     fontSize: 16,
-    color: "#FFFFFF",
+    color: "#2c3e50",
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.2)",
+    borderColor: "rgba(19,89,145,0.2)", // borda leve azul
   },
   inputFocused: {
-    borderColor: "#FFFFFF",
+    borderColor: "#135991", // destaque ao focar
   },
   descriptionInput: {
     height: 120,
@@ -501,19 +499,20 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 14,
     alignItems: "center",
-    backgroundColor: "rgba(255,255,255,0.1)",
+    backgroundColor: "#FFFFFF",
+    opacity: 0.2,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.2)",
+    borderColor: "rgba(19,89,145,1)", // borda azul suave
     marginHorizontal: 5,
   },
   sexoSelected: {
-    backgroundColor: "#283BE3",
-    borderColor: "#283BE3",
+    backgroundColor: "#135991",
+    borderColor: "#135991",
   },
   sexoText: {
     fontSize: 14,
-    color: "rgba(255,255,255,0.8)",
+    color: "#ffff",
   },
   sexoSelectedText: {
     color: "#fff",
@@ -523,7 +522,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#283BE3",
+    backgroundColor: "#135991",
     padding: 16,
     borderRadius: 12,
     marginTop: 10,
@@ -541,16 +540,16 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.2)",
+    borderColor: "rgba(19,89,145,0.2)", // leve azul
     paddingHorizontal: 15,
-    backgroundColor: "rgba(255,255,255,0.1)",
+    backgroundColor: "#FFFFFF",
+    opacity: 0.2,
     justifyContent: "center",
-    color: "#FFF",
+    color: "#2c3e50",
   },
-
   dataText: {
     fontSize: 15,
-    color: "#FFF",
+    color: "#2c3e50",
     opacity: 0.9,
   },
 });

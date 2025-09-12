@@ -6,10 +6,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 export default function Inicio({navigation}) {
   return (
     <LinearGradient
-      colors={['#1B2CC1', '#0D155B']}
+      colors={["#83bde3","#3f92cb", "#135991"]}
       style={styles.container}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 0, y: 1 }}
+      start={{ x: 0, y: 0, w:0 }}
+      end={{ x: 0, y: 0.9, w: 1}}
     >
       <View style={styles.logoContainer}>
                 <Image

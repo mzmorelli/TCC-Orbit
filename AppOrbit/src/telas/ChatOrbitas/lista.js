@@ -32,12 +32,7 @@ export default function ChatList({ navigation }) {
   ];
 
   return (
-    <LinearGradient
-      colors={['#1B2CC1', '#0D155B']}
-      style={styles.container}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-    >
+    <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Conversas</Text>
       </View>
@@ -52,7 +47,7 @@ export default function ChatList({ navigation }) {
             onPress={() => navigation.navigate('ChatOrbitas', { groupName: item.groupName })}
           >
             <View style={styles.iconContainer}>
-              <Ionicons name={item.icon} size={24} color="#FFFFFF" />
+              <Ionicons name={item.icon} size={24} color="#135991" />
             </View>
             
             <View style={styles.chatContent}>
@@ -74,59 +69,67 @@ export default function ChatList({ navigation }) {
         )}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
       />
-    </LinearGradient>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: {
+    flex: 1,
+    backgroundColor: '#d1e5f4', // fundo leve
+  },
   header: {
-    paddingTop: 60,
+    paddingTop: 40,
     paddingHorizontal: 20,
     paddingBottom: 20,
   },
   title: {
     fontSize: 24,
-    color: '#FFFFFF',
+    color: '#2c3e50',
     fontWeight: 'bold',
   },
   listContainer: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 0,
   },
   chatItem: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 12,
+    paddingHorizontal: 20,
+    backgroundColor: 'transparent', // sem fundo escuro
   },
   iconContainer: {
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: '#ffffff80', // leve transparência
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 15,
   },
   chatContent: {
     flex: 1,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(0,0,0,0.1)', // linha fina separando chats
+    paddingBottom: 12,
   },
   chatHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 4,
+    marginBottom: 2,
   },
   chatName: {
     fontSize: 16,
-    color: '#FFFFFF',
+    color: '#2c3e50',
     fontWeight: '600',
   },
   chatTime: {
     fontSize: 12,
-    color: 'rgba(255,255,255,0.6)',
+    color: '#4b5563',
   },
   lastMessage: {
     fontSize: 14,
-    color: 'rgba(255,255,255,0.7)',
+    color: '#374151',
   },
   unreadBadge: {
     width: 20,
@@ -141,9 +144,5 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 12,
     fontWeight: 'bold',
-  },
-  separator: {
-    height: 1,
-    backgroundColor: 'rgba(255,255,255,0.1)',
   },
 });

@@ -47,7 +47,7 @@ export default function anuncios({ navigation }) {
   }, []);
 
   return (
-    <LinearGradient colors={["#1B2CC1", "#0D155B"]} style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Desaparecidos</Text>
         <TouchableOpacity
@@ -93,6 +93,7 @@ export default function anuncios({ navigation }) {
 
               <View style={styles.card}>
                 <Text style={styles.userName}>{item.nome}</Text>
+                <Text style={styles.usuario}>Reportado por: {item.usuario_nome}</Text>
 
                 <View style={styles.infoSection}>
                   <View style={styles.infoItem}>
@@ -106,48 +107,28 @@ export default function anuncios({ navigation }) {
 
                   <View style={styles.infoItem}>
                     <View style={styles.infoIcon}>
-                      <Ionicons
-                        name="location-outline"
-                        size={16}
-                        color="#FFFFFF"
-                      />
+                      <Ionicons name="location-outline" size={16} color="#FFFFFF" />
                     </View>
                     <Text style={styles.infoText}>
                       Último local: {item.localVisto}
                     </Text>
                   </View>
-                  <View style={styles.infoItem}>
-                    <View style={styles.infoIcon}>
-                      <Ionicons name="call-outline" size={16} color="#FFFFFF" />
-                    </View>
-                    <Text style={styles.infoText}>
-                      Contato: {formatarTelefone(String(item.telefoneContato))}
-                    </Text>
-                  </View>
-                </View>
 
-                <View style={styles.detailsRow}>
-                  <View style={styles.detailItem}>
-                    <Text style={styles.detailLabel}>Idade</Text>
-                    <Text style={styles.detailValue}>{item.idade} anos</Text>
-                  </View>
-                  <View style={styles.detailItem}>
-                    <Text style={styles.detailLabel}>Altura</Text>
-                    <Text style={styles.detailValue}>{item.altura} cm</Text>
-                  </View>
+                  
                 </View>
               </View>
             </TouchableOpacity>
           ))}
         </ScrollView>
       )}
-    </LinearGradient>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#d1e5f4'
   },
   header: {
     paddingTop: 20,
@@ -161,11 +142,11 @@ const styles = StyleSheet.create({
   addIcon: {
     padding: 8,
     borderRadius: 20,
-    backgroundColor: "rgba(255,255,255,0.1)",
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
   },
   title: {
     fontSize: 24,
-    color: "#FFFFFF",
+    color: "#2c3e50",
     fontWeight: "600",
     letterSpacing: 0.5,
   },
@@ -178,13 +159,18 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
   },
   cardContainer: {
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor: "#89b6dbff",
     borderRadius: 20,
     padding: 15,
     marginBottom: 20,
     flexDirection: "row",
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.2)",
+    borderColor: "rgba(255, 255, 255, 0.3)",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5,
   },
   imageShadow: {
     width: 100,
@@ -214,7 +200,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "600",
     color: "#FFFFFF",
-    marginBottom: 10,
+    marginBottom: 5,
   },
   infoSection: {
     marginBottom: 10,
@@ -235,9 +221,15 @@ const styles = StyleSheet.create({
   },
   infoText: {
     fontSize: 14,
-    color: "#FFFFFF",
+    color: "#16578dff",
+    fontWeight: '500',
     flex: 1,
-    opacity: 0.9,
+  },
+  usuario: {
+    fontSize: 14,
+    color: "#4a4c50ff",
+    fontStyle: "italic",
+    marginBottom: 5,
   },
   detailsRow: {
     flexDirection: "row",
@@ -245,7 +237,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   detailItem: {
-    backgroundColor: "rgba(255, 255, 255, 0.15)",
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
     borderRadius: 10,
     paddingVertical: 8,
     paddingHorizontal: 12,
@@ -254,7 +246,7 @@ const styles = StyleSheet.create({
   },
   detailLabel: {
     fontSize: 12,
-    color: "rgba(255, 255, 255, 0.7)",
+    color: "rgba(255, 255, 255, 0.8)",
     marginBottom: 2,
   },
   detailValue: {

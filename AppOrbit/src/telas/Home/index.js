@@ -101,13 +101,7 @@ export default function MapaScreen({ route }) {
   };
 
   return (
-    <LinearGradient
-      colors={["#1B2CC1", "#0D155B"]}
-      style={styles.container}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-    >
-      {/* Header */}
+    <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Mapa</Text>
         <TouchableOpacity
@@ -118,7 +112,6 @@ export default function MapaScreen({ route }) {
         </TouchableOpacity>
       </View>
 
-      {/* Barra de busca real */}
       <View style={styles.searchContainer}>
         <Ionicons name="search" size={20} color="#999" />
         <TextInput
@@ -149,16 +142,15 @@ export default function MapaScreen({ route }) {
           domStorageEnabled={true}
         />
       </View>
-    </LinearGradient>
+      </View>
+    
   );
 }
 
 const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+  container: { flex: 1, backgroundColor:'#d1e5f4' },
   header: {
     paddingTop: 60,
     paddingHorizontal: 25,
@@ -168,7 +160,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    color: "#FFFFFF",
+    color: "#135991",
     fontWeight: "600",
   },
   locationIcon: {

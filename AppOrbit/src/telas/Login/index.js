@@ -9,10 +9,10 @@ export default function Login({navigation}) {
 
   return (
     <LinearGradient
-      colors={['#1B2CC1', '#0D155B']}
+      colors={["#83bde3","#3f92cb", "#135991"]}
       style={styles.container}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 0, y: 1 }}
+      start={{ x: 0, y: 0, w: 0 }}
+      end={{ x: 0, y: 0.9, w:1 }}
     >
       <View style={styles.header}>
         <TouchableOpacity style={styles.backIcon}>
@@ -145,13 +145,13 @@ const styles = StyleSheet.create({
   },
   link: {
     textAlign: 'center',
-    color: '#283BE3',
+    color: '#3f92cb',
     fontSize: 14,
     fontWeight: '600',
     marginBottom: 30,
   },
   button: {
-    backgroundColor: '#283BE3',
+    backgroundColor: '#3f92cb',
     paddingVertical: 16,
     borderRadius: 12,
     alignItems: 'center',

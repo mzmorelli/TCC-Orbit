@@ -18,12 +18,7 @@ export default function Orbitas({ navigation }) {
   };
 
   return (
-    <LinearGradient
-      colors={['#1B2CC1', '#0D155B']}
-      style={styles.container}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-    >
+    <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Minhas Órbitas</Text>
       </View>
@@ -36,10 +31,10 @@ export default function Orbitas({ navigation }) {
           <View>
             <TouchableOpacity onPress={() => toggleGrupo(item.id)} style={styles.groupItem}>
               <View style={styles.iconContainer}>
-                <Ionicons name={item.icone} size={22} color="#FFFFFF" />
+                <Ionicons name={item.icone} size={22} color="#135991" />
               </View>
               <Text style={styles.groupName}>{item.nome}</Text>
-              <Ionicons name="chevron-down" size={18} color="rgba(255,255,255,0.6)" />
+              <Ionicons name="chevron-down" size={18} color="#135991" />
             </TouchableOpacity>
 
             {grupoSelecionado === item.id && (
@@ -65,21 +60,22 @@ export default function Orbitas({ navigation }) {
         style={styles.addButton}
         onPress={() => navigation.navigate('CriarOrbita')}
       >
-        <Ionicons name="add" size={28} color="#FFFFFF" />
+        <Ionicons name="add" size={28} color="#fff" />
       </TouchableOpacity>
-    </LinearGradient>
+  
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: { flex: 1, backgroundColor:'#d1e5f4' },
   header: {
     paddingTop: 60,
     alignItems: 'center',
   },
   title: {
     fontSize: 20,
-    color: '#FFFFFF',
+    color: '#135991',
     fontWeight: '600',
   },
   listContainer: {
@@ -89,7 +85,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
     borderRadius: 12,
   },
   iconContainer: {
@@ -104,10 +100,10 @@ const styles = StyleSheet.create({
   groupName: {
     flex: 1,
     fontSize: 16,
-    color: '#FFFFFF',
+    color: '#135991',
   },
   optionsContainer: {
-    backgroundColor: 'rgba(255,255,255,0.05)',
+    backgroundColor: 'rgba(255,255,255,0.3)',
     paddingVertical: 10,
     paddingHorizontal: 20,
     marginHorizontal: 10,
@@ -115,7 +111,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 12,
   },
   optionText: {
-    color: '#fff',
+    color: '#135991',
     paddingVertical: 8,
   },
   addButton: {
@@ -125,7 +121,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#283BE3',
+    backgroundColor: '#135991',
     justifyContent: 'center',
     alignItems: 'center',
   },

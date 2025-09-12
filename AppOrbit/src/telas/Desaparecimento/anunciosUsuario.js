@@ -31,7 +31,7 @@ export default function Anuncios({ navigation }) {
   };
 
   return (
-    <LinearGradient colors={["#1B2CC1", "#0D155B"]} style={styles.container}>
+ <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Meus Anúncios</Text>
       </View>
@@ -114,12 +114,14 @@ export default function Anuncios({ navigation }) {
           </View>
         </TouchableOpacity>
       </ScrollView>
-    </LinearGradient>
+      </View>
+
   );
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#d1e5f4", // fundo geral mais claro
   },
   header: {
     paddingTop: 20,
@@ -127,17 +129,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    position: "relative",
     marginBottom: 20,
-  },
-  addIcon: {
-    padding: 8,
-    borderRadius: 20,
-    backgroundColor: "rgba(255,255,255,0.1)",
   },
   title: {
     fontSize: 24,
-    color: "#FFFFFF",
+    color: "#135991", // destaque para o título
     fontWeight: "600",
     letterSpacing: 0.5,
   },
@@ -150,26 +146,26 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
   },
   cardContainer: {
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor: "#FFFFFF", // cards claros
     borderRadius: 20,
     padding: 15,
     marginBottom: 20,
     flexDirection: "row",
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.2)",
+    borderColor: "#135991", // borda destaque
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 3,
   },
   imageShadow: {
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: "rgba(255,255,255,0.2)",
+    backgroundColor: "#cfe4f3", // leve sombra azul
     justifyContent: "center",
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 0.2,
-    shadowRadius: 10,
-    elevation: 5,
     marginRight: 15,
   },
   profileImage: {
@@ -177,7 +173,7 @@ const styles = StyleSheet.create({
     height: 90,
     borderRadius: 45,
     borderWidth: 2,
-    borderColor: "rgba(255,255,255,0.3)",
+    borderColor: "#135991", // borda azul
   },
   card: {
     flex: 1,
@@ -185,7 +181,7 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 18,
     fontWeight: "600",
-    color: "#FFFFFF",
+    color: "#135991",
     marginBottom: 10,
   },
   infoSection: {
@@ -197,7 +193,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   infoIcon: {
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    backgroundColor: "#135991",
     width: 28,
     height: 28,
     borderRadius: 14,
@@ -207,9 +203,8 @@ const styles = StyleSheet.create({
   },
   infoText: {
     fontSize: 14,
-    color: "#FFFFFF",
+    color: "#135991",
     flex: 1,
-    opacity: 0.9,
   },
   detailsRow: {
     flexDirection: "row",
@@ -217,7 +212,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   detailItem: {
-    backgroundColor: "rgba(255, 255, 255, 0.15)",
+    backgroundColor: "#cfe4f3",
     borderRadius: 10,
     paddingVertical: 8,
     paddingHorizontal: 12,
@@ -226,12 +221,12 @@ const styles = StyleSheet.create({
   },
   detailLabel: {
     fontSize: 12,
-    color: "rgba(255, 255, 255, 0.7)",
+    color: "#135991",
     marginBottom: 2,
   },
   detailValue: {
     fontSize: 14,
-    color: "#FFFFFF",
+    color: "#135991",
     fontWeight: "500",
   },
   iconsContainer: {
@@ -240,7 +235,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     marginLeft: 15,
   },
-
   iconButton: {
     marginVertical: 8,
   },

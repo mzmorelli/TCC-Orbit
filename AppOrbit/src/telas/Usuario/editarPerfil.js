@@ -17,12 +17,7 @@ export default function EditarPerfil ({navigation}) {
   const sexoOptions = ['Masculino', 'Feminino', 'Outro', 'Prefiro não dizer'];
 
   return (
-    <LinearGradient
-      colors={['#1B2CC1', '#0D155B']}
-      style={styles.container}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-    >
+    <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity 
           style={styles.backIcon} 
@@ -47,7 +42,7 @@ export default function EditarPerfil ({navigation}) {
                 value={nome}
                 onChangeText={setNome}
                 placeholder="Digite seu nome"
-                placeholderTextColor="rgba(255,255,255,0.5)"
+                placeholderTextColor="#135991"
               />
             </View>
             
@@ -60,7 +55,7 @@ export default function EditarPerfil ({navigation}) {
                   onChangeText={setIdade}
                   keyboardType="numeric"
                   placeholder="Sua idade"
-                  placeholderTextColor="rgba(255,255,255,0.5)"
+                  placeholderTextColor="#135991"
                 />
               </View>
               
@@ -82,7 +77,7 @@ export default function EditarPerfil ({navigation}) {
                   <Ionicons 
                     name={showSexoDropdown ? 'chevron-up' : 'chevron-down'} 
                     size={18} 
-                    color="rgba(255,255,255,0.6)" 
+                    color="#135991" 
                   />
                 </TouchableOpacity>
                 
@@ -123,7 +118,7 @@ export default function EditarPerfil ({navigation}) {
                 onChangeText={setEmail}
                 keyboardType="email-address"
                 placeholder="seu@email.com"
-                placeholderTextColor="rgba(255,255,255,0.5)"
+                placeholderTextColor="#135991"
               />
             </View>
             
@@ -135,7 +130,7 @@ export default function EditarPerfil ({navigation}) {
                 onChangeText={setTelefone}
                 keyboardType="phone-pad"
                 placeholder="(00) 00000-0000"
-                placeholderTextColor="rgba(255,255,255,0.5)"
+                placeholderTextColor="#135991"
               />
             </View>
             
@@ -146,7 +141,7 @@ export default function EditarPerfil ({navigation}) {
                 value={endereco}
                 onChangeText={setEndereco}
                 placeholder="Rua, número, cidade - estado"
-                placeholderTextColor="rgba(255,255,255,0.5)"
+                placeholderTextColor="#135991"
               />
             </View>
           </View>
@@ -164,7 +159,7 @@ export default function EditarPerfil ({navigation}) {
                   onChangeText={setPeso}
                   keyboardType="numeric"
                   placeholder="Ex: 75"
-                  placeholderTextColor="rgba(255,255,255,0.5)"
+                  placeholderTextColor="#135991"
                 />
               </View>
               
@@ -176,7 +171,7 @@ export default function EditarPerfil ({navigation}) {
                   onChangeText={setAltura}
                   keyboardType="numeric"
                   placeholder="Ex: 175"
-                  placeholderTextColor="rgba(255,255,255,0.5)"
+                  placeholderTextColor="#135991"
                 />
               </View>
             </View>
@@ -192,12 +187,13 @@ export default function EditarPerfil ({navigation}) {
           </TouchableOpacity>
         </View>
       </ScrollView>
-    </LinearGradient>
+    </View>
   );}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#d1e5f4', // fundo geral mais claro
   },
   scrollContainer: {
     flexGrow: 1,
@@ -209,24 +205,24 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    position: 'relative',
+    marginBottom: 20,
   },
   backIcon: {
     position: 'absolute',
     left: 25,
     padding: 8,
     borderRadius: 20,
-    backgroundColor: 'rgba(255,255,255,0.1)',
+    backgroundColor: 'rgba(19,89,145,0.15)', // azul suave
   },
   title: {
     fontSize: 24,
-    color: '#FFFFFF',
+    color: '#135991', // destaque azul
     fontWeight: '600',
     letterSpacing: 0.5,
   },
   glassBody: {
     flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.25)', // mais claro que antes
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     paddingTop: 40,
@@ -234,7 +230,7 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
     marginTop: 30,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.2)',
+    borderColor: 'rgba(19,89,145,0.3)', // borda azul suave
     overflow: 'hidden',
   },
   section: {
@@ -242,10 +238,9 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 18,
-    color: '#FFFFFF',
+    color: '#135991', // azul destaque
     fontWeight: '600',
     marginBottom: 15,
-    opacity: 0.9,
   },
   inputContainer: {
     marginBottom: 15,
@@ -256,82 +251,76 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    color: '#FFFFFF',
+    color: '#135991', // azul destaque
     marginBottom: 8,
-    opacity: 0.8,
   },
   input: {
-    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    backgroundColor: 'rgba(255, 255, 255, 0.4)', // mais claro
     borderRadius: 12,
     padding: 15,
-    color: '#FFFFFF',
+    color: '#135991', // texto azul
     fontSize: 16,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.2)',
+    borderColor: 'rgba(19,89,145,0.4)',
   },
- pickerContainer: {
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  backgroundColor: 'rgba(255, 255, 255, 0.15)',
-  borderRadius: 12,
-  paddingVertical: 14,
-  paddingHorizontal: 16,
-  borderWidth: 1,
-  borderColor: 'rgba(255, 255, 255, 0.2)',
-},
+  pickerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: 'rgba(255, 255, 255, 0.4)', // mais claro
+    borderRadius: 12,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+    borderWidth: 1,
+    borderColor: 'rgba(19,89,145,0.4)',
+  },
+  pickerText: {
+    color: '#135991',
+    fontSize: 15,
+  },
+  placeholderText: {
+    color: 'rgba(19,89,145,0.4)',
+  },
   dropdown: {
-  backgroundColor: 'rgba(255, 255, 255, 0.08)',
-  borderRadius: 12,
-  marginTop: 5,
-  borderWidth: 1,
-  borderColor: 'rgba(255, 255, 255, 0.2)',
-  zIndex: 100,
-  elevation: 6,
-  shadowColor: '#000',
-  shadowOffset: { width: 0, height: 3 },
-  shadowOpacity: 0.2,
-  shadowRadius: 8,
-},
+    backgroundColor: 'rgba(255,255,255,0.25)',
+    borderRadius: 12,
+    marginTop: 5,
+    borderWidth: 1,
+    borderColor: 'rgba(19,89,145,0.3)',
+    zIndex: 100,
+    elevation: 6,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+  },
   dropdownOption: {
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  paddingVertical: 12,
-  paddingHorizontal: 16,
-  borderBottomWidth: 1,
-  borderBottomColor: 'rgba(255, 255, 255, 0.05)',
-},
-dropdownOptionText: {
-  color: '#FFFFFF',
-  fontSize: 15,
-  opacity: 0.9,
-},
-dropdownOptionSelected: {
-  backgroundColor: 'rgba(76, 217, 100, 0.12)',
-  borderLeftWidth: 4,
-  borderLeftColor: '#4CD964',
-},
-pickerText: {
-  color: '#FFFFFF',
-  fontSize: 15,
-  opacity: 0.85,
-},
-placeholderText: {
-  color: 'rgba(255,255,255,0.4)',
-},
-  
-  // Estilo do botão de salvar
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(19,89,145,0.1)',
+  },
+  dropdownOptionText: {
+    color: '#135991',
+    fontSize: 15,
+  },
+  dropdownOptionSelected: {
+    backgroundColor: 'rgba(19,89,145,0.2)',
+    borderLeftWidth: 4,
+    borderLeftColor: '#135991',
+  },
+  // Botão de salvar
   saveButton: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(76, 217, 100, 0.2)',
+    backgroundColor: '#135991',
     padding: 18,
     borderRadius: 12,
     marginTop: 20,
-    borderWidth: 1,
-    borderColor: 'rgba(76, 217, 100, 0.3)',
   },
   saveButtonText: {
     color: '#FFFFFF',

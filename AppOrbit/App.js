@@ -39,7 +39,7 @@ function Tabs() {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-          color = "#283BE3";
+          color = "#135991";
           size = 30;
           if (route.name === "Home") {
             iconName = focused ? "home" : "home";

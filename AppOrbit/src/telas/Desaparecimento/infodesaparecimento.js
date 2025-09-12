@@ -36,7 +36,6 @@ export default function InfoDesaparecimento({ route, navigation }) {
     } else {
       setComentarios([
         ...comentarios,
-        //o id vai ser a data
         {
           id: Date.now().toString(),
           usuario: "@usuario",
@@ -48,12 +47,7 @@ export default function InfoDesaparecimento({ route, navigation }) {
   };
 
   return (
-    <LinearGradient
-      colors={["#1B2CC1", "#0D155B"]}
-      style={styles.container}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-    >
+    <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backIcon}
@@ -90,6 +84,7 @@ export default function InfoDesaparecimento({ route, navigation }) {
           />
 
           <Text style={styles.userName}>{desaparecido.nome}</Text>
+          <Text style={styles.advertiserName}>Reportado por: {desaparecido.usuario_nome}</Text>
 
           <View style={styles.detailsRow}>
             <View style={styles.detailItem}>
@@ -121,12 +116,13 @@ export default function InfoDesaparecimento({ route, navigation }) {
               <Ionicons name="call-outline" size={18} color="#FFFFFF" />
             </View>
             <View>
-              <Text style={styles.infoLabel}>Contato</Text>
+              <Text style={styles.infoLabel}>Falar com {desaparecido.usuario_nome}: </Text>
               <Text style={styles.infoText}>
-              {formatarTelefone(String(desaparecido.telefoneContato))}
+                {formatarTelefone(String(desaparecido.telefoneContato))}
               </Text>
             </View>
           </View>
+
           <View style={styles.infoItem}>
             <View style={styles.infoIcon}>
               <Ionicons name="time-outline" size={18} color="#FFFFFF" />
@@ -137,8 +133,8 @@ export default function InfoDesaparecimento({ route, navigation }) {
             </View>
           </View>
 
-          
-          
+
+
           <View style={styles.infoItem}>
             <View style={styles.infoIcon}>
               <Ionicons name="location-outline" size={18} color="#FFFFFF" />
@@ -159,7 +155,7 @@ export default function InfoDesaparecimento({ route, navigation }) {
           </TouchableOpacity>
         </View>
 
-        
+
 
         <View style={styles.glassCard}>
           <View style={styles.infoItem}>
@@ -216,16 +212,17 @@ export default function InfoDesaparecimento({ route, navigation }) {
           contentContainerStyle={styles.commentsList}
         />
       </ScrollView>
-    </LinearGradient>
+</View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#d1e5f4", // fundo claro
   },
   header: {
-    paddingTop: 60,
+    paddingTop: 40,
     paddingHorizontal: 25,
     flexDirection: "row",
     alignItems: "center",
@@ -235,16 +232,16 @@ const styles = StyleSheet.create({
   backIcon: {
     padding: 8,
     borderRadius: 20,
-    backgroundColor: "rgba(255,255,255,0.1)",
+    backgroundColor: "rgba(0,0,0,0.1)", // mais claro
   },
   shareIcon: {
     padding: 8,
     borderRadius: 20,
-    backgroundColor: "rgba(255,255,255,0.1)",
+    backgroundColor: "rgba(0,0,0,0.1)",
   },
   headerTitle: {
     fontSize: 20,
-    color: "#FFFFFF",
+    color: "#2c3e50",
     fontWeight: "600",
   },
   scrollContainer: {
@@ -256,32 +253,25 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 25,
   },
-  imageShadow: {
-    width: 140,
-    height: 140,
-    borderRadius: 70,
-    backgroundColor: "rgba(255,255,255,0.2)",
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.3,
-    shadowRadius: 20,
-    elevation: 10,
-    marginBottom: 15,
-  },
   profileImage: {
     width: 130,
     height: 130,
     borderRadius: 65,
-    borderWidth: 3,
+    borderWidth: 2,
     borderColor: "rgba(255,255,255,0.3)",
   },
   userName: {
     fontSize: 22,
     fontWeight: "600",
-    color: "#FFFFFF",
-    marginBottom: 20,
+    color: "#2c3e50",
+    marginBottom: 5,
+    textAlign: "center",
+  },
+  advertiserName: {
+    fontSize: 14,
+    fontStyle: "italic",
+    color: "#4b5563",
+    marginBottom: 10,
     textAlign: "center",
   },
   detailsRow: {
@@ -291,7 +281,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   detailItem: {
-    backgroundColor: "rgba(255, 255, 255, 0.15)",
+    backgroundColor: "rgba(0,0,0,0.1)",
     borderRadius: 12,
     padding: 12,
     alignItems: "center",
@@ -299,21 +289,21 @@ const styles = StyleSheet.create({
   },
   detailLabel: {
     fontSize: 12,
-    color: "rgba(255, 255, 255, 0.7)",
+    color: "#374151",
     marginBottom: 5,
   },
   detailValue: {
     fontSize: 16,
-    color: "#FFFFFF",
+    color: "#1e293b",
     fontWeight: "500",
   },
   glassCard: {
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor: "rgba(255, 255, 255, 0.7)", // card claro
     borderRadius: 20,
     padding: 20,
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.2)",
+    borderColor: "rgba(156,163,175,0.3)",
   },
   descriptionContainer: {
     flex: 1,
@@ -322,6 +312,7 @@ const styles = StyleSheet.create({
   descriptionText: {
     flexWrap: "wrap",
     flexShrink: 1,
+    color: "#1e293b",
   },
   infoItem: {
     flexDirection: "row",
@@ -329,7 +320,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   infoIcon: {
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    backgroundColor: "rgba(0,0,0,0.1)",
     width: 32,
     height: 32,
     borderRadius: 16,
@@ -339,12 +330,12 @@ const styles = StyleSheet.create({
   },
   infoLabel: {
     fontSize: 14,
-    color: "rgba(255, 255, 255, 0.7)",
+    color: "#374151",
     marginBottom: 3,
   },
   infoText: {
     fontSize: 16,
-    color: "#FFFFFF",
+    color: "#1e293b",
     opacity: 0.9,
     lineHeight: 22,
   },
@@ -357,27 +348,25 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 18,
-    color: "#FFFFFF",
+    color: "#1e293b",
     fontWeight: "600",
   },
   commentCount: {
     fontSize: 14,
-    color: "rgba(255, 255, 255, 0.7)",
+    color: "#374151",
   },
   commentInputContainer: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "rgba(255, 255, 255, 0.15)",
+    backgroundColor: "rgba(0,0,0,0.05)",
     borderRadius: 20,
     paddingHorizontal: 15,
     paddingVertical: 8,
     marginBottom: 20,
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.2)",
   },
   commentInput: {
     flex: 1,
-    color: "#FFFFFF",
+    color: "#1e293b",
     fontSize: 15,
     paddingVertical: 10,
     maxHeight: 100,
@@ -385,47 +374,44 @@ const styles = StyleSheet.create({
   commentButton: {
     padding: 8,
     borderRadius: 20,
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    backgroundColor: "rgba(0,0,0,0.1)",
   },
   commentsList: {
     paddingBottom: 30,
   },
   commentContainer: {
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor: "rgba(255,255,255,0.8)",
     borderRadius: 15,
     padding: 15,
     marginBottom: 12,
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
+    borderColor: "rgba(156,163,175,0.3)",
   },
   commentUser: {
     fontSize: 14,
     fontWeight: "600",
-    color: "#FFFFFF",
+    color: "#1e293b",
     marginBottom: 5,
   },
   commentText: {
     fontSize: 14,
-    color: "rgba(255, 255, 255, 0.9)",
+    color: "#1e293b",
     lineHeight: 20,
   },
   mapButton: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    backgroundColor: "rgba(0,0,0,0.1)",
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 15,
     marginTop: 8,
     marginBottom: 15,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.3)",
   },
   mapButtonText: {
-    color: "#FFFFFF",
+    color: "#1e293b",
     fontSize: 16,
     fontWeight: "600",
-  }
-
+  },
 });
