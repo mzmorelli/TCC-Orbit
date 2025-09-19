@@ -24,6 +24,7 @@ import ListaChat from "./src/telas/ChatOrbitas/lista.js";
 import anuncios from "./src/telas/Desaparecimento/anuncios.js";
 import anunciosUsuario from "./src/telas/Desaparecimento/anunciosUsuario.js";
 import mapaDesaparecido from "./src/telas/Desaparecimento/mapaDesaparecido.js";
+import mapa from "./src/telas/Mapa/index.js";
 
 import { Ionicons } from "@expo/vector-icons";
 
@@ -101,6 +102,7 @@ export default function App() {
         <Stack.Screen name="Anuncios" component={anuncios} />
         <Stack.Screen name="AnunciosUsuario" component={anunciosUsuario} />
         <Stack.Screen name="MapaDesaparecido" component={mapaDesaparecido}/>
+        <Stack.Screen name="Mapa" component={mapa}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
