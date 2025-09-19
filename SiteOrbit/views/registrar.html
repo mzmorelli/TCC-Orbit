@@ -1,11 +1,11 @@
 {% extends 'base.html' %} {% block content %}
 
 <head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
   <link
     rel="stylesheet"
     href="{{ url_for('static', filename='css/registrar.css') }}"
   />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -223,8 +223,8 @@
     // Drag and drop
     uploadWrapper.addEventListener('dragover', (e) => {
         e.preventDefault();
-        uploadWrapper.style.borderColor = 'rgba(27, 44, 193, 0.8)';
-        uploadWrapper.style.backgroundColor = 'rgba(27, 44, 193, 0.05)';
+        uploadWrapper.style.borderColor = 'rgba(13, 81, 136, 0.8)';
+        uploadWrapper.style.backgroundColor = 'rgba(13, 81, 136, 0.05)';
     });
 
     uploadWrapper.addEventListener('dragleave', () => {
@@ -235,7 +235,7 @@
     uploadWrapper.addEventListener('drop', (e) => {
         e.preventDefault();
         uploadWrapper.style.borderColor = '#cbd5e0';
-        uploadWrapper.style.backgroundColor = 'rgba(102, 126, 234, 0.05)';
+        uploadWrapper.style.backgroundColor = 'rgba(13, 81, 136, 0.05)';
 
         if (e.dataTransfer.files.length) {
             photoInput.files = e.dataTransfer.files;
