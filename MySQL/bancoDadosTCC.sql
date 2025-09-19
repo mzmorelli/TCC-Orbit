@@ -52,6 +52,43 @@ INSERT INTO `desaparecido` (`nome`, `idade`, `sexo`, `altura`, `telefoneContato`
 	('Isabela Duarte', 26, 'Feminino', 170, '(98) 92211-3344', '2025-06-20', 'Praça Dom Pedro II, São Luís - MA', 'Vestia vestido floral colorido e óculos escuros grandes. Estava acompanhada de um cachorro de porte médio, marrom com coleira azul. Relatos indicam que ela caminhava em direção ao terminal de ônibus quando desapareceu.', 'mulher6.jpg', 51, 'app', 12);
 /*!40000 ALTER TABLE `desaparecido` ENABLE KEYS */;
 
+-- Copiando estrutura para tabela tccorbit.membro
+CREATE TABLE IF NOT EXISTS `membro` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `orbita_id` int(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `foto` varchar(255) DEFAULT NULL,
+  `latitude` decimal(9,6) DEFAULT NULL,
+  `longitude` decimal(9,6) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `orbita_id` (`orbita_id`),
+  CONSTRAINT `membro_ibfk_1` FOREIGN KEY (`orbita_id`) REFERENCES `orbita` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Copiando dados para a tabela tccorbit.membro: ~4 rows (aproximadamente)
+/*!40000 ALTER TABLE `membro` DISABLE KEYS */;
+INSERT INTO `membro` (`id`, `orbita_id`, `nome`, `foto`, `latitude`, `longitude`) VALUES
+	(1, 1, 'João', 'joao.jpg\r\n', -24.497000, -47.844000),
+	(2, 1, 'Maria', 'maria.jpg', -24.500000, -47.846000),
+	(3, 2, 'Carlos', 'carlos.jpg', -24.495000, -47.842000),
+	(4, 3, 'Ana', 'ana.jpg', -24.499000, -47.840000);
+/*!40000 ALTER TABLE `membro` ENABLE KEYS */;
+
+-- Copiando estrutura para tabela tccorbit.orbita
+CREATE TABLE IF NOT EXISTS `orbita` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Copiando dados para a tabela tccorbit.orbita: ~3 rows (aproximadamente)
+/*!40000 ALTER TABLE `orbita` DISABLE KEYS */;
+INSERT INTO `orbita` (`id`, `nome`) VALUES
+	(1, 'Família'),
+	(2, 'Amigos'),
+	(3, 'Namorado');
+/*!40000 ALTER TABLE `orbita` ENABLE KEYS */;
+
 -- Copiando estrutura para tabela tccorbit.usuario
 CREATE TABLE IF NOT EXISTS `usuario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -63,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Copiando dados para a tabela tccorbit.usuario: ~12 rows (aproximadamente)
+-- Copiando dados para a tabela tccorbit.usuario: ~13 rows (aproximadamente)
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
 INSERT INTO `usuario` (`id`, `nome`, `nascimento`, `email`, `telefone`, `senha`) VALUES
 	(1, 'Marcos Silva', '1990-05-12', 'carolina@email.com', '(11) 91234-5678', '123456'),
