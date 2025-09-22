@@ -40,72 +40,19 @@
       <h2>Pessoas Desaparecidas</h2>
       <p>Ajude-nos a localizar estas pessoas. Qualquer informação é valiosa.</p>
     </div>
-    <div id="desaparecidos-container" class="row g-4">
-      {% for desaparecido in desaparecidos[:4] %}
-      <div class="col-md-6 col-lg-3">
-        <div class="flip-card">
-          <div class="flip-card-inner">
 
-            <div class="flip-card-front">
-              {% if desaparecido.imagem %}
-              {% if desaparecido.origem == 'site' %}
-              <img src="{{ url_for('static', filename='uploads/' + desaparecido.imagem) }}"
-                alt="Foto de {{ desaparecido.nome }}">
-              {% else %}
-              <img src="http://localhost/apptcc/uploads/{{ desaparecido.imagem }}"
-                alt="Foto de {{ desaparecido.nome }}">
-              {% endif %}
-              {% else %}
-              <img src="{{ url_for('static', filename='img/imagem-nao-disponivel.png') }}" alt="Imagem não disponível">
-              {% endif %}
-
-              <div class="card-overlay"></div>
-              <div class="overlay-info">
-                <h5>{{ desaparecido.nome }}</h5>
-                <p><i class="fas fa-map-marker-alt me-2"></i>{{ desaparecido.localVisto }}</p>
-                <p>
-                  <i class="fas fa-clock me-2"></i>
-                  {% if desaparecido.vezVisto %}
-                  {% if desaparecido.vezVisto is string %}
-                  {{ desaparecido.vezVisto }}
-                  {% else %}
-                  {{ desaparecido.vezVisto}}
-                  {% endif %}
-                  {% else %}
-                  Não informado
-                  {% endif %}
-                </p>
-              </div>
-            </div>
-
-            <div class="flip-card-back">
-              <div class="back-content">
-                <h5>Informações</h5>
-                <p><strong><i class="fas fa-phone me-2"></i>Contato:</strong> {{ desaparecido.telefoneContato }}</p>
-                <p><strong><i class="fas fa-file-alt me-2"></i>Descrição:</strong> {{ desaparecido.descricao }}</p>
-                <p>
-                  <strong><i class="fas fa-calendar me-2"></i>Visto por último:</strong>
-                  {% if desaparecido.vezVisto %}
-                  {% if desaparecido.vezVisto is string %}
-                  {{ desaparecido.vezVisto }}
-                  {% else %}
-                  {{ desaparecido.vezVisto.strftime('%d/%m/%Y às %H:%M') }}
-                  {% endif %}
-                  {% else %}
-                  Não informado
-                  {% endif %}
-                </p>
-                <a href="{{ url_for('detalhe', id=desaparecido.id) }}" class="btn-detalhes">
-                  <i class="fas fa-info-circle me-2"></i>Ver detalhes
-                </a>
-              </div>
-            </div>
-
-          </div>
-        </div>
+    <div class="desaparecidos-carousel">
+      <button class="carousel-btn prev" aria-label="Anterior">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <div class="carousel-viewport" id="desaparecidos-viewport">
+        <div class="carousel-track" id="desaparecidos-track"></div>
       </div>
-      {% endfor %}
+      <button class="carousel-btn next" aria-label="Próximo">
+        <i class="fas fa-chevron-right"></i>
+      </button>
     </div>
+
     <div class="text-center mt-5">
       <a href="{{ url_for('desaparecidos') }}" class="btn-ver-mais">
         Ver todas as pessoas desaparecidas <i class="fas fa-arrow-right ms-2"></i>
@@ -115,46 +62,52 @@
 </section>
 
 <script>
-  const desaparecidos = JSON.parse('{{ desaparecidos_json|tojson|safe }}');
-  let startIndex = 0;
-  const cardsPerPage = 4;
-  const container = document.getElementById("desaparecidos-container");
+  (function () {
+    const data = JSON.parse('{{ desaparecidos_json|tojson|safe }}');
+    const track = document.getElementById('desaparecidos-track');
+    const viewport = document.getElementById('desaparecidos-viewport');
+    const btnPrev = document.querySelector('.desaparecidos-carousel .prev');
+    const btnNext = document.querySelector('.desaparecidos-carousel .next');
 
-  function renderCards() {
-    container.innerHTML = "";
-    const slice = [];
+    let slidesPerView = 4;
+    let currentIndex = 0; // index of the left-most visible slide
+    let autoTimer = null;
+    let isTransitioning = false;
 
-    for (let i = 0; i < cardsPerPage; i++) {
-      const index = (startIndex + i) % desaparecidos.length;
-      slice.push(desaparecidos[index]);
+    function computeSlidesPerView() {
+      const w = window.innerWidth;
+      if (w < 576) return 1;
+      if (w < 992) return 2;
+      return 4;
     }
 
-    slice.forEach(d => {
-      container.innerHTML += `
-        <div class="col-md-6 col-lg-3">
-          <div class="flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                ${d.imagem
-          ? (d.origem === "site"
+    function slideTemplate(d) {
+      const imgHtml = d.imagem
+        ? (d.origem === 'site'
             ? `<img src="/static/uploads/${d.imagem}" alt="Foto de ${d.nome}">`
             : `<img src="http://localhost/apptcc/uploads/${d.imagem}" alt="Foto de ${d.nome}">`
           )
-          : `<img src="/static/img/imagem-nao-disponivel.png" alt="Imagem não disponível">`
-        }
+        : `<img src="/static/img/imagem-nao-disponivel.png" alt="Imagem não disponível">`;
+
+      return `
+        <div class="carousel-slide">
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                ${imgHtml}
                 <div class="card-overlay"></div>
                 <div class="overlay-info">
                   <h5>${d.nome}</h5>
-                  <p><i class="fas fa-map-marker-alt me-2"></i>${d.localVisto || "Não informado"}</p>
-                  <p><i class="fas fa-clock me-2"></i>${d.vezVisto || "Não informado"}</p>
+                  <p><i class="fas fa-map-marker-alt me-2"></i>${d.localVisto || 'Não informado'}</p>
+                  <p><i class="fas fa-clock me-2"></i>${d.vezVisto || 'Não informado'}</p>
                 </div>
               </div>
               <div class="flip-card-back">
                 <div class="back-content">
                   <h5>Informações</h5>
-                  <p><strong><i class="fas fa-phone me-2"></i>Contato:</strong> ${d.telefoneContato || "Não informado"}</p>
-                  <p><strong><i class="fas fa-file-alt me-2"></i>Descrição:</strong> ${d.descricao || "Não informado"}</p>
-                  <p><strong><i class="fas fa-calendar me-2"></i>Visto por último:</strong> ${d.vezVisto || "Não informado"}</p>
+                  <p><strong><i class="fas fa-phone me-2"></i>Contato:</strong> ${d.telefoneContato || 'Não informado'}</p>
+                  <p><strong><i class="fas fa-file-alt me-2"></i>Descrição:</strong> ${d.descricao || 'Não informado'}</p>
+                  <p><strong><i class="fas fa-calendar me-2"></i>Visto por último:</strong> ${d.vezVisto || 'Não informado'}</p>
                   <a href="/detalhe/${d.id}" class="btn-detalhes">
                     <i class="fas fa-info-circle me-2"></i>Ver detalhes
                   </a>
@@ -162,15 +115,97 @@
               </div>
             </div>
           </div>
-        </div>
-      `;
+        </div>`;
+    }
+
+    // Build initial content with multiple sets to avoid immediate appends
+    function buildTrack() {
+      slidesPerView = computeSlidesPerView();
+      const initialSets = 3; // render 3x data initially
+      let html = '';
+      for (let s = 0; s < initialSets; s++) {
+        html += data.map(d => slideTemplate(d)).join('');
+      }
+      track.innerHTML = html;
+      currentIndex = 0;
+      setImmediatePosition();
+    }
+
+    function getSlideWidth() {
+      const first = track.querySelector('.carousel-slide');
+      return first ? first.getBoundingClientRect().width : 0;
+    }
+
+    function setImmediatePosition() {
+      const w = getSlideWidth();
+      track.style.transition = 'none';
+      track.style.transform = `translateX(${-currentIndex * w}px)`;
+      // force reflow then restore transition
+      requestAnimationFrame(() => {
+        track.style.transition = '';
+      });
+    }
+
+    function goTo(index) {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      const w = getSlideWidth();
+      track.style.transform = `translateX(${-index * w}px)`;
+      currentIndex = index;
+    }
+
+    function next() {
+      // Append another full set when we are close to the end
+      const totalSlides = track.children.length;
+      const threshold = totalSlides - (slidesPerView * 2);
+      if (currentIndex >= threshold) {
+        // append one more set of slides forward-only
+        track.insertAdjacentHTML('beforeend', data.map(d => slideTemplate(d)).join(''));
+      }
+      goTo(currentIndex + slidesPerView);
+    }
+
+    function prev() {
+      // Forward-only behavior: disable previous navigation
+      return;
+    }
+
+    function onTransitionEnd() {
+      isTransitioning = false;
+    }
+
+    function startAuto() {
+      stopAuto();
+      autoTimer = setInterval(next, 8000);
+    }
+
+    function stopAuto() {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
+      }
+    }
+
+    // Events
+    btnNext.addEventListener('click', () => { next(); startAuto(); });
+    btnPrev.addEventListener('click', () => { prev(); });
+    viewport.addEventListener('mouseenter', stopAuto);
+    viewport.addEventListener('mouseleave', startAuto);
+    track.addEventListener('transitionend', onTransitionEnd);
+    window.addEventListener('resize', () => {
+      const oldPerView = slidesPerView;
+      const newPerView = computeSlidesPerView();
+      if (oldPerView !== newPerView) {
+        buildTrack();
+      } else {
+        setImmediatePosition();
+      }
     });
 
-    startIndex = (startIndex + cardsPerPage) % desaparecidos.length;
-  }
-
-  renderCards();
-  setInterval(renderCards, 10000);
+    // Init
+    buildTrack();
+    startAuto();
+  })();
 </script>
 
 <section class="features-custom">
