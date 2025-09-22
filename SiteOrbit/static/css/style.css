@@ -55,7 +55,7 @@ body {
 /* Hero Section */
 .hero-custom {
   background: var(--gradient-light);
-  padding: 6rem 0;
+  padding: 2rem 0;
   border-radius: 20px;
   margin: 20px;
   position: relative;
@@ -157,10 +157,10 @@ body {
 }
 
 .app-screen {
-  width: 280px;
-  height: 600px;
+  width: 260px;
+  height: 540px;
   background: var(--white);
-  border-radius: 40px;
+  border-radius: 30px;
   overflow: hidden;
   box-shadow: var(--shadow-lg);
   transform: rotate3d(0.5, 1, 0, 15deg);
@@ -253,16 +253,29 @@ body {
   display: flex;
   align-items: center;
 }
-
 .flip-card-back {
-  background: var(--gradient-primary);
-  color: var(--white);
+  background: var(--white); /* fundo branco */
+  text-decoration-color: black; /* texto em azul para contraste */
   transform: rotateY(180deg);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
+  border: 3px solid var(--accent-blue); /* borda azul */
+  border-radius: 16px; /* mantém o arredondamento */
 }
+
+/* Garantir clique no verso e não na frente quando não ativo */
+.flip-card-front,
+.flip-card-back {
+  pointer-events: none;
+}
+
+.flip-card:hover .flip-card-back,
+.flip-card:focus-within .flip-card-back {
+  pointer-events: auto;
+}
+
 
 .back-content {
   text-align: center;

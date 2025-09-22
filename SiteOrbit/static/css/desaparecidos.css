@@ -1,3 +1,21 @@
+:root {
+  --primary-blue: #0d5188;
+  --secondary-blue: #135991;
+  --light-blue: #d1e5f4;
+  --accent-blue: #1b5c9d;
+  --dark-blue: #0a3a61;
+  --teal: #2a9d8f;
+  --text-dark: #333333;
+  --text-light: #666666;
+  --white: #ffffff;
+  --light-gray: #f5f7fa;
+  --gradient-primary: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+  --gradient-light: linear-gradient(135deg, var(--light-blue) 0%, #e8f2fa 100%);
+  --shadow-sm: 0 4px 6px rgba(13, 81, 136, 0.08);
+  --shadow-md: 0 6px 12px rgba(13, 81, 136, 0.12);
+  --shadow-lg: 0 15px 30px rgba(13, 81, 136, 0.15);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -87,7 +105,7 @@ body {
 .header .section-title {
   font-size: 2rem;
   font-weight: 700;
-  color: #000066;
+  color: #135991;
 }
 
 .header .ordenar {
@@ -97,7 +115,7 @@ body {
 
 .header .ordenar strong {
   margin-left: 0.5rem;
-  color: rgba(27, 44, 193, 1);
+  color: #135991;
 }
 
 .desaparecido-card {
@@ -105,35 +123,35 @@ body {
   border-radius: 16px;
   overflow: hidden;
   transition: transform 0.3s, box-shadow 0.3s;
-  height: 100%; /* Garante que todos os cards tenham a mesma altura */
+  height: 100%;
 }
 
 .img-placeholder {
   width: 100%;
-  height: 300px; /* Altura fixa para todas as imagens */
+  height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* Esconde qualquer parte da imagem que exceda o container */
+  overflow: hidden;
   background: rgba(27, 44, 193, 0.1);
 }
 
 .img-placeholder img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Mantém a proporção da imagem e cobre todo o espaço */
-  object-position: center; /* Centraliza a imagem no container */
+  object-fit: cover;
+  object-position: center;
   transition: transform 0.3s ease;
 }
 
 .desaparecido-card:hover img {
-  transform: scale(1.05); /* Efeito de zoom suave ao passar o mouse */
+  transform: scale(1.05);
 }
 
-/* Remove o placeholder de imagem se não for mais necessário */
 .img-placeholder::before {
   display: none;
 }
+
 .info p {
   font-size: 0.9rem;
   line-height: 1.5;
@@ -154,7 +172,7 @@ ul.list-unstyled li {
 }
 
 .btn-primary {
-  background: rgba(27, 44, 193, 1);
+  background: #135991;
   border: none;
 }
 
@@ -176,11 +194,11 @@ ul.list-unstyled li {
   }
 }
 
-
+/* CORREÇÃO PRINCIPAL - Flip Card */
 .flip-card {
   background: transparent;
   width: 100%;
-  height: 340px;
+  height: 380px; /* Aumentei a altura para acomodar melhor o conteúdo */
   perspective: 1000px;
 }
 
@@ -188,7 +206,7 @@ ul.list-unstyled li {
   position: relative;
   width: 100%;
   height: 100%;
-  transition: transform 1s;
+  transition: transform 0.8s;
   transform-style: preserve-3d;
 }
 
@@ -199,10 +217,9 @@ ul.list-unstyled li {
 .flip-card-front,
 .flip-card-back {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   border-radius: 12px;
   overflow: hidden;
@@ -211,7 +228,6 @@ ul.list-unstyled li {
 
 .flip-card-front {
   position: relative;
-
 }
 
 .flip-card-front img {
@@ -240,26 +256,54 @@ ul.list-unstyled li {
   background: #fff;
   color: #000;
   transform: rotateY(180deg);
-  padding: 1.5rem;
+  padding: 1.2rem;
   font-size: 0.9rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   text-align: left;
-  border: 3px solid #1b2cc1;
+  border: 3px solid #135991;
   border-radius: 12px;
   line-height: 1.6;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Permitir clique no verso e bloquear na frente quando não ativo */
+.flip-card-front,
+.flip-card-back {
+  pointer-events: none;
+}
+
+.flip-card:hover .flip-card-back,
+.flip-card:focus-within .flip-card-back {
+  pointer-events: auto;
+}
+
+/* CONTEÚDO DO VERSO - CORREÇÃO DO BOTÃO */
+.flip-card-back-content {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 0.8rem;
+  padding-right: 5px;
+  max-height: calc(100% - 60px); /* Garante espaço para o botão */
+}
+
+.flip-card-back-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.flip-card-back-content::-webkit-scrollbar-thumb {
+  background: var(--primary-blue);
+  border-radius: 10px;
+}
 
 .flip-card-back p {
   margin: 0.3rem 0;
   line-height: 1.3;
 }
 
+/* BOTÃO CORRIGIDO - SEMPRE VISÍVEL E CLICÁVEL */
 .btn-detalhes {
-  background: radial-gradient(circle, rgba(27, 44, 193, 1) 0%, rgba(13, 21, 91, 1) 100%);
+  background: radial-gradient(circle, rgb(41, 29, 211) 0%, rgba(13, 21, 91, 1) 100%);
   color: white;
   border: none;
   padding: 12px 30px;
@@ -268,15 +312,18 @@ ul.list-unstyled li {
   text-decoration: none;
   text-align: center;
   box-shadow: 0 4px 15px rgba(13, 21, 91, 0.4);
-  position: relative;
-  overflow: hidden;
   transition: all 0.3s ease;
-  margin-top: 0.8rem;
+  margin-top: auto; /* Isso garante que o botão fique na parte inferior */
+  flex-shrink: 0;
+  z-index: 10;
+  position: relative;
+  display: block;
+  width: 100%;
 }
 
 .btn-detalhes:hover {
   background: #f0f0f0;
-  color: #000066;
+  color: #261391;
   transform: translateY(-2px);
 }
 
@@ -285,6 +332,7 @@ ul.list-unstyled li {
   border: 2px solid rgba(27, 44, 193, 0.1);
   transition: transform 0.3s ease;
 }
+
 .detalhe-card:hover {
   transform: translateY(-5px);
 }
@@ -293,32 +341,16 @@ ul.list-unstyled li {
 .detalhe-img {
   max-height: 320px;
   object-fit: cover;
-  border: 4px solid #000066;
+  border: 4px solid  #135991;
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
-/* Botão destaque */
-.btn-detalhes {
-  background: linear-gradient(135deg, #1b2cc1, #0d155b);
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-.btn-detalhes:hover {
-  background: #f0f0f0;
-  color: #000066;
-  transform: translateY(-2px);
 }
 
 /* Comentários */
 .comentarios-section {
-  background: rgba(27, 44, 193, 0.05);
+  background:  #13589113;
   border: 1px solid rgba(27, 44, 193, 0.1);
 }
+
 .comentario-card {
   background: #fff;
   border-radius: 8px;
@@ -326,15 +358,16 @@ ul.list-unstyled li {
   margin-bottom: 0.8rem;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
+
 .relacionados-section .card {
   border-radius: 12px;
   transition: transform 0.3s, box-shadow 0.3s;
 }
+
 .relacionados-section .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 18px #135991;
 }
-
 
 .desaparecidos-carousel-wrapper {
   overflow: hidden;
@@ -347,7 +380,23 @@ ul.list-unstyled li {
 }
 
 .carousel-item {
-  flex: 0 0 25%; /* 4 cards visíveis (100 / 4 = 25%) */
+  flex: 0 0 25%;
   padding: 0 0.5rem;
   box-sizing: border-box;
+}
+
+/* Melhorias de responsividade para mobile */
+@media (max-width: 768px) {
+  .flip-card {
+    height: 400px; /* Altura um pouco maior para mobile */
+  }
+  
+  .flip-card-back {
+    padding: 1rem;
+  }
+  
+  .btn-detalhes {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
 }
