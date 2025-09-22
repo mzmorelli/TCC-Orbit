@@ -105,9 +105,9 @@
               <div class="flip-card-back">
                 <div class="back-content">
                   <h5>Informações</h5>
-                  <p><strong><i class="fas fa-phone me-2"></i>Contato:</strong> ${d.telefoneContato || 'Não informado'}</p>
-                  <p><strong><i class="fas fa-file-alt me-2"></i>Descrição:</strong> ${d.descricao || 'Não informado'}</p>
-                  <p><strong><i class="fas fa-calendar me-2"></i>Visto por último:</strong> ${d.vezVisto || 'Não informado'}</p>
+                  <p class="info-row"><strong><i class="fas fa-phone me-2"></i>Contato:</strong> <span class="text-value">${d.telefoneContato || 'Não informado'}</span></p>
+                  <p class="info-row"><strong><i class="fas fa-file-alt me-2"></i>Descrição:</strong> <span class="description-text">${d.descricao || 'Não informado'}</span></p>
+                  <p class="info-row"><strong><i class="fas fa-calendar me-2"></i>Visto por último:</strong> <span class="text-value">${d.vezVisto || 'Não informado'}</span></p>
                   <a href="/detalhe/${d.id}" class="btn-detalhes">
                     <i class="fas fa-info-circle me-2"></i>Ver detalhes
                   </a>

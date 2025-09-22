@@ -325,6 +325,7 @@ body {
 
 .back-content {
   text-align: center;
+  width: 100%;
 }
 
 .back-content h5 {
@@ -338,6 +339,30 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.25rem;
+  padding: 0 0.25rem;
+}
+
+/* Improve layout inside the back side */
+.back-content .info-row {
+  text-align: center;
+}
+
+.back-content .text-value {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.back-content .description-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* show up to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .btn-detalhes {
