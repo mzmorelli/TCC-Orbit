@@ -385,6 +385,16 @@ ul.list-unstyled li {
   box-sizing: border-box;
 }
 
+/* Customização específica para desaparecidos - mais linhas na descrição */
+.desaparecidos-custom .description-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* show up to 5 lines instead of 3 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
 /* Melhorias de responsividade para mobile */
 @media (max-width: 768px) {
   .flip-card {

@@ -3,6 +3,7 @@
 <head>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/desaparecidos.css') }}" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <section class="desaparecidos-custom py-5">
@@ -54,24 +55,25 @@
             </div>
 
             <div class="flip-card-back">
-              <p><strong>Telefone para contato:</strong> {{ desaparecido.telefoneContato }}</p>
-              <p><strong>Descrição:</strong> {{ desaparecido.descricao }}</p>
-              <p>
-                <strong>Última vez visto:</strong>
-                {% if desaparecido.vezVisto %}
-                {% if desaparecido.vezVisto is string %}
-                {{ desaparecido.vezVisto }}
-                {% else %}
-                {{ desaparecido.vezVisto.strftime('%d/%m/%Y às %H:%M') }}
-                {% endif %}
-                {% else %}
-                Não informado
-                {% endif %}
-              </p>
-
-              <a href="{{ url_for('detalhe', id=desaparecido.id) }}" class="btn-detalhes">
-                Ver mais detalhes
-              </a>
+              <div class="back-content">
+                <h5>Informações</h5>
+                <p class="info-row"><strong><i class="fas fa-phone me-2"></i>Contato:</strong> <span class="text-value">{{ desaparecido.telefoneContato or 'Não informado' }}</span></p>
+                <p class="info-row"><strong><i class="fas fa-file-alt me-2"></i>Descrição:</strong> <span class="description-text">{{ desaparecido.descricao or 'Não informado' }}</span></p>
+                <p class="info-row"><strong><i class="fas fa-calendar me-2"></i>Visto por último:</strong> <span class="text-value">
+                  {% if desaparecido.vezVisto %}
+                  {% if desaparecido.vezVisto is string %}
+                  {{ desaparecido.vezVisto }}
+                  {% else %}
+                  {{ desaparecido.vezVisto.strftime('%d/%m/%Y às %H:%M') }}
+                  {% endif %}
+                  {% else %}
+                  Não informado
+                  {% endif %}
+                </span></p>
+                <a href="{{ url_for('detalhe', id=desaparecido.id) }}" class="btn-detalhes">
+                  <i class="fas fa-info-circle me-2"></i>Ver detalhes
+                </a>
+              </div>
             </div>
 
           </div>
