@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   Text,
@@ -13,8 +13,10 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import * as Animatable from "react-native-animatable";
 import axios from "axios";
+import { UserContext } from '../../userContext/index.js';
 
 export default function Home({ navigation }) {
+  const { user } = useContext(UserContext);
   const [grupoSelecionado, setGrupoSelecionado] = useState(null);
   const [desaparecidos, setDesaparecidos] = useState([]);
   const [orbitas, setOrbitas] = useState([]);
@@ -69,7 +71,6 @@ export default function Home({ navigation }) {
       keyExtractor={(item) => item.id.toString()}
       ListHeaderComponent={
         <>
-          {/* Cabeçalho */}
           <View style={styles.header}>
             <View style={styles.headerContent}>
               <View style={styles.userInfo}>
@@ -78,18 +79,21 @@ export default function Home({ navigation }) {
                   style={styles.userPhoto}
                 />
                 <View style={styles.userTextContainer}>
-                  <Text style={styles.welcome}>Bem-vindo, Usuário</Text>
+                  <Text style={styles.welcome}>
+                    Bem-vindo, {(user?.nome || "Usuário").split(' ')[0]}
+                  </Text>
+
                   <Text style={styles.subtitle}>Explore o Orbit</Text>
                 </View>
               </View>
-              <TouchableOpacity style={styles.notificationButton}>
-                <Ionicons
-                  name="notifications-outline"
-                  size={24}
-                  color="#fff"
-                />
+              <TouchableOpacity
+                style={styles.notificationButton}
+                onPress={() => navigation.navigate("Alerta")}
+              >
+                <Ionicons name="notifications-outline" size={24} color="#fff" />
                 <View style={styles.notificationBadge}></View>
               </TouchableOpacity>
+
             </View>
           </View>
 
@@ -153,9 +157,9 @@ export default function Home({ navigation }) {
             <Text style={styles.sectionTitle}>Ações Rápidas</Text>
             <View style={styles.actionsRow}>
               <TouchableOpacity style={styles.actionButton}
-              onPress={() =>
-                      navigation.navigate("CadDesaparecimento")
-                    }>
+                onPress={() =>
+                  navigation.navigate("CadDesaparecimento")
+                }>
                 <View style={[styles.actionIcon, { backgroundColor: "#E6F2FF" }]}>
                   <Ionicons name="add-circle" size={24} color="#0B3D91" />
                 </View>
@@ -169,12 +173,26 @@ export default function Home({ navigation }) {
                 <Text style={styles.actionText}>Mapa</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.actionButton}>
+              <TouchableOpacity
+                style={styles.actionButton}
+                onPress={async () => {
+                  try {
+                    await axios.post("http://10.239.0.240/appTcc/criar_alerta.php", {
+                       usuario: user.nome,
+                      mensagem: "🚨 Alerta de emergência enviado!",
+                    });
+                    alert("Alerta enviado com sucesso!");
+                  } catch (error) {
+                    alert("Erro ao enviar alerta: " + error.message);
+                  }
+                }}
+              >
                 <View style={[styles.actionIcon, { backgroundColor: "#E6FFFA" }]}>
                   <Ionicons name="alert-circle" size={24} color="#0B3D91" />
                 </View>
                 <Text style={styles.actionText}>Alertas</Text>
               </TouchableOpacity>
+
             </View>
           </View>
         </>

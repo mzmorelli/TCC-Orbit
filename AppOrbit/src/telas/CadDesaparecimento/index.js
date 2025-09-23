@@ -131,7 +131,7 @@ export default function CadDesaparecimento({ navigation }) {
       );
 
       const response = await axios.post(
-        `http://10.68.36.140/appTcc/salvar.php`,
+        `http://10.239.0.240/appTcc/salvar.php`,
         formDataToSend,
         {
           headers: {

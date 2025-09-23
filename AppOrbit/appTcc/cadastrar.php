@@ -25,19 +25,15 @@ try {
     $senha = $postData['senha'] ?? '';
     $nascimento = $postData['nascimento'] ?? null;
 
-    $query = $pdo->prepare("
-    INSERT INTO usuario (nome, nascimento, email, telefone, senha) 
-    VALUES (:nome, :nascimento, :email, :telefone, :senha)
-");
+    // Usando MySQLi
+    $stmt = $conn->prepare("
+        INSERT INTO usuario (nome, nascimento, email, telefone, senha) 
+        VALUES (?, ?, ?, ?, ?)
+    ");
 
+    $stmt->bind_param("sssss", $nome, $nascimento, $email, $telefone, $senha);
 
-    $query->bindValue(":nome", $nome);
-    $query->bindValue(":nascimento", $nascimento);
-    $query->bindValue(":email", $email);
-    $query->bindValue(":telefone", $telefone);
-    $query->bindValue(":senha", $senha);
-
-    if ($query->execute()) {
+    if ($stmt->execute()) {
         $response['success'] = true;
         $response['message'] = 'Usuário cadastrado com sucesso';
     } else {
@@ -51,3 +47,4 @@ try {
 // Limpa qualquer output antes do JSON
 ob_end_clean();
 echo json_encode($response);
+?>

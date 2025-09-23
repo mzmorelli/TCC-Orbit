@@ -1,26 +1,70 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { View, TextInput, TouchableOpacity, Text, Alert, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import { UserContext } from '../../userContext/index.js';
+import axios from 'axios';
 
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { login } = useContext(UserContext);
+
+  const handleLogin = async () => {
+    // Validação básica
+    if (!email || !senha) {
+      Alert.alert('Erro', 'Por favor, preencha todos os campos!');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      console.log('Tentando login com:', { email, senha });
+      
+      const response = await axios.post('http://10.239.0.240/appTcc/login_fake.php', {
+        email: email.toLowerCase().trim(),
+        senha: senha.trim()
+      });
+
+      console.log('Resposta do servidor:', response.data);
+
+      if (response.data.success) {
+        console.log('Login bem-sucedido:', response.data.user);
+        login(response.data.user);
+        navigation.navigate('Home');
+      } else {
+        Alert.alert('Erro', response.data.msg || 'Email ou senha inválidos!');
+      }
+    } catch (error) {
+      console.error('Erro completo:', error);
+      console.error('Response:', error.response);
+      
+      if (error.response) {
+        Alert.alert('Erro', `Servidor retornou erro: ${error.response.status}`);
+      } else if (error.request) {
+        Alert.alert('Erro', 'Não foi possível conectar ao servidor. Verifique o IP e a rede.');
+      } else {
+        Alert.alert('Erro', 'Erro inesperado: ' + error.message);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <LinearGradient
-      colors={["#83bde3","#3f92cb", "#135991"]}
+      colors={["#83bde3", "#3f92cb", "#135991"]}
       style={styles.container}
-      start={{ x: 0, y: 0, w: 0 }}
-      end={{ x: 0, y: 0.9, w:1 }}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 0, y: 1 }}
     >
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backIcon}>
-          <Ionicons name="arrow-back" size={24} color="#FFFFFF"
-          onPress={() => navigation.goBack()} />
+        <TouchableOpacity style={styles.backIcon} onPress={() => navigation.goBack()}>
+          <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        
-        
+
         <View style={styles.logoContainer}>
           <Image
             source={require('../../../assets/logoOrbitOfc.png')}
@@ -28,17 +72,17 @@ export default function Login({navigation}) {
             resizeMode="contain"
           />
         </View>
-        
+
         <View style={styles.dotsContainer}>
           <View style={[styles.dot, styles.activeDot]} />
           <View style={styles.dot} />
           <View style={styles.dot} />
         </View>
       </View>
-      
+
       <View style={styles.body}>
         <Text style={styles.labelBold}>Bem-vindo</Text>
-        
+
         <TextInput
           style={styles.input}
           placeholder="Email"
@@ -47,8 +91,9 @@ export default function Login({navigation}) {
           onChangeText={setEmail}
           keyboardType="email-address"
           autoCapitalize="none"
+          editable={!loading}
         />
-        
+
         <TextInput
           style={styles.input}
           placeholder="Senha"
@@ -56,16 +101,19 @@ export default function Login({navigation}) {
           secureTextEntry
           value={senha}
           onChangeText={setSenha}
+          editable={!loading}
         />
-        
-        <TouchableOpacity
-        onPress={() => navigation.navigate("Cadastro")}>
+
+        <TouchableOpacity onPress={() => navigation.navigate("Cadastro")} disabled={loading}>
           <Text style={styles.link}>Cadastrar-se</Text>
         </TouchableOpacity>
-        
-        <TouchableOpacity style={styles.button}
-        onPress={() => navigation.navigate("Home")}>
-          <Text style={styles.buttonText}>Login</Text>
+
+        <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={loading}>
+          {loading ? (
+            <ActivityIndicator color="#FFFFFF" />
+          ) : (
+            <Text style={styles.buttonText}>Login</Text>
+          )}
         </TouchableOpacity>
       </View>
     </LinearGradient>
