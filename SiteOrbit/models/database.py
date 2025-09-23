@@ -3,6 +3,10 @@ from datetime import datetime
 
 db = SQLAlchemy()
 
+class Usuario(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(150), nullable=False)
+
 class Desaparecido(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(150), nullable=False)
@@ -15,9 +19,10 @@ class Desaparecido(db.Model):
     descricao = db.Column(db.Text)
     imagem = db.Column(db.String(255))
     origem = db.Column(db.String(10), nullable=True)  
+    usuario_id = db.Column(db.Integer)  # FK to usuario.id (present in DB schema)
 
     def __init__(self, nome, idade, sexo, telefoneContato, vezVisto, localVisto, 
-                 descricao=None, altura=None, imagem=None):
+                 descricao=None, altura=None, imagem=None, usuario_id=None):
         self.nome = nome
         self.idade = idade
         self.sexo = sexo
@@ -27,3 +32,4 @@ class Desaparecido(db.Model):
         self.localVisto = localVisto
         self.descricao = descricao
         self.imagem = imagem
+        self.usuario_id = usuario_id

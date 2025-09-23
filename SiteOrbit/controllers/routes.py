@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for, request, flash, current_app
 from datetime import datetime
-from models.database import db, Desaparecido
+from models.database import db, Desaparecido, Usuario
 from werkzeug.utils import secure_filename
 import os
 
@@ -100,4 +100,8 @@ def init_app(app):
                     .order_by(Desaparecido.id.desc())
                     .limit(4)
                     .all())
-        return render_template('detalhe.html', pessoa=pessoa)
+        anunciante = None
+        if getattr(pessoa, 'usuario_id', None):
+            usuario = Usuario.query.get(pessoa.usuario_id)
+            anunciante = usuario.nome if usuario else None
+        return render_template('detalhe.html', pessoa=pessoa, relacionados=relacionados, anunciante=anunciante)
