@@ -507,6 +507,30 @@ body {
   box-shadow: var(--shadow-lg);
 }
 
+/* Botão "Ver no mapa" (usa paleta existente) */
+.btn-view-map {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  background: var(--gradient-primary);
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.btn-view-map:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  filter: brightness(1.05);
+}
+
 .about-visual {
   position: relative;
   padding: 2rem;
