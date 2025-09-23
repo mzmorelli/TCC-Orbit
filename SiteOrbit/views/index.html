@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="static/css/orbit-modern.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+  <link rel="stylesheet" href="static/css/map.css">
 </head>
 
 <section class="hero-custom">
@@ -59,6 +61,82 @@
       </a>
     </div>
   </div>
+</section>
+
+<section id="mapa-desaparecidos" class="py-5">
+  <div class="container">
+    <div class="section-header">
+      <h2>Mapa de Desaparecidos</h2>
+      <p>Veja no mapa os locais reportados como último avistamento.</p>
+    </div>
+    <div id="map-desaparecidos" class="map-container rounded-4" style="height: 460px;"></div>
+  </div>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    (function() {
+      const data = JSON.parse('{{ desaparecidos_json|tojson|safe }}');
+      const map = L.map('map-desaparecidos').setView([-14.235, -51.9253], 4);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+      }).addTo(map);
+
+      const bounds = L.latLngBounds();
+      let plotted = 0;
+      const markerIcon = L.icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41]
+      });
+
+      function imageFor(d) {
+        if (!d.imagem) return '/static/img/imagem-nao-disponivel.png';
+        if (d.origem === 'site') return `/static/uploads/${d.imagem}`;
+        return `http://localhost/apptcc/uploads/${d.imagem}`;
+      }
+
+      // Nominatim throttle para evitar rate-limit
+      const delayMs = 400; // ~2.5 req/s
+      data.forEach((d, idx) => {
+        const address = (d.localVisto || '').toString().trim();
+        if (!address) return;
+        setTimeout(() => {
+          fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
+            .then(r => r.json())
+            .then(results => {
+              if (!results || results.length === 0) return;
+              const place = results[0];
+              const lat = parseFloat(place.lat);
+              const lon = parseFloat(place.lon);
+              if (isNaN(lat) || isNaN(lon)) return;
+
+              const marker = L.marker([lat, lon], { icon: markerIcon }).addTo(map);
+              const popup = `
+                <div class="custom-popup">
+                  <div class="popup-header">
+                    <img class="popup-avatar" src="${imageFor(d)}" onerror="this.style.display='none'"/>
+                    <div class="popup-texts">
+                      <div class="popup-title">${d.nome}</div>
+                      <div class="popup-sub">${(d.localVisto || 'Local não informado')}</div>
+                    </div>
+                  </div>
+                </div>
+              `;
+              marker.bindPopup(popup);
+              bounds.extend([lat, lon]);
+              plotted++;
+              if (plotted === 1) {
+                map.setView([lat, lon], 13);
+              } else {
+                map.fitBounds(bounds, { padding: [40, 40], maxZoom: 14 });
+              }
+            })
+            .catch(() => {});
+        }, idx * delayMs);
+      });
+    })();
+  </script>
 </section>
 
 <script>

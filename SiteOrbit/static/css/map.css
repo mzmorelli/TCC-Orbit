@@ -35,10 +35,11 @@
   text-align: center;
   padding: 15px;
   min-width: 180px;
-  background: linear-gradient(135deg, #83bde3 0%, #3f92cb 100%);
+  background: var(--light-blue, #d1e5f4); /* sólido e claro */
   border-radius: 16px;
-  color: white;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  color: var(--primary-blue, #0d5188);
+  box-shadow: 0 10px 28px rgba(13, 81, 136, 0.20);
+  border: 1px solid rgba(13,81,136,0.15);
 }
 
 .custom-popup img {
@@ -53,7 +54,7 @@
 
 .custom-popup b {
   font-size: 16px;
-  color: #fff;
+  color: var(--primary-blue, #0d5188);
   display: block;
   margin-bottom: 6px;
   font-weight: 700;
@@ -76,13 +77,41 @@
 }
 
 .leaflet-popup-tip {
-  background: #3f92cb;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background: var(--light-blue, #d1e5f4);
+  box-shadow: 0 2px 5px rgba(13, 81, 136, 0.15);
 }
 
 .leaflet-container {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: #fff !important; /* remove fundo cinza padrão */
+}
+
+/* Popup card refinado */
+.popup-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+}
+
+.popup-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.9);
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.popup-texts { max-width: 200px; }
+.popup-title {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.1;
+}
+.popup-sub {
+  font-size: 12px;
+  opacity: 0.95;
 }
 
 /* Modal simples para o mapa */
