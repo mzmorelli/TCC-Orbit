@@ -32,4 +32,4 @@ class Desaparecido(db.Model):
         self.localVisto = localVisto
         self.descricao = descricao
         self.imagem = imagem
-        self.usuario_id = usuario_id
+        self.usuario_id = 1
