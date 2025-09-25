@@ -11,7 +11,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { UserContext } from '../../userContext';
 import axios from "axios";
 
-const BASE_URL = "http://10.239.0.240/appTcc";
+const BASE_URL = "http://192.168.1.71/appTcc";
 
 export default function MeusDesaparecidos({ navigation }) {
   const { user } = useContext(UserContext);

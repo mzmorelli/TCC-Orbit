@@ -109,3 +109,27 @@ Login success for: fernando@email.com - User: {"id":3,"nome":"Fernando Lima","em
 Email: marcos@email.com, Senha: 123456
 Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
 Login success for: marcos@email.com - User: {"id":1,"nome":"Marcos Silva","email":"marcos@email.com"}
+2025-09-25 01:59:09 - Login attempt
+Email: , Senha: 
+2025-09-25 02:03:45 - Login attempt
+Email: juliana@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: juliana@email.com - User: {"id":4,"nome":"Juliana Costa","email":"juliana@email.com"}
+2025-09-25 02:07:26 - Login attempt
+Email: , Senha: 
+2025-09-25 02:58:47 - Login attempt
+Email: juliana@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: juliana@email.com - User: {"id":4,"nome":"Juliana Costa","email":"juliana@email.com"}
+2025-09-25 03:23:45 - Login attempt
+Email: fernando@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: fernando@email.com - User: {"id":3,"nome":"Fernando Lima","email":"fernando@email.com"}
+2025-09-25 03:28:10 - Login attempt
+Email: marcos@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: marcos@email.com - User: {"id":1,"nome":"Marcos Silva","email":"marcos@email.com"}
+2025-09-25 03:34:48 - Login attempt
+Email: fernando@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: fernando@email.com - User: {"id":3,"nome":"Fernando Lima","email":"fernando@email.com"}

@@ -32,7 +32,7 @@ export default function Home({ navigation }) {
     const fetchDesaparecidos = async () => {
       try {
         const response = await axios.get(
-          "http://10.239.0.240/appTcc/listar-cards.php"
+          "http://192.168.1.71//appTcc/listar-cards.php"
         );
         if (response.data.success) {
           setDesaparecidos(response.data.dados);
@@ -51,7 +51,7 @@ export default function Home({ navigation }) {
     const fetchOrbitas = async () => {
       try {
         const response = await axios.get(
-          "http://10.239.0.240/appTcc/listar-orbitas.php"
+          "http://192.168.1.71//appTcc/listar-orbitas.php"
         );
         if (response.data.success) {
           setOrbitas(response.data.orbita);
@@ -133,8 +133,8 @@ export default function Home({ navigation }) {
                         source={{
                           uri:
                             item.origem === "site"
-                              ? `http://10.239.0.240/SiteOrbit/static/uploads/${item.imagem}`
-                              : `http://10.239.0.240/appTcc/uploads/${item.imagem}`,
+                              ? `http://192.168.1.71/SiteOrbit/static/uploads/${item.imagem}`
+                              : `http://192.168.1.71/appTcc/uploads/${item.imagem}`,
                         }}
                         style={styles.desaparecidoPhoto}
                       />
@@ -177,7 +177,7 @@ export default function Home({ navigation }) {
                 style={styles.actionButton}
                 onPress={async () => {
                   try {
-                    await axios.post("http://10.239.0.240/appTcc/criar_alerta.php", {
+                    await axios.post("http://192.168.1.71/appTcc/criar_alerta.php", {
                        usuario: user.nome,
                       mensagem: "🚨 Alerta de emergência enviado!",
                     });

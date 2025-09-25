@@ -74,7 +74,7 @@ function AppContent() {
 
     const buscarAlertas = async () => {
       try {
-        const response = await axios.get("http://10.239.0.240/appTcc/listar_alerta.php");
+        const response = await axios.get("http://192.168.1.71/appTcc/listar_alerta.php");
         if (response.data.success && response.data.alertas.length > 0) {
           const ultimo = response.data.alertas[0];
           if (ultimoId !== ultimo.id) {

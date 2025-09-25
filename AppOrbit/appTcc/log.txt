@@ -1,0 +1,11 @@
+{"nomeCompleto":"yasmin","idade":"12","altura":"130","sexo":"F","telefone":"101010","ultimoLocal":"miracatu","ultimaData":"21032008","descricao":"chata"}Array
+(
+    [nomeCompleto] => yasmin
+    [idade] => 12
+    [altura] => 130
+    [sexo] => F
+    [telefone] => 101010
+    [ultimoLocal] => miracatu
+    [ultimaData] => 21032008
+    [descricao] => chata
+)

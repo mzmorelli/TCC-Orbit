@@ -29,7 +29,7 @@ export default function anuncios({ navigation }) {
     const buscarDesaparecidos = async () => {
       try {
         const response = await axios.get(
-          "http://10.239.0.240/appTcc/listar-cards.php"
+          "http://192.168.1.71/appTcc/listar-cards.php"
         );
         if (response.data.success) {
           setDesaparecidos(response.data.dados);
