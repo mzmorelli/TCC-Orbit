@@ -11,7 +11,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { UserContext } from '../../userContext';
 import axios from "axios";
 
-const BASE_URL = "http://192.168.1.71/appTcc";
 
 export default function MeusDesaparecidos({ navigation }) {
   const { user } = useContext(UserContext);
@@ -20,7 +19,7 @@ export default function MeusDesaparecidos({ navigation }) {
   const fetchMeusDesaparecidos = async () => {
     if (!user) return;
     try {
-      const response = await axios.post(`${BASE_URL}/listar_meus_desaparecidos.php`, { usuario_id: user.id });
+      const response = await axios.post(`${API_URL}/listar_meus_desaparecidos.php`, { usuario_id: user.id });
       if (response.data.success) {
         setDesaparecidos(response.data.desaparecidos);
       }
@@ -47,7 +46,7 @@ export default function MeusDesaparecidos({ navigation }) {
         <TouchableOpacity key={item.id} style={styles.cardContainer}>
           <View style={styles.imageShadow}>
             <Image
-              source={{ uri: `${BASE_URL}/uploads/${item.imagem}` }}
+              source={{ uri: `${API_URL}/uploads/${item.imagem}` }}
               style={styles.profileImage}
             />
 

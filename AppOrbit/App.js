@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
 import { UserProvider, UserContext } from './src/userContext/index.js';
+import { API_URL } from './url.js';
 
 import Inicio from "./src/telas/Inicio/index.js";
 import Login from "./src/telas/Login/index.js";
@@ -68,18 +69,17 @@ function AppContent() {
   const [mostrarModal, setMostrarModal] = useState(false);
   const [ultimoId, setUltimoId] = useState(null);
 
-  // Buscar alertas
   useEffect(() => {
-    let inicializando = true; // flag para primeira carga
+    let inicializando = true; 
 
     const buscarAlertas = async () => {
       try {
-        const response = await axios.get("http://192.168.1.71/appTcc/listar_alerta.php");
+        const response = await axios.get(`${API_URL}listar_alerta.php`);
         if (response.data.success && response.data.alertas.length > 0) {
           const ultimo = response.data.alertas[0];
           if (ultimoId !== ultimo.id) {
             setAlerta(ultimo);
-            if (!inicializando) { // só abre modal se não for a primeira carga
+            if (!inicializando) { 
               setMostrarModal(true);
             }
             setUltimoId(ultimo.id);
@@ -88,7 +88,7 @@ function AppContent() {
       } catch (error) {
         console.error("Erro ao buscar alertas:", error);
       } finally {
-        inicializando = false; // primeira carga concluída
+        inicializando = false; 
       }
     };
 
@@ -121,7 +121,6 @@ function AppContent() {
         </Stack.Navigator>
       </NavigationContainer>
 
-      {/* Modal de alerta */}
       <Modal
         visible={mostrarModal}
         transparent={true}

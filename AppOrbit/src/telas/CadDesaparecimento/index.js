@@ -135,7 +135,7 @@ export default function CadDesaparecimento({ navigation }) {
 
       console.log('Enviando dados:', jsonData);
 
-      const response = await fetch("http://192.168.1.71/appTcc/salvar.php", {
+      const response = await fetch("http://10.239.0.243/appTcc/salvar.php", {
         method: "POST",
         body: dataToSend,
         headers: {

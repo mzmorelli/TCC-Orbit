@@ -27,12 +27,12 @@ export default function Home({ navigation }) {
     setGrupoSelecionado(grupoSelecionado === id ? null : id);
   };
 
-  // Buscar desaparecidos
+
   useEffect(() => {
     const fetchDesaparecidos = async () => {
       try {
         const response = await axios.get(
-          "http://192.168.1.71//appTcc/listar-cards.php"
+          `${API_URL}listar-cards.php`
         );
         if (response.data.success) {
           setDesaparecidos(response.data.dados);
@@ -51,7 +51,7 @@ export default function Home({ navigation }) {
     const fetchOrbitas = async () => {
       try {
         const response = await axios.get(
-          "http://192.168.1.71//appTcc/listar-orbitas.php"
+          `${API_URL}listar-orbitas.php`
         );
         if (response.data.success) {
           setOrbitas(response.data.orbita);
@@ -133,9 +133,10 @@ export default function Home({ navigation }) {
                         source={{
                           uri:
                             item.origem === "site"
-                              ? `http://192.168.1.71/SiteOrbit/static/uploads/${item.imagem}`
-                              : `http://192.168.1.71/appTcc/uploads/${item.imagem}`,
+                              ? `${SITE_URL}uploads/${item.imagem}`
+                              : `${API_URL}uploads/${item.imagem}`,
                         }}
+
                         style={styles.desaparecidoPhoto}
                       />
                     </View>
@@ -177,8 +178,8 @@ export default function Home({ navigation }) {
                 style={styles.actionButton}
                 onPress={async () => {
                   try {
-                    await axios.post("http://192.168.1.71/appTcc/criar_alerta.php", {
-                       usuario: user.nome,
+                    await axios.post("http://10.239.0.243/appTcc/criar_alerta.php", {
+                      usuario: user.nome,
                       mensagem: "🚨 Alerta de emergência enviado!",
                     });
                     alert("Alerta enviado com sucesso!");

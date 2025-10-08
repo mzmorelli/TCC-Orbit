@@ -76,7 +76,7 @@ export default function InfoDesaparecimento({ route, navigation }) {
             source={
               desaparecido.imagem
                 ? {
-                  uri: `http://192.168.1.71/appTcc/uploads/${desaparecido.imagem}`,
+                  uri: `${API_URL}/uploads/${desaparecido.imagem}`,
                 }
                 : require("../../../assets/sem-foto.png")
             }
