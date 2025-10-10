@@ -15,7 +15,7 @@ import axios from "axios";
 
 const { width } = Dimensions.get("window");
 
-const BASE_URL = "http://10.239.0.243//appTcc";
+const BASE_URL = "http://10.239.20.67//appTcc";
 
 export default function Alerta({ navigation }) {
   const [alertas, setAlertas] = useState([]);

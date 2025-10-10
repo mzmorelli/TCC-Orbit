@@ -96,8 +96,7 @@
         return `http://localhost/apptcc/uploads/${d.imagem}`;
       }
 
-      // Nominatim throttle para evitar rate-limit
-      const delayMs = 400; // ~2.5 req/s
+      const delayMs = 400;
       data.forEach((d, idx) => {
         const address = (d.localVisto || '').toString().trim();
         if (!address) return;

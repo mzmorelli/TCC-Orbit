@@ -11,6 +11,7 @@ import {
   ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import WebView from "react-native-webview";
 import * as Animatable from "react-native-animatable";
 import axios from "axios";
 import { UserContext } from '../../userContext/index.js';
@@ -32,7 +33,7 @@ export default function Home({ navigation }) {
     const fetchDesaparecidos = async () => {
       try {
         const response = await axios.get(
-          `${API_URL}listar-cards.php`
+          "http://10.239.20.67//appTcc/listar-cards.php"
         );
         if (response.data.success) {
           setDesaparecidos(response.data.dados);
@@ -46,12 +47,11 @@ export default function Home({ navigation }) {
     fetchDesaparecidos();
   }, []);
 
-  // Buscar órbitas
   useEffect(() => {
     const fetchOrbitas = async () => {
       try {
         const response = await axios.get(
-          `${API_URL}listar-orbitas.php`
+          "http://10.239.20.67//appTcc/listar-orbitas.php"
         );
         if (response.data.success) {
           setOrbitas(response.data.orbita);
@@ -97,7 +97,6 @@ export default function Home({ navigation }) {
             </View>
           </View>
 
-          {/* Seção desaparecidos */}
           <View style={styles.mainSection}>
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Desaparecidos</Text>
@@ -133,10 +132,9 @@ export default function Home({ navigation }) {
                         source={{
                           uri:
                             item.origem === "site"
-                              ? `${SITE_URL}uploads/${item.imagem}`
-                              : `${API_URL}uploads/${item.imagem}`,
+                              ? `http://10.239.20.67/SiteOrbit/static/uploads/${item.imagem}`
+                              : `http://10.239.20.67/appTcc/uploads/${item.imagem}`,
                         }}
-
                         style={styles.desaparecidoPhoto}
                       />
                     </View>
@@ -153,7 +151,6 @@ export default function Home({ navigation }) {
             )}
           </View>
 
-          {/* Seção Ações Rápidas */}
           <View style={styles.quickActions}>
             <Text style={styles.sectionTitle}>Ações Rápidas</Text>
             <View style={styles.actionsRow}>
@@ -167,7 +164,10 @@ export default function Home({ navigation }) {
                 <Text style={styles.actionText}>Reportar</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.actionButton}>
+              <TouchableOpacity style={styles.actionButton}
+              onPress={()=>
+                navigation.navigate("MapaTodosDesaparecidos")
+              }>
                 <View style={[styles.actionIcon, { backgroundColor: "#FFF2E6" }]}>
                   <Ionicons name="map" size={24} color="#0B3D91" />
                 </View>
@@ -178,7 +178,7 @@ export default function Home({ navigation }) {
                 style={styles.actionButton}
                 onPress={async () => {
                   try {
-                    await axios.post("http://10.239.0.243/appTcc/criar_alerta.php", {
+                    await axios.post("http://10.239.20.67/appTcc/criar_alerta.php", {
                       usuario: user.nome,
                       mensagem: "🚨 Alerta de emergência enviado!",
                     });
@@ -196,7 +196,149 @@ export default function Home({ navigation }) {
 
             </View>
           </View>
+
+          <View style={styles.chaveiroContainer}>
+            <Text style={styles.chaveiroTitle}>Seu Chaveiro</Text>
+            <TouchableOpacity
+              style={styles.mapaPreviewContainer}
+              onPress={() => navigation.navigate("MapaChaveiro")}
+            >
+              <WebView
+  source={{
+    html: `<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <style>
+      html, body, #map {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+      #map { border-radius: 12px; overflow: hidden; }
+      
+      .custom-marker {
+        background: #135991;
+        border: 3px solid #fff;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      
+      .custom-marker::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 8px solid #135991;
+      }
+      
+      .pulse-effect {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #135991;
+        cursor: pointer;
+        box-shadow: 0 0 0 rgba(19, 89, 145, 0.4);
+        animation: pulse 2s infinite;
+        position: relative;
+      }
+      
+      .saturn-icon {
+        width: 20px;
+        height: 20px;
+        background: #ffff;
+        border-radius: 50%;
+        position: relative;
+      }
+      
+      .saturn-icon::before {
+        content: '';
+        position: absolute;
+        width: 30px;
+        height: 8px;
+        background: #3d6d93ff;
+        border-radius: 4px;
+        transform: rotate(15deg);
+        top: 50%;
+        left: 50%;
+        margin-top: -4px;
+        margin-left: -15px;
+        box-shadow: 0 0 2px rgba(0,0,0,0.3);
+      }
+      
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(19, 89, 145, 0.4);
+        }
+        70% {
+          box-shadow: 0 0 0 15px rgba(19, 89, 145, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(19, 89, 145, 0);
+        }
+      }
+      
+      @keyframes rotateSaturn {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      .rotating-saturn {
+        animation: rotateSaturn 10s linear infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+      var map = L.map('map', { zoomControl: false, attributionControl: false })
+        .setView([-24.49940278453548, -47.848294079713284], 16);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+      }).addTo(map);
+
+      var customIcon = L.divIcon({
+        className: 'custom-marker',
+        html: '<div class="pulse-effect"><div class="saturn-icon rotating-saturn"></div></div>',
+        iconSize: [40, 40],
+        iconAnchor: [20, 40]
+      });
+
+      L.marker([-24.49940278453548, -47.848294079713284], {
+        icon: customIcon
+      })
+        .addTo(map)
+        .openPopup();
+    </script>
+  </body>
+</html>`
+  }}
+  style={styles.mapaPreview}
+  scrollEnabled={false}
+  originWhitelist={["*"]}
+/>
+            </TouchableOpacity>
+          </View>
         </>
+
       }
       renderItem={({ item }) => (
         <View style={styles.groupContainer}>
@@ -463,4 +605,33 @@ const styles = StyleSheet.create({
     color: "#0B3D91",
     fontWeight: "500",
   },
+  chaveiroContainer: {
+    backgroundColor: '#fff',
+    marginHorizontal: 16,
+    marginTop: 10,
+    padding: 16,
+    borderRadius: 16,
+    elevation: 3,
+    shadowColor: '#0B3D91',
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
+    marginBottom: 20,
+  },
+  chaveiroTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#0B3D91',
+    marginBottom: 12,
+  },
+  mapaPreviewContainer: {
+    height: 180,
+    borderRadius: 12,
+    overflow: 'hidden',
+  },
+  mapaPreview: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 12,
+  },
+
 });

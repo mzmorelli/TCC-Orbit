@@ -1,1 +1,1 @@
-export const API_URL = "http://10.239.0.243/appTcc/"
+export const API_URL = "http://10.239.20.67/appTcc/"

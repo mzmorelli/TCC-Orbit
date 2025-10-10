@@ -15,7 +15,7 @@ export default function Mapa({ route, navigation }) {
         const fetchOrbita = async () => {
             try {
                 const response = await axios.get(
-                    `${API_URL}listar-orbitas.php?id=${orbitaId}`
+                    `http://10.239.20.67/appTcc/listar-orbitas.php?id=${orbitaId}`
                 );
 
                 if (response.data.success) {
@@ -174,7 +174,7 @@ export default function Mapa({ route, navigation }) {
                     className: "custom-marker",
                     html: \`
                       <div class="marker-container">
-                        <img src="http://10.239.0.243/appTcc/uploads/\${membro.foto}" 
+                        <img src="http://10.239.20.67/appTcc/uploads/\${membro.foto}" 
                              class="marker-img"
                              onerror="this.src='https://ui-avatars.com/api/?name=\${encodeURIComponent(membro.nome)}&background=3f92cb&color=fff&size=70&bold=true&font-size=0.4'"
                              style="width: 100%; height: 100%; object-fit: cover;"/>
@@ -192,7 +192,7 @@ export default function Mapa({ route, navigation }) {
                 popupContent += '<b>' + membro.nome + '</b>';
                 
                 if (membro.foto && membro.foto !== '') {
-                  popupContent += '<img src="http://10.239.0.243/appTcc/uploads/' + 
+                  popupContent += '<img src="http://10.239.20.67/appTcc/uploads/' + 
                                  membro.foto + 
                                  '" onerror="this.style.display=\\'none\\'"/>';
                 } else {
@@ -279,7 +279,7 @@ export default function Mapa({ route, navigation }) {
         setLoading(true);
         try {
             const response = await axios.get(
-                `${API_URL}listar-orbitas.php?id=${orbitaId}`
+                `http://10.239.20.67/appTcc/listar-orbitas.php?id=${orbitaId}`
             );
 
             if (response.data.success) {
@@ -295,6 +295,7 @@ export default function Mapa({ route, navigation }) {
                 setDadosOrbita(orbitaLimpa);
                 setMembrosCount(orbitaLimpa.membro.length);
                 
+                // Recarregar os marcadores
                 injectData();
             }
         } catch (error) {
@@ -319,7 +320,8 @@ export default function Mapa({ route, navigation }) {
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor="#135991" barStyle="light-content" />
-
+            
+            {/* Cabeçalho compacto */}
             <View style={styles.header}>
                 <TouchableOpacity 
                     style={styles.backButton}
@@ -364,6 +366,8 @@ export default function Mapa({ route, navigation }) {
                     console.warn('WebView error: ', nativeEvent);
                 }}
             />
+            
+            {/* Overlay de carregamento durante atualização */}
             {loading && (
                 <View style={styles.overlay}>
                     <ActivityIndicator size="large" color="#3f92cb" />

@@ -6,7 +6,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
 import { UserProvider, UserContext } from './src/userContext/index.js';
-import { API_URL } from './url.js';
 
 import Inicio from "./src/telas/Inicio/index.js";
 import Login from "./src/telas/Login/index.js";
@@ -29,6 +28,8 @@ import anunciosUsuario from "./src/telas/Desaparecimento/anunciosUsuario.js";
 import mapaDesaparecido from "./src/telas/Desaparecimento/mapaDesaparecido.js";
 import mapa from "./src/telas/Mapa/index.js";
 import Alerta from "./src/telas/Alerta/index.js";
+import MapaChaveiro from "./src/telas/MapaChaveiro/index.js";
+import MapaTodosDesaparecidos from "./src/telas/MapaDesaparecidos/index.js";
 
 const Tab = createBottomTabNavigator();
 
@@ -69,17 +70,18 @@ function AppContent() {
   const [mostrarModal, setMostrarModal] = useState(false);
   const [ultimoId, setUltimoId] = useState(null);
 
+  // Buscar alertas
   useEffect(() => {
-    let inicializando = true; 
+    let inicializando = true; // flag para primeira carga
 
     const buscarAlertas = async () => {
       try {
-        const response = await axios.get(`${API_URL}listar_alerta.php`);
+        const response = await axios.get("http://10.239.20.67/appTcc/listar_alerta.php");
         if (response.data.success && response.data.alertas.length > 0) {
           const ultimo = response.data.alertas[0];
           if (ultimoId !== ultimo.id) {
             setAlerta(ultimo);
-            if (!inicializando) { 
+            if (!inicializando) { // só abre modal se não for a primeira carga
               setMostrarModal(true);
             }
             setUltimoId(ultimo.id);
@@ -88,7 +90,7 @@ function AppContent() {
       } catch (error) {
         console.error("Erro ao buscar alertas:", error);
       } finally {
-        inicializando = false; 
+        inicializando = false; // primeira carga concluída
       }
     };
 
@@ -118,9 +120,12 @@ function AppContent() {
           <Stack.Screen name="MapaDesaparecido" component={mapaDesaparecido} />
           <Stack.Screen name="Mapa" component={mapa} />
           <Stack.Screen name="Alerta" component={Alerta} />
+          <Stack.Screen name="MapaChaveiro" component={MapaChaveiro}/>
+          <Stack.Screen name="MapaTodosDesaparecidos" component={MapaTodosDesaparecidos}/>
         </Stack.Navigator>
       </NavigationContainer>
 
+    
       <Modal
         visible={mostrarModal}
         transparent={true}
