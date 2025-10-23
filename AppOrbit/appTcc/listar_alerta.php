@@ -12,10 +12,11 @@ try {
         "success" => true,
         "alertas" => $alertas
     ]);
-} catch (Exception $e) {
+} 
+catch (Exception $e) {
     echo json_encode([
         "success" => false,
-        "message" => "Erro ao buscar alertas: " . $e->getMessage()
+        // "message" => "Erro ao buscar alertas: " . $e->getMessage()
     ]);
 }
 ?>

@@ -23,7 +23,7 @@ export default function Login({ navigation }) {
     try {
       console.log('Tentando login com:', { email, senha });
       
-      const response = await axios.post('http://10.239.20.67//appTcc/login_fake.php', {
+      const response = await axios.post('http://10.239.23.166//appTcc/login_fake.php', {
         email: email.toLowerCase().trim(),
         senha: senha.trim()
       });

@@ -20,7 +20,7 @@ export default function InfoPessoal({ navigation, route }) {
 
   const cadastrarUsuario = async () => {
     try {
-      const response = await fetch("http://10.239.20.67/appTcc/cadastrar.php", {
+      const response = await fetch("http://10.239.23.166/appTcc/cadastrar.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nome, nascimento, email, telefone, senha }),

@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root"; // usuário padrão do XAMPP
-$password = ""; // senha padrão do XAMPP (vazia)
+$password = ""; 
 $dbname = "tccorbit"; // substitua pelo nome do seu banco
 
 // Criar conexão

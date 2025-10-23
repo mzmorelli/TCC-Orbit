@@ -8,7 +8,6 @@ import {
   FlatList,
   ActivityIndicator,
   Dimensions,
-  ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import WebView from "react-native-webview";
@@ -28,12 +27,11 @@ export default function Home({ navigation }) {
     setGrupoSelecionado(grupoSelecionado === id ? null : id);
   };
 
-
   useEffect(() => {
     const fetchDesaparecidos = async () => {
       try {
         const response = await axios.get(
-          "http://10.239.20.67//appTcc/listar-cards.php"
+          "http://10.239.23.166//appTcc/listar-cards.php"
         );
         if (response.data.success) {
           setDesaparecidos(response.data.dados);
@@ -51,7 +49,7 @@ export default function Home({ navigation }) {
     const fetchOrbitas = async () => {
       try {
         const response = await axios.get(
-          "http://10.239.20.67//appTcc/listar-orbitas.php"
+          "http://10.239.23.166//appTcc/listar-orbitas.php"
         );
         if (response.data.success) {
           setOrbitas(response.data.orbita);
@@ -65,12 +63,84 @@ export default function Home({ navigation }) {
     fetchOrbitas();
   }, []);
 
+  const renderOrbitaItem = ({ item }) => (
+    <View style={styles.orbitaCard}>
+      <TouchableOpacity
+        onPress={() => toggleGrupo(item.id)}
+        style={[
+          styles.orbitaHeader,
+          grupoSelecionado === item.id && styles.orbitaHeaderActive,
+        ]}
+      >
+        <View style={styles.orbitaInfo}>
+          <View style={styles.orbitaIconContainer}>
+            <Ionicons 
+              name={item.icone || "people"} 
+              size={22} 
+              color="#0B3D91" 
+            />
+          </View>
+          <View style={styles.orbitaTextContainer}>
+            <Text style={styles.orbitaName}>{item.nome}</Text>
+            {/* REMOVIDA A LINHA DA QUANTIDADE DE MEMBROS */}
+          </View>
+        </View>
+        <View style={styles.orbitaActions}>
+          <Ionicons
+            name={grupoSelecionado === item.id ? "chevron-up" : "chevron-down"}
+            size={20}
+            color="#0B3D91"
+          />
+        </View>
+      </TouchableOpacity>
+
+      {grupoSelecionado === item.id && (
+        <Animatable.View
+          animation="fadeInDown"
+          duration={400}
+          style={styles.orbitaOptions}
+        >
+          <TouchableOpacity
+            style={styles.optionButton}
+            onPress={() => navigation.navigate("Mapa", { orbitaId: item.id })}
+          >
+            <View style={styles.optionIcon}>
+              <Ionicons name="map-outline" size={18} color="#0B3D91" />
+            </View>
+            <Text style={styles.optionText}>Ver no Mapa</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.optionButton}
+            onPress={() => navigation.navigate("OrbitaDetalhes", { orbitaId: item.id })}
+          >
+            <View style={styles.optionIcon}>
+              <Ionicons name="settings-outline" size={18} color="#0B3D91" />
+            </View>
+            <Text style={styles.optionText}>Gerenciar Grupo</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.optionButton}
+            onPress={() => navigation.navigate("Membros", { orbitaId: item.id })}
+          >
+            <View style={styles.optionIcon}>
+              <Ionicons name="people-outline" size={18} color="#0B3D91" />
+            </View>
+            <Text style={styles.optionText}>Ver Membros</Text>
+          </TouchableOpacity>
+        </Animatable.View>
+      )}
+    </View>
+  );
+
   return (
     <FlatList
-      data={orbitas}
-      keyExtractor={(item) => item.id.toString()}
+      data={[]}
+      keyExtractor={() => "main-list"}
       ListHeaderComponent={
         <>
+          {/* HEADER */}
           <View style={styles.header}>
             <View style={styles.headerContent}>
               <View style={styles.userInfo}>
@@ -82,7 +152,6 @@ export default function Home({ navigation }) {
                   <Text style={styles.welcome}>
                     Bem-vindo, {(user?.nome || "Usuário").split(' ')[0]}
                   </Text>
-
                   <Text style={styles.subtitle}>Explore o Orbit</Text>
                 </View>
               </View>
@@ -93,10 +162,10 @@ export default function Home({ navigation }) {
                 <Ionicons name="notifications-outline" size={24} color="#fff" />
                 <View style={styles.notificationBadge}></View>
               </TouchableOpacity>
-
             </View>
           </View>
 
+          {/* DESAPARECIDOS */}
           <View style={styles.mainSection}>
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Desaparecidos</Text>
@@ -132,8 +201,8 @@ export default function Home({ navigation }) {
                         source={{
                           uri:
                             item.origem === "site"
-                              ? `http://10.239.20.67/SiteOrbit/static/uploads/${item.imagem}`
-                              : `http://10.239.20.67/appTcc/uploads/${item.imagem}`,
+                              ? `http://10.239.23.166/SiteOrbit/static/uploads/${item.imagem}`
+                              : `http://10.239.23.166/appTcc/uploads/${item.imagem}`,
                         }}
                         style={styles.desaparecidoPhoto}
                       />
@@ -151,6 +220,7 @@ export default function Home({ navigation }) {
             )}
           </View>
 
+          {/* AÇÕES RÁPIDAS */}
           <View style={styles.quickActions}>
             <Text style={styles.sectionTitle}>Ações Rápidas</Text>
             <View style={styles.actionsRow}>
@@ -178,7 +248,7 @@ export default function Home({ navigation }) {
                 style={styles.actionButton}
                 onPress={async () => {
                   try {
-                    await axios.post("http://10.239.20.67/appTcc/criar_alerta.php", {
+                    await axios.post("http://10.239.23.166/appTcc/criar_alerta.php", {
                       usuario: user.nome,
                       mensagem: "🚨 Alerta de emergência enviado!",
                     });
@@ -193,10 +263,10 @@ export default function Home({ navigation }) {
                 </View>
                 <Text style={styles.actionText}>Alertas</Text>
               </TouchableOpacity>
-
             </View>
           </View>
 
+          {/* CHAVEIRO */}
           <View style={styles.chaveiroContainer}>
             <Text style={styles.chaveiroTitle}>Seu Chaveiro</Text>
             <TouchableOpacity
@@ -204,8 +274,8 @@ export default function Home({ navigation }) {
               onPress={() => navigation.navigate("MapaChaveiro")}
             >
               <WebView
-  source={{
-    html: `<!DOCTYPE html>
+                source={{
+                  html: `<!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -330,57 +400,59 @@ export default function Home({ navigation }) {
     </script>
   </body>
 </html>`
-  }}
-  style={styles.mapaPreview}
-  scrollEnabled={false}
-  originWhitelist={["*"]}
-/>
+                }}
+                style={styles.mapaPreview}
+                scrollEnabled={false}
+                originWhitelist={["*"]}
+              />
             </TouchableOpacity>
           </View>
-        </>
 
-      }
-      renderItem={({ item }) => (
-        <View style={styles.groupContainer}>
-          <TouchableOpacity
-            onPress={() => toggleGrupo(item.id)}
-            style={[
-              styles.groupItem,
-              grupoSelecionado === item.id && styles.groupItemActive,
-            ]}
-          >
-            <View style={styles.iconContainer}>
-              <Ionicons name={item.icone || "people"} size={22} color="#0B3D91" />
-            </View>
-            <Text style={styles.groupName}>{item.nome}</Text>
-            <Ionicons
-              name={grupoSelecionado === item.id ? "chevron-up" : "chevron-down"}
-              size={18}
-              color="#0B3D91"
-            />
-          </TouchableOpacity>
-
-          {grupoSelecionado === item.id && (
-            <Animatable.View
-              animation="fadeInDown"
-              duration={400}
-              style={styles.optionsContainer}
-            >
-
-              <TouchableOpacity
-                style={styles.optionButton}
-                onPress={() => navigation.navigate("Mapa", { orbitaId: item.id })}
-              >
-                <Ionicons name="map-outline" size={18} color="#0B3D91" />
-                <Text style={styles.optionText}>Ver no Mapa</Text>
+          {/* MINHAS ÓRBITAS */}
+          <View style={styles.orbitasSection}>
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>Minhas Órbitas</Text>
+              <TouchableOpacity>
+                <Text style={styles.seeAllText}>Ver todas</Text>
               </TouchableOpacity>
+            </View>
+            <Text style={styles.sectionSubtitle}>
+              Gerencie seus grupos e acompanhe a localização em tempo real
+            </Text>
 
-            </Animatable.View>
-          )}
-        </View>
-      )}
-      ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
-      contentContainerStyle={{ paddingBottom: 30 }}
+            {loadingOrbitas ? (
+              <ActivityIndicator
+                size="large"
+                color="#0B3D91"
+                style={{ marginTop: 20, marginBottom: 20 }}
+              />
+            ) : orbitas.length > 0 ? (
+              <View style={styles.orbitasList}>
+                {orbitas.map((item) => (
+                  <View key={item.id.toString()}>
+                    {renderOrbitaItem({ item })}
+                  </View>
+                ))}
+              </View>
+            ) : (
+              <View style={styles.emptyOrbitas}>
+                <Ionicons name="people-outline" size={48} color="#6B93B8" />
+                <Text style={styles.emptyTitle}>Nenhuma órbita encontrada</Text>
+                <Text style={styles.emptySubtitle}>
+                  Crie sua primeira órbita para começar a monitorar sua família
+                </Text>
+                <TouchableOpacity 
+                  style={styles.createOrbitaButton}
+                  onPress={() => navigation.navigate("CriarOrbita")}
+                >
+                  <Text style={styles.createOrbitaText}>Criar Órbita</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+          </View>
+        </>
+      }
+      contentContainerStyle={styles.container}
     />
   );
 }
@@ -389,7 +461,7 @@ const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    paddingBottom: 30,
     backgroundColor: "#F7FAFD",
   },
   header: {
@@ -484,6 +556,11 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     lineHeight: 20,
   },
+  seeAllText: {
+    fontSize: 14,
+    color: "#0B3D91",
+    fontWeight: "600",
+  },
   desaparecidosList: {
     paddingVertical: 8,
   },
@@ -519,63 +596,12 @@ const styles = StyleSheet.create({
     color: "#6B93B8",
     marginTop: 2,
   },
-  groupContainer: {
-    marginBottom: 4,
-    paddingHorizontal: 10
-  },
-  groupItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#F7FAFD",
-    padding: 16,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "#E6F0FA",
-  },
-  groupItemActive: {
-    backgroundColor: "#E6F0FA",
-    borderColor: "#0B3D91",
-  },
-  iconContainer: {
-    backgroundColor: "#FFFFFF",
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 12,
-  },
-  groupName: {
-    fontSize: 16,
-    color: "#0B3D91",
-    flex: 1,
-    fontWeight: "600",
-  },
-  optionsContainer: {
-    backgroundColor: "#F7FAFD",
-    padding: 16,
-    borderRadius: 12,
-    marginTop: 8,
-    borderLeftWidth: 3,
-    borderLeftColor: "#0B3D91",
-  },
-  optionButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 10,
-  },
-  optionText: {
-    fontSize: 15,
-    color: "#0B3D91",
-    marginLeft: 12,
-    fontWeight: "500",
-  },
   quickActions: {
     backgroundColor: "#FFFFFF",
     padding: 20,
     marginTop: 20,
     marginHorizontal: 16,
-    marginBottom: 30,
+    marginBottom: 20,
     borderRadius: 16,
     shadowColor: "#0B3D91",
     shadowOffset: { width: 0, height: 2 },
@@ -633,5 +659,130 @@ const styles = StyleSheet.create({
     height: '100%',
     borderRadius: 12,
   },
-
+  // ESTILOS PARA A SEÇÃO DE ÓRBITAS UNIFICADA
+  orbitasSection: {
+    backgroundColor: "#FFFFFF",
+    padding: 20,
+    marginHorizontal: 16,
+    borderRadius: 16,
+    shadowColor: "#0B3D91",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
+    elevation: 3,
+    marginBottom: 20,
+  },
+  orbitasList: {
+    marginTop: 8,
+  },
+  orbitaCard: {
+    backgroundColor: "#F7FAFD",
+    borderRadius: 12,
+    marginBottom: 12,
+    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: "#E6F0FA",
+  },
+  orbitaHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 16,
+  },
+  orbitaHeaderActive: {
+    backgroundColor: "#E6F0FA",
+    borderBottomWidth: 1,
+    borderBottomColor: "#0B3D91",
+  },
+  orbitaInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1,
+  },
+  orbitaIconContainer: {
+    backgroundColor: "#FFFFFF",
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 12,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  orbitaTextContainer: {
+    flex: 1,
+  },
+  orbitaName: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#0B3D91",
+    // Aumentei o tamanho da fonte e removi a marginBottom para compensar a remoção da linha de membros
+    fontSize: 17,
+  },
+  // REMOVIDO O ESTILO orbitaMembers
+  orbitaActions: {
+    paddingLeft: 12,
+  },
+  orbitaOptions: {
+    backgroundColor: "#FFFFFF",
+    padding: 16,
+    borderTopWidth: 1,
+    borderTopColor: "#E6F0FA",
+  },
+  optionButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 8,
+  },
+  optionIcon: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: "#F7FAFD",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 12,
+  },
+  optionText: {
+    fontSize: 15,
+    color: "#0B3D91",
+    fontWeight: "500",
+  },
+  emptyOrbitas: {
+    alignItems: "center",
+    padding: 40,
+    backgroundColor: "#F7FAFD",
+    borderRadius: 12,
+    marginTop: 16,
+  },
+  emptyTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#0B3D91",
+    marginTop: 16,
+    marginBottom: 8,
+  },
+  emptySubtitle: {
+    fontSize: 14,
+    color: "#6B93B8",
+    textAlign: "center",
+    lineHeight: 20,
+    marginBottom: 24,
+  },
+  createOrbitaButton: {
+    backgroundColor: "#0B3D91",
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 25,
+  },
+  createOrbitaText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "600",
+  },
 });

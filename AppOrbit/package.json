@@ -19,7 +19,7 @@
     "expo": "~52.0.43",
     "expo-image-picker": "~16.0.6",
     "expo-linear-gradient": "~14.0.2",
-    "expo-location": "^18.0.10",
+    "expo-location": "^18.1.6",
     "expo-status-bar": "~2.0.1",
     "form-data": "^4.0.3",
     "node": "^23.11.0",

@@ -72,25 +72,26 @@ function AppContent() {
 
   // Buscar alertas
   useEffect(() => {
-    let inicializando = true; // flag para primeira carga
+    let inicializando = true; 
 
     const buscarAlertas = async () => {
       try {
-        const response = await axios.get("http://10.239.20.67/appTcc/listar_alerta.php");
+        const response = await axios.get("http://10.239.23.166/appTcc/listar_alerta.php");
         if (response.data.success && response.data.alertas.length > 0) {
           const ultimo = response.data.alertas[0];
           if (ultimoId !== ultimo.id) {
             setAlerta(ultimo);
-            if (!inicializando) { // só abre modal se não for a primeira carga
+            if (!inicializando) { 
               setMostrarModal(true);
             }
             setUltimoId(ultimo.id);
           }
-        }
-      } catch (error) {
-        console.error("Erro ao buscar alertas:", error);
-      } finally {
-        inicializando = false; // primeira carga concluída
+        }}
+      //  catch (error) {
+      //   console.error("Erro ao buscar alertas:", error);
+      // } 
+      finally {
+        inicializando = false; 
       }
     };
 
