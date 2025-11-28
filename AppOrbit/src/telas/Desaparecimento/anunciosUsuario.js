@@ -8,10 +8,10 @@ import {
   Image,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { UserContext } from '../../userContext';
+import { UserContext } from "../../userContext";
 import axios from "axios";
 
-const BASE_URL = "http://10.239.23.166/appTcc";
+import BASE_URL from "../../../url.js";
 
 export default function MeusDesaparecidos({ navigation }) {
   const { user } = useContext(UserContext);
@@ -20,7 +20,11 @@ export default function MeusDesaparecidos({ navigation }) {
   const fetchMeusDesaparecidos = async () => {
     if (!user) return;
     try {
-      const response = await axios.post(`${BASE_URL}/listar_meus_desaparecidos.php`, { usuario_id: user.id });
+      const response = await axios.post(
+        `${BASE_URL}/listar_meus_desaparecidos.php`,
+        { usuario_id: user.id }
+      );
+
       if (response.data.success) {
         setDesaparecidos(response.data.desaparecidos);
       }
@@ -32,6 +36,25 @@ export default function MeusDesaparecidos({ navigation }) {
   useEffect(() => {
     fetchMeusDesaparecidos();
   }, []);
+
+  const excluirDesaparecido = async (id) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/excluir_desaparecido.php`,
+        { id }
+      );
+
+      if (response.data.success) {
+        alert("Anúncio excluído!");
+        fetchMeusDesaparecidos();
+      } else {
+        alert("Erro ao excluir.");
+      }
+    } catch (error) {
+      alert("Erro ao conectar com o servidor.");
+      console.log(error);
+    }
+  };
 
   const formatarTelefone = (numero) => {
     return numero
@@ -50,7 +73,6 @@ export default function MeusDesaparecidos({ navigation }) {
               source={{ uri: `${BASE_URL}/uploads/${item.imagem}` }}
               style={styles.profileImage}
             />
-
           </View>
 
           <View style={styles.card}>
@@ -61,21 +83,27 @@ export default function MeusDesaparecidos({ navigation }) {
                 <View style={styles.infoIcon}>
                   <Ionicons name="time-outline" size={16} color="#FFFFFF" />
                 </View>
-                <Text style={styles.infoText}>Desaparecido desde: {item.vezVisto}</Text>
+                <Text style={styles.infoText}>
+                  Desaparecido desde: {item.vezVisto}
+                </Text>
               </View>
 
               <View style={styles.infoItem}>
                 <View style={styles.infoIcon}>
                   <Ionicons name="location-outline" size={16} color="#FFFFFF" />
                 </View>
-                <Text style={styles.infoText}>Último local: {item.localVisto}</Text>
+                <Text style={styles.infoText}>
+                  Último local: {item.localVisto}
+                </Text>
               </View>
 
               <View style={styles.infoItem}>
                 <View style={styles.infoIcon}>
                   <Ionicons name="call-outline" size={16} color="#FFFFFF" />
                 </View>
-                <Text style={styles.infoText}>Contato: {formatarTelefone(item.telefoneContato)}</Text>
+                <Text style={styles.infoText}>
+                  Contato: {formatarTelefone(item.telefoneContato)}
+                </Text>
               </View>
             </View>
 
@@ -91,23 +119,32 @@ export default function MeusDesaparecidos({ navigation }) {
             </View>
           </View>
 
-          {/* Área dos ícones */}
           <View style={styles.iconsContainer}>
-            <TouchableOpacity style={styles.iconButton} onPress={() => { }}>
-              <Ionicons name="create-outline" size={24} color="#FFF" />
+            <TouchableOpacity
+              style={styles.iconButton}
+              onPress={() =>
+                navigation.navigate("EditarDesaparecidos", { dados: item })
+              }
+            >
+              <Ionicons name="create-outline" size={24} color="#135991" />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.iconButton} onPress={() => { }}>
-              <Ionicons name="trash-outline" size={24} color="#FFF" />
+
+            <TouchableOpacity
+              style={styles.iconButton}
+              onPress={() => excluirDesaparecido(item.id)}
+            >
+              <Ionicons name="trash-outline" size={24} color="#135991"/>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.iconButton} onPress={() => { }}>
-              <Ionicons name="checkmark-circle-outline" size={24} color="#FFF" />
-            </TouchableOpacity>
+
+
           </View>
         </TouchableOpacity>
       ))}
 
       {desaparecidos.length === 0 && (
-        <Text style={{ textAlign: "center", marginTop: 20 }}>Nenhum desaparecido encontrado.</Text>
+        <Text style={{ textAlign: "center", marginTop: 20 }}>
+          Nenhum desaparecido encontrado.
+        </Text>
       )}
     </ScrollView>
   );
@@ -139,7 +176,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginRight: 15,
   },
-  profileImage: { width: 90, height: 90, borderRadius: 45, borderWidth: 2, borderColor: "#135991" },
+  profileImage: {
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    borderWidth: 2,
+    borderColor: "#135991",
+  },
   card: { flex: 1 },
   userName: { fontSize: 18, fontWeight: "600", color: "#135991", marginBottom: 10 },
   infoSection: { marginBottom: 10 },
@@ -155,9 +198,21 @@ const styles = StyleSheet.create({
   },
   infoText: { fontSize: 14, color: "#135991", flex: 1 },
   detailsRow: { flexDirection: "row", justifyContent: "space-between", marginTop: 10 },
-  detailItem: { backgroundColor: "#cfe4f3", borderRadius: 10, paddingVertical: 8, paddingHorizontal: 12, alignItems: "center", minWidth: "45%" },
+  detailItem: {
+    backgroundColor: "#cfe4f3",
+    borderRadius: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    alignItems: "center",
+    minWidth: "45%",
+  },
   detailLabel: { fontSize: 12, color: "#135991", marginBottom: 2 },
   detailValue: { fontSize: 14, color: "#135991", fontWeight: "500" },
-  iconsContainer: { justifyContent: "space-around", alignItems: "center", flexDirection: "column", marginLeft: 15 },
+  iconsContainer: {
+    justifyContent: "space-around",
+    alignItems: "center",
+    flexDirection: "column",
+    marginLeft: 15,
+  },
   iconButton: { marginVertical: 8 },
 });

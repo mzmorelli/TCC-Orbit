@@ -12,10 +12,9 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { UserContext } from '../../userContext/index.js';
 import axios from "axios";
+import BASE_URL from "../../../url.js";
 
 const { width } = Dimensions.get("window");
-
-const BASE_URL = "http://10.239.23.166//appTcc";
 
 export default function Alerta({ navigation }) {
   const [alertas, setAlertas] = useState([]);

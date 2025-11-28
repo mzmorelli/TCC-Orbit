@@ -1,35 +1,39 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
+import axios from 'axios';
+import { BASE_URL } from '../../../url.js';
 
-export default function ChatList({ navigation }) {
-  const chats = [
-    {
-      id: '1',
-      groupName: 'Família',
-      lastMessage: 'Vamos almoçar juntos no domingo?',
-      time: '12:30',
-      unread: 2,
-      icon: 'home'
-    },
-    {
-      id: '2',
-      groupName: 'Amigos',
-      lastMessage: 'E aí, bora sair hoje?',
-      time: '10:15',
-      unread: 0,
-      icon: 'beer'
-    },
-    {
-      id: '3',
-      groupName: 'Amor',
-      lastMessage: 'Te amo! ❤️',
-      time: 'Ontem',
-      unread: 0,
-      icon: 'heart-circle'
-    },
-  ];
+export default function ListaChat({ navigation }) {
+  const [orbitas, setOrbitas] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    carregarOrbitas();
+  }, []);
+
+  const carregarOrbitas = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/listar-orbitas.php`);
+      if (response.data.success && Array.isArray(response.data.orbita)) {
+        setOrbitas(response.data.orbita);
+      } else {
+        console.log("Erro ao buscar órbitas:", response.data);
+      }
+    } catch (error) {
+      console.log("Erro:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#135991" />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -38,33 +42,34 @@ export default function ChatList({ navigation }) {
       </View>
 
       <FlatList
-        data={chats}
-        keyExtractor={(item) => item.id}
+        data={orbitas}
+        keyExtractor={(item) => String(item.id)}
         contentContainerStyle={styles.listContainer}
         renderItem={({ item }) => (
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.chatItem}
-            onPress={() => navigation.navigate('ChatOrbitas', { groupName: item.groupName })}
+            onPress={() =>
+              navigation.navigate('ChatOrbitas', {
+                orbitaId: item.id,
+                nomeOrbita: item.nome,
+                membros: item.membro,
+              })
+            }
           >
             <View style={styles.iconContainer}>
-              <Ionicons name={item.icon} size={24} color="#135991" />
+              <Ionicons name="people" size={24} color="#135991" />
             </View>
-            
+
             <View style={styles.chatContent}>
               <View style={styles.chatHeader}>
-                <Text style={styles.chatName}>{item.groupName}</Text>
-                <Text style={styles.chatTime}>{item.time}</Text>
+                <Text style={styles.chatName}>{item.nome}</Text>
+                <Text style={styles.chatTime}>{" "}</Text>
               </View>
+
               <Text style={styles.lastMessage} numberOfLines={1}>
-                {item.lastMessage}
+                {item.membro.length} membros
               </Text>
             </View>
-            
-            {item.unread > 0 && (
-              <View style={styles.unreadBadge}>
-                <Text style={styles.unreadText}>{item.unread}</Text>
-              </View>
-            )}
           </TouchableOpacity>
         )}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
@@ -76,7 +81,7 @@ export default function ChatList({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#d1e5f4', // fundo leve
+    backgroundColor: '#d1e5f4',
   },
   header: {
     paddingTop: 40,
@@ -96,13 +101,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 12,
     paddingHorizontal: 20,
-    backgroundColor: 'transparent', // sem fundo escuro
+    backgroundColor: 'transparent',
   },
   iconContainer: {
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: '#ffffff80', // leve transparência
+    backgroundColor: '#ffffff80',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 15,
@@ -110,7 +115,7 @@ const styles = StyleSheet.create({
   chatContent: {
     flex: 1,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(0,0,0,0.1)', // linha fina separando chats
+    borderBottomColor: 'rgba(0,0,0,0.1)',
     paddingBottom: 12,
   },
   chatHeader: {
@@ -131,18 +136,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#374151',
   },
-  unreadBadge: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    backgroundColor: '#FF3B30',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 10,
-  },
-  unreadText: {
-    color: '#FFFFFF',
-    fontSize: 12,
-    fontWeight: 'bold',
+  separator: {
+    height: 1,
+    backgroundColor: 'transparent',
   },
 });

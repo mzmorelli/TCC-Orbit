@@ -11,7 +11,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 
 export default function InfoPessoal({ navigation, route }) {
-  const { telefone } = route.params; // aqui vem o telefone da primeira tela
+  const { telefone } = route.params; 
   const [nome, setNome] = useState("");
   const [nascimento, setNascimento] = useState("");
   const [email, setEmail] = useState("");
@@ -112,7 +112,7 @@ export default function InfoPessoal({ navigation, route }) {
           <TouchableOpacity
             style={styles.button}
             activeOpacity={0.8}
-            onPress={cadastrarUsuario} // só referencia a função
+            onPress={cadastrarUsuario} 
           >
             <Text style={styles.buttonText}>Salvar</Text>
           </TouchableOpacity>

@@ -11,6 +11,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import axios from "axios";
+import BASE_URL from "../../../url.js";
 
 export default function anuncios({ navigation }) {
   const [desaparecidos, setDesaparecidos] = useState([]);
@@ -19,17 +20,17 @@ export default function anuncios({ navigation }) {
     if (!numero || typeof numero !== "string") return "";
 
     return numero
-      .replace(/\D/g, "") // remove tudo que não for número
-      .replace(/(\d{2})(\d)/, "($1) $2") // coloca parênteses no DDD
-      .replace(/(\d{5})(\d)/, "$1-$2") // coloca o hífen
-      .replace(/(-\d{4})\d+?$/, "$1"); // limita a 4 dígitos no final
+      .replace(/\D/g, "") 
+      .replace(/(\d{2})(\d)/, "($1) $2") 
+      .replace(/(\d{5})(\d)/, "$1-$2") 
+      .replace(/(-\d{4})\d+?$/, "$1"); 
   };
 
   useEffect(() => {
     const buscarDesaparecidos = async () => {
       try {
         const response = await axios.get(
-          "http://10.239.23.166/appTcc/listar-cards.php"
+          `${BASE_URL}/listar-cards.php`
         );
         if (response.data.success) {
           setDesaparecidos(response.data.dados);
@@ -84,8 +85,8 @@ export default function anuncios({ navigation }) {
                   source={{
                     uri:
                       item.origem === "site"
-                        ? `http://10.239.23.166/SiteOrbit/static/uploads/${item.imagem}`
-                        : `http://10.239.23.166/appTcc/uploads/${item.imagem}`,
+                        ? `http://10.239.0.239/SiteOrbit/static/uploads/${item.imagem}`
+                        : `${BASE_URL}/uploads/${item.imagem}`,
                   }}
                   style={styles.profileImage}
                 />

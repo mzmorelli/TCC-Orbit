@@ -14,6 +14,7 @@ import WebView from "react-native-webview";
 import * as Animatable from "react-native-animatable";
 import axios from "axios";
 import { UserContext } from '../../userContext/index.js';
+import BASE_URL from "../../../url.js";
 
 export default function Home({ navigation }) {
   const { user } = useContext(UserContext);
@@ -31,7 +32,7 @@ export default function Home({ navigation }) {
     const fetchDesaparecidos = async () => {
       try {
         const response = await axios.get(
-          "http://10.239.23.166//appTcc/listar-cards.php"
+          `${BASE_URL}/listar-cards.php`
         );
         if (response.data.success) {
           setDesaparecidos(response.data.dados);
@@ -49,7 +50,7 @@ export default function Home({ navigation }) {
     const fetchOrbitas = async () => {
       try {
         const response = await axios.get(
-          "http://10.239.23.166//appTcc/listar-orbitas.php"
+          `${BASE_URL}/listar-orbitas.php`
         );
         if (response.data.success) {
           setOrbitas(response.data.orbita);
@@ -165,7 +166,6 @@ export default function Home({ navigation }) {
             </View>
           </View>
 
-          {/* DESAPARECIDOS */}
           <View style={styles.mainSection}>
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Desaparecidos</Text>
@@ -201,8 +201,8 @@ export default function Home({ navigation }) {
                         source={{
                           uri:
                             item.origem === "site"
-                              ? `http://10.239.23.166/SiteOrbit/static/uploads/${item.imagem}`
-                              : `http://10.239.23.166/appTcc/uploads/${item.imagem}`,
+                              ? `http://10.239.0.239/SiteOrbit/static/uploads/${item.imagem}`
+                              : `${BASE_URL}/uploads/${item.imagem}`,
                         }}
                         style={styles.desaparecidoPhoto}
                       />
@@ -220,7 +220,6 @@ export default function Home({ navigation }) {
             )}
           </View>
 
-          {/* AÇÕES RÁPIDAS */}
           <View style={styles.quickActions}>
             <Text style={styles.sectionTitle}>Ações Rápidas</Text>
             <View style={styles.actionsRow}>
@@ -248,7 +247,7 @@ export default function Home({ navigation }) {
                 style={styles.actionButton}
                 onPress={async () => {
                   try {
-                    await axios.post("http://10.239.23.166/appTcc/criar_alerta.php", {
+                    await axios.post(`${BASE_URL}/criar_alerta.php`, {
                       usuario: user.nome,
                       mensagem: "🚨 Alerta de emergência enviado!",
                     });
@@ -266,7 +265,6 @@ export default function Home({ navigation }) {
             </View>
           </View>
 
-          {/* CHAVEIRO */}
           <View style={styles.chaveiroContainer}>
             <Text style={styles.chaveiroTitle}>Seu Chaveiro</Text>
             <TouchableOpacity
@@ -408,7 +406,6 @@ export default function Home({ navigation }) {
             </TouchableOpacity>
           </View>
 
-          {/* MINHAS ÓRBITAS */}
           <View style={styles.orbitasSection}>
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Minhas Órbitas</Text>
@@ -659,7 +656,7 @@ const styles = StyleSheet.create({
     height: '100%',
     borderRadius: 12,
   },
-  // ESTILOS PARA A SEÇÃO DE ÓRBITAS UNIFICADA
+
   orbitasSection: {
     backgroundColor: "#FFFFFF",
     padding: 20,
@@ -720,10 +717,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "700",
     color: "#0B3D91",
-    // Aumentei o tamanho da fonte e removi a marginBottom para compensar a remoção da linha de membros
     fontSize: 17,
   },
-  // REMOVIDO O ESTILO orbitaMembers
+
   orbitaActions: {
     paddingLeft: 12,
   },

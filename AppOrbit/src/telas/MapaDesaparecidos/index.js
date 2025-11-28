@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { View, StyleSheet, Dimensions, TouchableOpacity, Text, StatusBar, ActivityIndicator, Alert } from "react-native";
 import { WebView } from "react-native-webview";
 import { Ionicons } from "@expo/vector-icons";
+import BASE_URL from "../../../url";
 
 export default function MapaTodosDesaparecidos({ navigation }) {
   const webViewRef = useRef(null);
@@ -12,7 +13,7 @@ export default function MapaTodosDesaparecidos({ navigation }) {
   useEffect(() => {
     console.log("🔍 Buscando dados dos desaparecidos...");
     
-    fetch("http://10.239.23.166/appTcc/listar-coordenadas.php")
+    fetch(`${BASE_URL}/listar-coordenadas.php`)
       .then(res => res.text())
       .then(text => {
         try {
@@ -21,8 +22,7 @@ export default function MapaTodosDesaparecidos({ navigation }) {
           
           if(json.success){
             console.log(`✅ ${json.dados.length} desaparecidos carregados`);
-            
-            // Verifica o primeiro item para ver todos os campos
+
             if (json.dados.length > 0) {
               console.log("📋 Campos do primeiro desaparecido:", Object.keys(json.dados[0]));
               console.log("🔍 Dados completos do primeiro:", json.dados[0]);
@@ -46,12 +46,10 @@ export default function MapaTodosDesaparecidos({ navigation }) {
       });
   }, []);
 
-  // Função para navegar para a tela de informações
   const navigateToInfo = (desaparecido) => {
     console.log("📱 Navegando para informações do:", desaparecido.nome);
     console.log("📋 Dados que serão enviados:", desaparecido);
     
-    // Verifica se todos os campos necessários estão presentes
     const camposRequeridos = ['idade', 'altura', 'sexo', 'descricao', 'telefoneContato', 'vezVisto', 'usuario_nome'];
     const camposFaltantes = camposRequeridos.filter(campo => !desaparecido[campo]);
     
@@ -64,7 +62,6 @@ export default function MapaTodosDesaparecidos({ navigation }) {
     });
   };
 
-  // Envia dados quando mapa estiver pronto
   useEffect(() => {
     if (mapLoaded && desaparecidos.length > 0) {
       console.log("🚀 Enviando dados para o mapa:", desaparecidos.length, "registros");

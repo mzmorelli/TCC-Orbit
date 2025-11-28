@@ -233,3 +233,107 @@ Login success for: isabela@email.com - User: {"id":10,"nome":"Isabela Mendes","e
 Email: marcos@email.com, Senha: 123456
 Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
 Login success for: marcos@email.com - User: {"id":1,"nome":"Marcos Silva","email":"marcos@email.com"}
+2025-11-28 15:30:54 - Login attempt
+Email: juliana@email.com, Senha: 12345
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login failed for: juliana@email.com
+2025-11-28 15:31:00 - Login attempt
+Email: juliana@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: juliana@email.com - User: {"id":4,"nome":"Juliana Costa","email":"juliana@email.com"}
+2025-11-28 15:34:44 - Login attempt
+Email: juliana@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: juliana@email.com - User: {"id":4,"nome":"Juliana Costa","email":"juliana@email.com"}
+2025-11-28 15:36:56 - Login attempt
+Email: juliana@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: juliana@email.com - User: {"id":4,"nome":"Juliana Costa","email":"juliana@email.com"}
+2025-11-28 15:55:51 - Login attempt
+Email: marcelo@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login failed for: marcelo@email.com
+2025-11-28 15:56:09 - Login attempt
+Email: juliana@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: juliana@email.com - User: {"id":4,"nome":"Juliana Costa","email":"juliana@email.com"}
+2025-11-28 17:48:36 - Login attempt
+Email: juliana@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: juliana@email.com - User: {"id":4,"nome":"Juliana Costa","email":"juliana@email.com"}
+2025-11-28 17:49:58 - Login attempt
+Email: isabela@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: isabela@email.com - User: {"id":10,"nome":"Isabela Mendes","email":"isabela@email.com"}
+2025-11-28 17:55:07 - Login attempt
+Email: fernanda@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login failed for: fernanda@email.com
+2025-11-28 17:55:14 - Login attempt
+Email: marcos@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: marcos@email.com - User: {"id":1,"nome":"Marcos Silva","email":"marcos@email.com"}
+2025-11-28 17:58:05 - Login attempt
+Email: juliana@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: juliana@email.com - User: {"id":4,"nome":"Juliana Costa","email":"juliana@email.com"}
+2025-11-28 18:13:24 - Login attempt
+Email: isabela@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: isabela@email.com - User: {"id":10,"nome":"Isabela Mendes","email":"isabela@email.com"}
+2025-11-28 18:14:05 - Login attempt
+Email: isabela@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: isabela@email.com - User: {"id":10,"nome":"Isabela Mendes","email":"isabela@email.com"}
+2025-11-28 18:18:08 - Login attempt
+Email: gustavo@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: gustavo@email.com - User: {"id":7,"nome":"Gustavo Martins","email":"gustavo@email.com"}
+2025-11-28 18:22:06 - Login attempt
+Email: fernanda@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login failed for: fernanda@email.com
+2025-11-28 18:22:15 - Login attempt
+Email: isabela@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: isabela@email.com - User: {"id":10,"nome":"Isabela Mendes","email":"isabela@email.com"}
+2025-11-28 18:23:26 - Login attempt
+Email: marcos@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: marcos@email.com - User: {"id":1,"nome":"Marcos Silva","email":"marcos@email.com"}
+2025-11-28 18:24:20 - Login attempt
+Email: juliana@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: juliana@email.com - User: {"id":4,"nome":"Juliana Costa","email":"juliana@email.com"}
+2025-11-28 18:25:18 - Login attempt
+Email: andre@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: andre@email.com - User: {"id":9,"nome":"Andr\u00e9 Nascimento","email":"andre@email.com"}
+2025-11-28 18:35:38 - Login attempt
+Email: isabela@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: isabela@email.com - User: {"id":10,"nome":"Isabela Mendes","email":"isabela@email.com"}
+2025-11-28 18:40:53 - Login attempt
+Email: isabela@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: isabela@email.com - User: {"id":10,"nome":"Isabela Mendes","email":"isabela@email.com"}
+2025-11-28 18:41:08 - Login attempt
+Email: juliana@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: juliana@email.com - User: {"id":4,"nome":"Juliana Costa","email":"juliana@email.com"}
+2025-11-28 18:44:37 - Login attempt
+Email: andre@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: andre@email.com - User: {"id":9,"nome":"Andr\u00e9 Nascimento","email":"andre@email.com"}
+2025-11-28 18:47:19 - Login attempt
+Email: andre@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: andre@email.com - User: {"id":9,"nome":"Andr\u00e9 Nascimento","email":"andre@email.com"}
+2025-11-28 18:48:47 - Login attempt
+Email: andre@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: andre@email.com - User: {"id":9,"nome":"Andr\u00e9 Nascimento","email":"andre@email.com"}
+2025-11-28 18:51:17 - Login attempt
+Email: andre@email.com, Senha: 123456
+Query: SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?
+Login success for: andre@email.com - User: {"id":9,"nome":"Andr\u00e9 Nascimento","email":"andre@email.com"}

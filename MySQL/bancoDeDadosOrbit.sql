@@ -1,18 +1,15 @@
 -- --------------------------------------------------------
 -- Servidor:                     127.0.0.1
--- Versão do servidor:           10.4.27-MariaDB - mariadb.org binary distribution
+-- Versão do servidor:           10.4.32-MariaDB - mariadb.org binary distribution
 -- OS do Servidor:               Win64
--- HeidiSQL Versão:              12.12.0.7122
+-- HeidiSQL Versão:              9.5.0.5196
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
 /*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
 -- Copiando estrutura do banco de dados para tccorbit
@@ -26,9 +23,10 @@ CREATE TABLE IF NOT EXISTS `alerta` (
   `mensagem` text NOT NULL,
   `criado_em` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Copiando dados para a tabela tccorbit.alerta: ~87 rows (aproximadamente)
+-- Copiando dados para a tabela tccorbit.alerta: ~91 rows (aproximadamente)
+/*!40000 ALTER TABLE `alerta` DISABLE KEYS */;
 INSERT INTO `alerta` (`id`, `usuario`, `mensagem`, `criado_em`) VALUES
 	(1, 'Usuário Mobile', '🚨 Alerta de emergência enviado!', '2025-09-22 16:27:11'),
 	(2, 'Usuário Mobile', '🚨 Alerta de emergência enviado!', '2025-09-22 16:33:15'),
@@ -120,7 +118,32 @@ INSERT INTO `alerta` (`id`, `usuario`, `mensagem`, `criado_em`) VALUES
 	(88, 'Isabela Mendes', 'Enviou um alerta de emergência!', '2025-10-17 17:11:03'),
 	(89, 'Isabela Mendes', 'Enviou um alerta de emergência!', '2025-10-17 17:27:50'),
 	(90, 'Isabela Mendes', 'Enviou um alerta de emergência!', '2025-10-17 17:35:43'),
-	(91, 'Marcos Silva', 'Enviou um alerta de emergência!', '2025-10-23 14:17:29');
+	(91, 'Marcos Silva', 'Enviou um alerta de emergência!', '2025-10-23 14:17:29'),
+	(92, 'André Nascimento', 'Enviou um alerta de emergência!', '2025-11-28 17:30:20'),
+	(93, 'André Nascimento', 'Enviou um alerta de emergência!', '2025-11-28 17:58:31');
+/*!40000 ALTER TABLE `alerta` ENABLE KEYS */;
+
+-- Copiando estrutura para tabela tccorbit.chat_orbita
+CREATE TABLE IF NOT EXISTS `chat_orbita` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `orbita_id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `mensagem` text NOT NULL,
+  `data_envio` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Copiando dados para a tabela tccorbit.chat_orbita: ~3 rows (aproximadamente)
+/*!40000 ALTER TABLE `chat_orbita` DISABLE KEYS */;
+INSERT INTO `chat_orbita` (`id`, `orbita_id`, `usuario_id`, `mensagem`, `data_envio`) VALUES
+	(9, 1, 7, 'Oi mae, vc sabe se o pai quer alguma coisa do mercado? ', '2025-11-28 14:19:01'),
+	(10, 3, 7, 'Oi amor, vi que vc esta na academia, me espera ai pra gente treinar juntos!', '2025-11-28 14:21:06'),
+	(11, 2, 7, 'Oi amiga, quer sair mais tarde?', '2025-11-28 14:21:48'),
+	(12, 1, 10, 'Oi filho, ele nao esta em casa, a localizaçao esta marcando que ele foi na farmacia, jaja ele te responde', '2025-11-28 14:23:16'),
+	(13, 1, 1, 'Oi filhao, nao preciso de nada nao! Obrigada ', '2025-11-28 14:24:06'),
+	(14, 3, 4, 'Oi vida, vou te esperar aqui entao', '2025-11-28 14:24:53'),
+	(15, 2, 9, 'Bora ir naquela pizzaria que abriu mes passado', '2025-11-28 14:25:43');
+/*!40000 ALTER TABLE `chat_orbita` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela tccorbit.desaparecido
 CREATE TABLE IF NOT EXISTS `desaparecido` (
@@ -144,6 +167,7 @@ CREATE TABLE IF NOT EXISTS `desaparecido` (
 ) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Copiando dados para a tabela tccorbit.desaparecido: ~12 rows (aproximadamente)
+/*!40000 ALTER TABLE `desaparecido` DISABLE KEYS */;
 INSERT INTO `desaparecido` (`nome`, `idade`, `sexo`, `altura`, `telefoneContato`, `vezVisto`, `localVisto`, `descricao`, `imagem`, `id`, `origem`, `usuario_id`, `latitude`, `longitude`) VALUES
 	('Ana Carolina Silva', 26, 'Feminino', 160, '(11) 91234-5678', '2025-05-20', 'Terminal Rodoviário do Tietê, São Paulo - SP', 'Usava calça jeans azul escura, blusa vermelha de manga curta e tênis branco. Cabelos castanhos longos e lisos, estava com uma mochila lilás. Foi vista conversando com uma senhora próxima à bilheteria antes de desaparecer.', 'mulher1.jpg', 40, 'app', 1, -23.5160318, -46.6242863),
 	('Lucas Henrique Alves', 23, 'Masculino', 184, '(11) 99876-5432', '2025-06-10', 'Praça da Sé, São Paulo - SP', 'Vestia camiseta do Corinthians, bermuda preta e tênis azul com detalhes brancos. Carregava uma bola de futebol debaixo do braço e foi visto brincando próximo à escadaria da Catedral da Sé. Relatos indicam que estava acompanhado de outros meninos.', 'homem1.jpg', 41, 'app', 2, -23.5502017, -46.6342653),
@@ -153,10 +177,10 @@ INSERT INTO `desaparecido` (`nome`, `idade`, `sexo`, `altura`, `telefoneContato`
 	('Júlia Fernandes Lopes', 20, 'Feminino', 174, '(41) 99887-2345', '2025-02-05', 'Centro Histórico, Curitiba - PR', 'Vestia vestido longo branco e carregava uma bolsa vermelha de couro. Tinha cabelos castanhos ondulados soltos e usava brincos grandes dourados. Foi vista caminhando em direção à Praça Tiradentes por volta das 18h.', 'mulher3.jpg', 45, 'app', 6, -25.4276617, -49.2722117),
 	('Miguel Andrade', 54, 'Masculino', 160, '(85) 99111-4433', '2025-06-15', 'Praia do Futuro, Fortaleza - CE', 'Foi visto entrando no mar sem camisa, vestindo apenas uma bermuda azul listrada. Carregava uma prancha de bodyboard amarela. Pessoas relataram que as ondas estavam fortes no momento do desaparecimento.', 'homem4.jpg', 46, 'app', 7, -3.7466293, -38.4461101),
 	('Lara Beatriz Martins', 22, 'Feminino', 158, '(61) 98888-7766', '2025-05-07', 'Parque da Cidade, Brasília - DF', 'Jovem de cabelos cacheados escuros, usava blusa preta, calça jeans rasgada e tênis branco. Estava acompanhada de amigas, mas se afastou do grupo pouco antes de desaparecer. Relatos dizem que ela parecia estar usando fones de ouvido.', 'mulher4.jpeg', 47, 'app', 8, -15.7903320, -47.9005301),
-	('Eduardo Nascimento', 24, 'Masculino', 190, '(27) 97777-1234', '2025-06-02', 'Portão de escola municipal, Vila Velha - ES', 'Vestia uniforme da empresa com boné azul e tênis branco de detalhes vermelhos. Foi visto saindo do trabalho e caminhando em direção a uma banca de revistas próximo à entrada.', 'homem5.jpg', 48, 'app', 9, 0.0000000, 0.0000000),
-	('Fernanda Alves Moura', 30, 'Feminino', 163, '(62) 96666-2222', '2025-04-18', 'Terminal Isidória, Goiânia - GO', 'Mulher trajava terno preto formal, sapatos sociais e portava um crachá de empresa de tecnologia. Cabelos castanhos presos em coque, carregava uma pasta preta de documentos. Testemunhas relataram que ela aparentava estar com pressa.', 'mulher5.jpg', 49, 'app', 10, -16.7186228, -49.2534239),
+	('Eduardo Nascimenta', 24, 'Masculino', 190, '(27) 97777-1234', '2025-06-02', 'Portão de escola municipal, Vila Velha - ES', 'Vestia uniforme da empresa com boné azul e tênis branco de detalhes vermelhos. Foi visto saindo do trabalho e caminhando em direção a uma banca de revistas próximo à entrada.', 'homem5.jpg', 48, 'app', 9, 0.0000000, 0.0000000),
 	('Bruno César Lima', 19, 'Masculino', 178, '(95) 91122-3344', '2025-03-30', 'Rodoviária de Boa Vista - RR', 'Jovem com barba rala, vestia camiseta regata cinza, bermuda jeans e mochila grande de acampamento. Foi visto comprando passagem e depois andando em direção à área de embarque sozinho.', 'homem6.jpg', 50, 'app', 11, 2.8049808, -60.6886519),
 	('Isabela Duarte', 26, 'Feminino', 170, '(98) 92211-3344', '2025-06-20', 'Praça Dom Pedro II, São Luís - MA', 'Vestia vestido floral colorido e óculos escuros grandes. Estava acompanhada de um cachorro de porte médio, marrom com coleira azul. Relatos indicam que ela caminhava em direção ao terminal de ônibus quando desapareceu.', 'mulher6.jpg', 51, 'app', 12, -2.5275741, -44.3050401);
+/*!40000 ALTER TABLE `desaparecido` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela tccorbit.membro
 CREATE TABLE IF NOT EXISTS `membro` (
@@ -172,11 +196,13 @@ CREATE TABLE IF NOT EXISTS `membro` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Copiando dados para a tabela tccorbit.membro: ~4 rows (aproximadamente)
+/*!40000 ALTER TABLE `membro` DISABLE KEYS */;
 INSERT INTO `membro` (`id`, `orbita_id`, `nome`, `foto`, `latitude`, `longitude`) VALUES
 	(1, 1, 'João', 'joao.jpg\r\n', -24.497000, -47.844000),
 	(2, 1, 'Maria', 'maria.jpg', -24.500000, -47.846000),
 	(3, 2, 'Carlos', 'carlos.jpg', -24.495000, -47.842000),
 	(4, 3, 'Ana', 'ana.jpg', -24.499000, -47.840000);
+/*!40000 ALTER TABLE `membro` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela tccorbit.orbita
 CREATE TABLE IF NOT EXISTS `orbita` (
@@ -186,10 +212,12 @@ CREATE TABLE IF NOT EXISTS `orbita` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Copiando dados para a tabela tccorbit.orbita: ~3 rows (aproximadamente)
+/*!40000 ALTER TABLE `orbita` DISABLE KEYS */;
 INSERT INTO `orbita` (`id`, `nome`) VALUES
 	(1, 'Família'),
 	(2, 'Amigos'),
 	(3, 'Namorado');
+/*!40000 ALTER TABLE `orbita` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela tccorbit.usuario
 CREATE TABLE IF NOT EXISTS `usuario` (
@@ -203,6 +231,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Copiando dados para a tabela tccorbit.usuario: ~14 rows (aproximadamente)
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
 INSERT INTO `usuario` (`id`, `nome`, `nascimento`, `email`, `telefone`, `senha`) VALUES
 	(1, 'Marcos Silva', '1990-05-12', 'marcos@email.com', '(11) 91234-5678', '123456'),
 	(2, 'Patrícia Souza', '1988-11-23', 'patricia@email.com', '(11) 99876-5432', '123456'),
@@ -218,9 +247,8 @@ INSERT INTO `usuario` (`id`, `nome`, `nascimento`, `email`, `telefone`, `senha`)
 	(12, 'Ana Paula Ribeiro', '1997-06-25', 'ana@email.com', '(98) 92211-3344', '123456'),
 	(15, '', NULL, '', '', ''),
 	(16, '', NULL, '', '', '');
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 
-/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;

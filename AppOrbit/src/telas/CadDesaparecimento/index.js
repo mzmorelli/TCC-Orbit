@@ -13,6 +13,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import BASE_URL from "../../../url.js";
 
 export default function CadDesaparecimento({ navigation }) {
   const [formData, setFormData] = useState({
@@ -69,7 +70,7 @@ export default function CadDesaparecimento({ navigation }) {
     setMostrarCalendario(false);
     if (selectedDate) {
       setDataSelecionada(selectedDate);
-      // Formatar data para YYYY-MM-DD
+   
       const dataFormatada = selectedDate.toISOString().split('T')[0];
       handleChange("ultimaData", dataFormatada);
     }
@@ -103,7 +104,6 @@ export default function CadDesaparecimento({ navigation }) {
     try {
       const dataToSend = new FormData();
 
-      // Adicionar imagem corretamente
       if (formData.imagem) {
         const localUri = formData.imagem;
         const filename = localUri.split('/').pop();
@@ -116,8 +116,6 @@ export default function CadDesaparecimento({ navigation }) {
           type: type,
         });
       }
-
-      // Adicionar dados JSON
       const jsonData = {
         nomeCompleto: formData.nomeCompleto.trim(),
         idade: formData.idade,
@@ -135,7 +133,7 @@ export default function CadDesaparecimento({ navigation }) {
 
       console.log('Enviando dados:', jsonData);
 
-      const response = await fetch("http://10.239.23.166/appTcc/salvar.php", {
+      const response = await fetch(`${BASE_URL}/salvar.php`, {
         method: "POST",
         body: dataToSend,
         headers: {
@@ -346,7 +344,7 @@ return (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#d1e5f4", // fundo leve
+    backgroundColor: "#d1e5f4", 
   },
   header: {
     paddingTop: 60,
@@ -358,7 +356,7 @@ const styles = StyleSheet.create({
   backIcon: {
     padding: 8,
     borderRadius: 20,
-    backgroundColor: "rgba(19,89,145,0.2)", // destaque suave
+    backgroundColor: "rgba(19,89,145,0.2)", 
     marginRight: 15,
   },
   titulo: {
@@ -385,7 +383,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     opacity: 0.2,
     borderWidth: 2,
-    borderColor: "#135991", // destaque azul
+    borderColor: "#135991", 
     justifyContent: "center",
     alignItems: "center",
   },
@@ -394,10 +392,10 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 75,
     borderWidth: 2,
-    borderColor: "#135991", // destaque azul
+    borderColor: "#135991", 
   },
   addPhotoText: {
-    color: "#135991", // destaque azul
+    color: "#135991",
     fontSize: 14,
     marginTop: 10,
   },
@@ -418,10 +416,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#2c3e50",
     borderWidth: 1,
-    borderColor: "rgba(19,89,145,0.2)", // borda leve azul
+    borderColor: "rgba(19,89,145,0.2)", 
   },
   inputFocused: {
-    borderColor: "#135991", // destaque ao focar
+    borderColor: "#135991", 
   },
   descriptionInput: {
     height: 120,
@@ -442,7 +440,7 @@ const styles = StyleSheet.create({
     opacity: 0.2,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "rgba(19,89,145,1)", // borda azul suave
+    borderColor: "rgba(19,89,145,1)",
     marginHorizontal: 5,
   },
   sexoSelected: {
@@ -479,7 +477,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "rgba(19,89,145,0.2)", // leve azul
+    borderColor: "rgba(19,89,145,0.2)", 
     paddingHorizontal: 15,
     backgroundColor: "#FFFFFF",
     opacity: 0.2,

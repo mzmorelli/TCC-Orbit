@@ -2,9 +2,8 @@
 $servername = "localhost";
 $username = "root"; // usuário padrão do XAMPP
 $password = ""; 
-$dbname = "tccorbit"; // substitua pelo nome do seu banco
+$dbname = "tccorbit"; 
 
-// Criar conexão
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verificar conexão

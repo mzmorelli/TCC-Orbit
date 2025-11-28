@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { UserContext } from '../../userContext/index.js';
 import axios from 'axios';
+import BASE_URL from "../../../url.js";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState('');
@@ -23,7 +24,7 @@ export default function Login({ navigation }) {
     try {
       console.log('Tentando login com:', { email, senha });
       
-      const response = await axios.post('http://10.239.23.166//appTcc/login_fake.php', {
+      const response = await axios.post(`${BASE_URL}/login_fake.php`, {
         email: email.toLowerCase().trim(),
         senha: senha.trim()
       });

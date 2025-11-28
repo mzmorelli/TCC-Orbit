@@ -146,7 +146,6 @@ export default function EditarPerfil ({navigation}) {
             </View>
           </View>
           
-          {/* Seção de Saúde */}
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Saúde</Text>
             
@@ -176,8 +175,7 @@ export default function EditarPerfil ({navigation}) {
               </View>
             </View>
           </View>
-          
-          {/* Botão de Salvar (apenas visual) */}
+
           <TouchableOpacity 
             style={styles.saveButton}
             onPress={() => navigation.goBack()}
@@ -193,7 +191,7 @@ export default function EditarPerfil ({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#d1e5f4', // fundo geral mais claro
+    backgroundColor: '#d1e5f4', 
   },
   scrollContainer: {
     flexGrow: 1,
@@ -212,17 +210,17 @@ const styles = StyleSheet.create({
     left: 25,
     padding: 8,
     borderRadius: 20,
-    backgroundColor: 'rgba(19,89,145,0.15)', // azul suave
+    backgroundColor: 'rgba(19,89,145,0.15)', 
   },
   title: {
     fontSize: 24,
-    color: '#135991', // destaque azul
+    color: '#135991', 
     fontWeight: '600',
     letterSpacing: 0.5,
   },
   glassBody: {
     flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.25)', // mais claro que antes
+    backgroundColor: 'rgba(255, 255, 255, 0.25)', 
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     paddingTop: 40,
@@ -230,7 +228,7 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
     marginTop: 30,
     borderWidth: 1,
-    borderColor: 'rgba(19,89,145,0.3)', // borda azul suave
+    borderColor: 'rgba(19,89,145,0.3)', 
     overflow: 'hidden',
   },
   section: {
@@ -238,7 +236,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 18,
-    color: '#135991', // azul destaque
+    color: '#135991', 
     fontWeight: '600',
     marginBottom: 15,
   },
@@ -251,14 +249,14 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    color: '#135991', // azul destaque
+    color: '#135991', 
     marginBottom: 8,
   },
   input: {
-    backgroundColor: 'rgba(255, 255, 255, 0.4)', // mais claro
+    backgroundColor: 'rgba(255, 255, 255, 0.4)', 
     borderRadius: 12,
     padding: 15,
-    color: '#135991', // texto azul
+    color: '#135991', 
     fontSize: 16,
     borderWidth: 1,
     borderColor: 'rgba(19,89,145,0.4)',
@@ -267,7 +265,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: 'rgba(255, 255, 255, 0.4)', // mais claro
+    backgroundColor: 'rgba(255, 255, 255, 0.4)', 
     borderRadius: 12,
     paddingVertical: 14,
     paddingHorizontal: 16,
@@ -312,7 +310,6 @@ const styles = StyleSheet.create({
     borderLeftWidth: 4,
     borderLeftColor: '#135991',
   },
-  // Botão de salvar
   saveButton: {
     flexDirection: 'row',
     alignItems: 'center',

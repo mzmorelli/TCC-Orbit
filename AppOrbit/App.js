@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
 import { UserProvider, UserContext } from './src/userContext/index.js';
+import BASE_URL from "./url.js";
 
 import Inicio from "./src/telas/Inicio/index.js";
 import Login from "./src/telas/Login/index.js";
@@ -30,6 +31,7 @@ import mapa from "./src/telas/Mapa/index.js";
 import Alerta from "./src/telas/Alerta/index.js";
 import MapaChaveiro from "./src/telas/MapaChaveiro/index.js";
 import MapaTodosDesaparecidos from "./src/telas/MapaDesaparecidos/index.js";
+import EditarDesaparecidos from "./src/telas/EditarDesaparecidos/index.js";
 
 const Tab = createBottomTabNavigator();
 
@@ -70,13 +72,12 @@ function AppContent() {
   const [mostrarModal, setMostrarModal] = useState(false);
   const [ultimoId, setUltimoId] = useState(null);
 
-  // Buscar alertas
   useEffect(() => {
     let inicializando = true; 
 
     const buscarAlertas = async () => {
       try {
-        const response = await axios.get("http://10.239.23.166/appTcc/listar_alerta.php");
+        const response = await axios.get(`${BASE_URL}/listar_alerta.php`);
         if (response.data.success && response.data.alertas.length > 0) {
           const ultimo = response.data.alertas[0];
           if (ultimoId !== ultimo.id) {
@@ -123,6 +124,7 @@ function AppContent() {
           <Stack.Screen name="Alerta" component={Alerta} />
           <Stack.Screen name="MapaChaveiro" component={MapaChaveiro}/>
           <Stack.Screen name="MapaTodosDesaparecidos" component={MapaTodosDesaparecidos}/>
+          <Stack.Screen name="EditarDesaparecidos" component={EditarDesaparecidos}/>
         </Stack.Navigator>
       </NavigationContainer>
 

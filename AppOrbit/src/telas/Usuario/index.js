@@ -83,38 +83,38 @@ export default function PerfilUsuario() {
 const styles = StyleSheet.create({
   container: { flex: 1 },
   header: {
-    paddingTop: 40, // antes 60
+    paddingTop: 40, 
     paddingHorizontal: 25,
     alignItems: 'center',
-    marginBottom: 15, // antes 20
+    marginBottom: 15, 
   },
   title: { fontSize: 24, color: '#fff', fontWeight: 'bold' },
-  profileFloatContainer: { alignItems: 'center', marginTop: 15, zIndex: 2 }, // antes 30
+  profileFloatContainer: { alignItems: 'center', marginTop: 15, zIndex: 2 }, 
   profileImageShadow: {
-    width: 130, // antes 140
+    width: 130, 
     height: 130,
     borderRadius: 65,
     backgroundColor: '#cfe4f3',
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 6 }, // antes 10
+    shadowOffset: { width: 0, height: 6 }, 
     shadowOpacity: 0.1,
-    shadowRadius: 12, // antes 20
-    elevation: 6, // antes 10
+    shadowRadius: 12, 
+    elevation: 6,
   },
   profileImage: {
-    width: 120, // antes 130
+    width: 120, 
     height: 120,
     borderRadius: 60,
     borderWidth: 2,
     borderColor: '#135991',
   },
   userName: {
-    fontSize: 20, // antes 22
+    fontSize: 20, 
     fontWeight: '600',
     color: '#fff',
-    marginTop: 10, // antes 15
+    marginTop: 10,
     textShadowColor: 'rgba(0,0,0,0.2)',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 3,
@@ -122,60 +122,60 @@ const styles = StyleSheet.create({
   glassBody: {
     flex: 1,
     backgroundColor: 'rgba(255,255,255,0.15)',
-    borderTopLeftRadius: 35, // antes 40
+    borderTopLeftRadius: 35, 
     borderTopRightRadius: 35,
-    paddingTop: 25, // antes 40
-    paddingHorizontal: 20, // antes 25
-    paddingBottom: 20, // antes 30
-    marginTop: 15, // antes 30
+    paddingTop: 25, 
+    paddingHorizontal: 20, 
+    paddingBottom: 20, 
+    marginTop: 15, 
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.2)',
   },
   infoSection: {
     backgroundColor: 'rgba(255,255,255,0.25)',
-    borderRadius: 15, // antes 20
-    padding: 15, // antes 20
-    marginBottom: 20, // antes 25
+    borderRadius: 15, 
+    padding: 15, 
+    marginBottom: 20, 
   },
-  infoItem: { flexDirection: 'row', alignItems: 'center', marginBottom: 10 }, // antes 15
+  infoItem: { flexDirection: 'row', alignItems: 'center', marginBottom: 10 }, 
   infoIcon: {
     backgroundColor: '#83bde3',
-    width: 32, // antes 36
+    width: 32,
     height: 32,
     borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 10, // antes 12
+    marginRight: 10, 
   },
-  infoText: { fontSize: 15, color: '#135991', flex: 1 }, // antes 16
-  menuContainer: { marginBottom: 20 }, // antes 25
+  infoText: { fontSize: 15, color: '#135991', flex: 1 }, 
+  menuContainer: { marginBottom: 20 }, 
   menuItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 12, // antes 18
+    paddingVertical: 12,
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(19,89,145,0.2)',
   },
   menuIconContainer: {
     backgroundColor: '#cfe4f3',
-    width: 36, // antes 40
+    width: 36, 
     height: 36,
-    borderRadius: 18, // antes 20
+    borderRadius: 18, 
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 12, // antes 15
+    marginRight: 12,
   },
-  menuText: { flex: 1, fontSize: 15, color: '#135991', fontWeight: '500' }, // antes 16
+  menuText: { flex: 1, fontSize: 15, color: '#135991', fontWeight: '500' }, 
   logoutButton: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 12, // antes 15
-    borderRadius: 10, // antes 12
+    paddingVertical: 12, 
+    borderRadius: 10, 
     backgroundColor: 'rgba(255,59,48,0.1)',
     borderWidth: 1,
     borderColor: 'rgba(255,59,48,0.3)',
   },
-  logoutButtonText: { color: '#FF3B30', fontSize: 15, fontWeight: '600', marginRight: 8 }, // antes 16
+  logoutButtonText: { color: '#FF3B30', fontSize: 15, fontWeight: '600', marginRight: 8 }, 
 });
 

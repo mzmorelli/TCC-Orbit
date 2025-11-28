@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import BASE_URL from "../../../url.js";
 
 export default function InfoDesaparecimento({ route, navigation }) {
   const { desaparecido } = route.params;
@@ -18,10 +19,10 @@ export default function InfoDesaparecimento({ route, navigation }) {
     if (!numero || typeof numero !== "string") return "";
 
     return numero
-      .replace(/\D/g, "") // remove tudo que não for número
-      .replace(/(\d{2})(\d)/, "($1) $2") // coloca parênteses no DDD
-      .replace(/(\d{5})(\d)/, "$1-$2") // coloca o hífen
-      .replace(/(-\d{4})\d+?$/, "$1"); // limita a 4 dígitos no final
+      .replace(/\D/g, "") 
+      .replace(/(\d{2})(\d)/, "($1) $2") 
+      .replace(/(\d{5})(\d)/, "$1-$2") 
+      .replace(/(-\d{4})\d+?$/, "$1"); 
   };
 
   const [comentarios, setComentarios] = useState([
@@ -76,7 +77,7 @@ export default function InfoDesaparecimento({ route, navigation }) {
             source={
               desaparecido.imagem
                 ? {
-                  uri: `http://10.239.23.166/appTcc/uploads/${desaparecido.imagem}`,
+                  uri: `${BASE_URL}/uploads/${desaparecido.imagem}`,
                 }
                 : require("../../../assets/sem-foto.png")
             }
@@ -219,7 +220,7 @@ export default function InfoDesaparecimento({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#d1e5f4", // fundo claro
+    backgroundColor: "#d1e5f4", 
   },
   header: {
     paddingTop: 40,
@@ -232,7 +233,7 @@ const styles = StyleSheet.create({
   backIcon: {
     padding: 8,
     borderRadius: 20,
-    backgroundColor: "rgba(0,0,0,0.1)", // mais claro
+    backgroundColor: "rgba(0,0,0,0.1)", 
   },
   shareIcon: {
     padding: 8,
@@ -298,7 +299,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   glassCard: {
-    backgroundColor: "rgba(255, 255, 255, 0.7)", // card claro
+    backgroundColor: "rgba(255, 255, 255, 0.7)", 
     borderRadius: 20,
     padding: 20,
     marginBottom: 20,
